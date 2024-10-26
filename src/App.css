@@ -1,0 +1,29 @@
+.root-game {
+	background-color: red;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.titulo-juego {
+	margin-top: 0;
+	text-align: center;
+}
+
+.root-game main {
+	display: flex;
+}
+
+main .juego {
+	background-color: green;
+	flex-grow: 5;
+}
+
+main .selector-color {
+	background-color: blueviolet;
+	flex-grow: 1;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: repeat(1fr);
+	row-gap: 2rem;
+}

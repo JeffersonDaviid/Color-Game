@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Colorear Secciones con SVG</title>
+  <style>
+    svg {
+      width: 100%;
+      height: auto;
+      border: 1px solid black;
+    }
+
+    .section {
+      cursor: pointer;
+      stroke: black;
+      stroke-width: 2;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 class="text-center text-2xl font-bold my-3">Infinity Quality</h1>
+
+
+  <section id="detalles" class="mb-3">
+    <p>
+      <b>Nombre:</b> <i>ARTURITO</i>
+    </p>
+    <p>
+      <b>Tiempo:</b> <i>2 minutos</i>
+    </p>
+    <p>
+      <b>Intentos fallidos:</b> <i>5</i>
+    </p>
+  </section>
+
+  <section class="flex justify-center p-4 w-full md:w-5/6 lg:w-1/2">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <!-- Definimos los diferentes polígonos en el mural -->
+      <polygon class="section" points="10,10 30,10 20,30" fill="lightgray" id="section1" />
+      <polygon class="section" points="30,10 50,10 40,30" fill="lightgray" id="section2" />
+      <polygon class="section" points="50,10 70,10 60,30" fill="lightgray" id="section3" />
+      <polygon class="section" points="70,10 90,10 80,30" fill="lightgray" id="section4" />
+
+      <polygon class="section" points="20,30 40,30 30,50 10,50" fill="lightgray" id="section5" />
+      <polygon class="section" points="40,30 60,30 50,50 30,50" fill="lightgray" id="section6" />
+      <polygon class="section" points="60,30 80,30 70,50 50,50" fill="lightgray" id="section7" />
+      <polygon class="section" points="80,30 90,10 90,50 70,50" fill="lightgray" id="section8" />
+
+      <polygon class="section" points="10,50 30,50 20,70" fill="lightgray" id="section9" />
+      <polygon class="section" points="30,50 50,50 40,70" fill="lightgray" id="section10" />
+      <polygon class="section" points="50,50 70,50 60,70" fill="lightgray" id="section11" />
+      <polygon class="section" points="70,50 90,50 80,70" fill="lightgray" id="section12" />
+
+      <polygon class="section" points="20,70 40,70 30,90" fill="lightgray" id="section13" />
+      <polygon class="section" points="40,70 60,70 50,90" fill="lightgray" id="section14" />
+      <polygon class="section" points="60,70 80,70 70,90" fill="lightgray" id="section15" />
+    </svg>
+  </section>
+
+  <section id="lista-colores" class="flex justify-center gap-4 my-8">
+    <p>
+    <div class="flex flex-col">
+      <svg fill="green" width="64px" height="64px" viewBox="-8 -8 48.00 48.00" version="1.1">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="red" stroke-width="0">
+        </g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M0 26.016v-20q0-2.496 1.76-4.256t4.256-1.76h12.32l-4 4h-8.32q-0.832 0-1.44 0.608t-0.576 1.408v20q0 0.832 0.576 1.408t1.44 0.576h20q0.8 0 1.408-0.576t0.576-1.408v-8.352l4-4v12.352q0 2.496-1.76 4.224t-4.224 1.76h-20q-2.496 0-4.256-1.76t-1.76-4.224zM6.016 26.016l4-12 13.984-14.016 8 8-13.984 14.016zM10.016 22.016l5.984-2.016-4-4zM14.016 14.016l4 4 5.984-6.016-4-4z">
+          </path>
+        </g>
+      </svg>
+      <label class="text-center text-2xl font-bold">A</label>
+    </div>
+    <div class="flex flex-col">
+      <svg fill="pink" width="64px" height="64px" viewBox="-8 -8 48.00 48.00" version="1.1">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="red" stroke-width="0">
+        </g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M0 26.016v-20q0-2.496 1.76-4.256t4.256-1.76h12.32l-4 4h-8.32q-0.832 0-1.44 0.608t-0.576 1.408v20q0 0.832 0.576 1.408t1.44 0.576h20q0.8 0 1.408-0.576t0.576-1.408v-8.352l4-4v12.352q0 2.496-1.76 4.224t-4.224 1.76h-20q-2.496 0-4.256-1.76t-1.76-4.224zM6.016 26.016l4-12 13.984-14.016 8 8-13.984 14.016zM10.016 22.016l5.984-2.016-4-4zM14.016 14.016l4 4 5.984-6.016-4-4z">
+          </path>
+        </g>
+      </svg>
+      <label class="text-center text-2xl font-bold">B</label>
+    </div>
+    <div class="flex flex-col">
+      <svg fill="skyblue" width="64px" height="64px" viewBox="-8 -8 48.00 48.00" version="1.1">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="red" stroke-width="0">
+        </g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M0 26.016v-20q0-2.496 1.76-4.256t4.256-1.76h12.32l-4 4h-8.32q-0.832 0-1.44 0.608t-0.576 1.408v20q0 0.832 0.576 1.408t1.44 0.576h20q0.8 0 1.408-0.576t0.576-1.408v-8.352l4-4v12.352q0 2.496-1.76 4.224t-4.224 1.76h-20q-2.496 0-4.256-1.76t-1.76-4.224zM6.016 26.016l4-12 13.984-14.016 8 8-13.984 14.016zM10.016 22.016l5.984-2.016-4-4zM14.016 14.016l4 4 5.984-6.016-4-4z">
+          </path>
+        </g>
+      </svg>
+      <label class="text-center text-2xl font-bold">C</label>
+    </div>
+    <div class="flex flex-col">
+      <svg fill="orange" width="64px" height="64px" viewBox="-8 -8 48.00 48.00" version="1.1">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="red" stroke-width="0">
+        </g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M0 26.016v-20q0-2.496 1.76-4.256t4.256-1.76h12.32l-4 4h-8.32q-0.832 0-1.44 0.608t-0.576 1.408v20q0 0.832 0.576 1.408t1.44 0.576h20q0.8 0 1.408-0.576t0.576-1.408v-8.352l4-4v12.352q0 2.496-1.76 4.224t-4.224 1.76h-20q-2.496 0-4.256-1.76t-1.76-4.224zM6.016 26.016l4-12 13.984-14.016 8 8-13.984 14.016zM10.016 22.016l5.984-2.016-4-4zM14.016 14.016l4 4 5.984-6.016-4-4z">
+          </path>
+        </g>
+      </svg>
+      <label class="text-center text-2xl font-bold">D</label>
+    </div>
+    <div class="flex flex-col">
+      <svg fill="violet" width="64px" height="64px" viewBox="-8 -8 48.00 48.00" version="1.1">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="red" stroke-width="0">
+        </g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M0 26.016v-20q0-2.496 1.76-4.256t4.256-1.76h12.32l-4 4h-8.32q-0.832 0-1.44 0.608t-0.576 1.408v20q0 0.832 0.576 1.408t1.44 0.576h20q0.8 0 1.408-0.576t0.576-1.408v-8.352l4-4v12.352q0 2.496-1.76 4.224t-4.224 1.76h-20q-2.496 0-4.256-1.76t-1.76-4.224zM6.016 26.016l4-12 13.984-14.016 8 8-13.984 14.016zM10.016 22.016l5.984-2.016-4-4zM14.016 14.016l4 4 5.984-6.016-4-4z">
+          </path>
+        </g>
+      </svg>
+      <label class="text-center text-2xl font-bold">E</label>
+    </div>
+    </p>
+  </section>
+
+  <script>
+    const colors = ['red', 'blue', 'green', 'yellow', 'orange', 'purple'];
+
+    document.querySelectorAll('.section').forEach(section => {
+      section.addEventListener('click', function () {
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        this.setAttribute('fill', randomColor);
+      });
+    });
+  </script>
+
+</body>
+
+</html>
