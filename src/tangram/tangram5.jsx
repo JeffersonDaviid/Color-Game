@@ -1,27 +1,40 @@
 import React from 'react';
 
-function Tangram5({ selectedColor, selectedLabel }) {
+function TurtleTangram({ selectedColor, selectedLabel }) {
   const handleSectionClick = (event) => {
     const label = event.target.getAttribute('data-label');
-    // Si estamos en modo "BORRAR" (selectedColor es 'lightgray'), ignora la etiqueta
     if (selectedColor === 'lightgray' || label === selectedLabel) {
       event.target.style.fill = selectedColor;
     }
   };
 
   return (
-    <svg width="100%" height="100%" viewBox="0 0 100 100">
-      <polygon points="50,10 55,30 70,30 58,40 65,55 50,45 35,55 42,40 30,30 45,30" fill="lightgray" stroke="black" strokeWidth="1" data-label="A" onClick={handleSectionClick} />
-      <text x="48" y="25" fontSize="5" fill="black">A</text>
-      
-      {/* Puntos adicionales para completar la estrella */}
-      <polygon points="50,45 55,55 45,55" fill="lightgray" stroke="black" strokeWidth="1" data-label="B" onClick={handleSectionClick} />
-      <text x="48" y="52" fontSize="5" fill="black">B</text>
+    <svg width="100%" height="100%" viewBox="0 0 200 200">
+      {/* Caparazón (A) */}
+      <ellipse cx="100" cy="100" rx="50" ry="70" fill="#d3d3d3" stroke="black" strokeWidth="3" data-label="A" onClick={handleSectionClick} />
+      <text x="100" y="100" fontSize="12" fontWeight="bold" fill="black" textAnchor="middle">A</text>
 
-      <polygon points="42,40 50,50 58,40" fill="lightgray" stroke="black" strokeWidth="1" data-label="C" onClick={handleSectionClick} />
-      <text x="48" y="44" fontSize="5" fill="black">C</text>
+      {/* Cabeza (B) - Más grande para parecer una cabeza */}
+      <circle cx="100" cy="35" r="25" fill="#d3d3d3" stroke="black" strokeWidth="3" data-label="B" onClick={handleSectionClick} />
+      <text x="100" y="40" fontSize="12" fontWeight="bold" fill="black" textAnchor="middle">B</text>
+
+      {/* Pata izquierda delantera (C) */}
+      <ellipse cx="55" cy="70" rx="12" ry="20" fill="#d3d3d3" stroke="black" strokeWidth="3" data-label="C" onClick={handleSectionClick} />
+      <text x="55" y="75" fontSize="12" fontWeight="bold" fill="black" textAnchor="middle">C</text>
+
+      {/* Pata derecha delantera (D) */}
+      <ellipse cx="145" cy="70" rx="12" ry="20" fill="#d3d3d3" stroke="black" strokeWidth="3" data-label="D" onClick={handleSectionClick} />
+      <text x="145" y="75" fontSize="12" fontWeight="bold" fill="black" textAnchor="middle">D</text>
+
+      {/* Pata izquierda trasera (E) */}
+      <ellipse cx="55" cy="140" rx="12" ry="20" fill="#d3d3d3" stroke="black" strokeWidth="3" data-label="E" onClick={handleSectionClick} />
+      <text x="55" y="145" fontSize="12" fontWeight="bold" fill="black" textAnchor="middle">E</text>
+
+      {/* Pata derecha trasera (F) */}
+      <ellipse cx="145" cy="140" rx="12" ry="20" fill="#d3d3d3" stroke="black" strokeWidth="3" data-label="F" onClick={handleSectionClick} />
+      <text x="145" y="145" fontSize="12" fontWeight="bold" fill="black" textAnchor="middle">F</text>
     </svg>
   );
 }
 
-export default Tangram5;
+export default TurtleTangram;
