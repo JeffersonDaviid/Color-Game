@@ -6,7 +6,6 @@ const [numCorrectedColors, setNumCorrectedColors] = useState(0);
 
   const handleSectionClick = (event) => {
     const label = event.target.getAttribute('data-label');
-    // Si estamos en modo "BORRAR" (selectedColor es 'lightgray'), ignora la etiqueta
     if (selectedColor === 'lightgray' || label === selectedLabel) {
       event.target.style.fill = selectedColor;
       
@@ -27,31 +26,30 @@ const [numCorrectedColors, setNumCorrectedColors] = useState(0);
  
 
   return (
-    <svg width="100%" height="100%" viewBox="0 0 100 100">
-      {/* Pétalos superiores */}
-      <polygon points="50,10 55,25 45,25" fill="lightgray" stroke="black" strokeWidth="1" data-label="A" onClick={handleSectionClick} />
-      <text x="48" y="20" fontSize="5" fill="black">A</text>
+    <svg width="100%" height="100%" viewBox="0 0 200 200">
+      {/* Techo */}
+      <polygon points="40,80 100,20 160,80" fill="lightgray" stroke="black" strokeWidth="3" data-label="A" onClick={handleSectionClick} />
+      <text x="95" y="55" fontSize="10" fontWeight="bold" fill="black">A</text>
 
-      <polygon points="45,25 35,35 50,30" fill="lightgray" stroke="black" strokeWidth="1" data-label="B" onClick={handleSectionClick} />
-      <text x="40" y="30" fontSize="5" fill="black">B</text>
+      {/* Chimenea */}
+      <rect x="130" y="35" width="15" height="30" fill="lightgray" stroke="black" strokeWidth="3" data-label="B" onClick={handleSectionClick} />
+      <text x="133" y="50" fontSize="10" fontWeight="bold" fill="black">B</text>
 
-      <polygon points="55,25 65,35 50,30" fill="lightgray" stroke="black" strokeWidth="1" data-label="C" onClick={handleSectionClick} />
-      <text x="55" y="30" fontSize="5" fill="black">C</text>
+      {/* Paredes */}
+      <rect x="40" y="80" width="120" height="100" fill="lightgray" stroke="black" strokeWidth="3" data-label="C" onClick={handleSectionClick} />
+      <text x="95" y="130" fontSize="10" fontWeight="bold" fill="black">C</text>
 
-      {/* Pétalos laterales */}
-      <polygon points="35,35 45,45 50,30" fill="lightgray" stroke="black" strokeWidth="1" data-label="D" onClick={handleSectionClick} />
-      <text x="38" y="40" fontSize="5" fill="black">D</text>
+      {/* Puerta */}
+      <rect x="85" y="140" width="30" height="40" fill="lightgray" stroke="black" strokeWidth="3" data-label="D" onClick={handleSectionClick} />
+      <text x="93" y="160" fontSize="10" fontWeight="bold" fill="black">D</text>
 
-      <polygon points="65,35 55,45 50,30" fill="lightgray" stroke="black" strokeWidth="1" data-label="E" onClick={handleSectionClick} />
-      <text x="60" y="40" fontSize="5" fill="black">E</text>
+      {/* Ventana izquierda */}
+      <rect x="50" y="100" width="20" height="20" fill="lightgray" stroke="black" strokeWidth="3" data-label="E" onClick={handleSectionClick} />
+      <text x="57" y="115" fontSize="10" fontWeight="bold" fill="black">E</text>
 
-      {/* Tallo */}
-      <rect x="48" y="50" width="4" height="40" fill="lightgray" stroke="black" strokeWidth="1" data-label="F" onClick={handleSectionClick} />
-      <text x="50" y="70" fontSize="5" fill="black">F</text>
-      
-      {/* Hoja */}
-      <polygon points="40,65 48,60 48,70" fill="lightgray" stroke="black" strokeWidth="1" data-label="F" onClick={handleSectionClick} />
-      <text x="42" y="68" fontSize="5" fill="black">F</text>
+      {/* Ventana derecha */}
+      <rect x="130" y="100" width="20" height="20" fill="lightgray" stroke="black" strokeWidth="3" data-label="F" onClick={handleSectionClick} />
+      <text x="137" y="115" fontSize="10" fontWeight="bold" fill="black">F</text>
     </svg>
   );
 }

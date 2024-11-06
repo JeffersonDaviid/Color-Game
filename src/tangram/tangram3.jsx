@@ -1,38 +1,40 @@
 import React from 'react';
 
-function Tangram3({ selectedColor, selectedLabel }) {
+function AbstractShape({ selectedColor, selectedLabel }) {
   const handleSectionClick = (event) => {
     const label = event.target.getAttribute('data-label');
-    // Si estamos en modo "BORRAR" (selectedColor es 'lightgray'), ignora la etiqueta
     if (selectedColor === 'lightgray' || label === selectedLabel) {
       event.target.style.fill = selectedColor;
     }
   };
 
   return (
-    <svg width="100%" height="100%" viewBox="0 0 100 100">
-      {/* Hojas superiores */}
-      <polygon points="40,20 50,5 60,20" fill="lightgray" stroke="black" strokeWidth="1" data-label="A" onClick={handleSectionClick} />
-      <text x="48" y="15" fontSize="5" fill="black">A</text>
+    <svg width="100%" height="100%" viewBox="0 0 400 400">
+      {/* Triángulo superior (A) */}
+      <polygon points="200,40 160,120 240,120" fill="#d3d3d3" stroke="black" strokeWidth="3" data-label="A" onClick={handleSectionClick} />
+      <text x="200" y="90" fontSize="18" fontWeight="bold" fill="black" textAnchor="middle">A</text>
 
-      <polygon points="35,35 50,20 65,35" fill="lightgray" stroke="black" strokeWidth="1" data-label="B" onClick={handleSectionClick} />
-      <text x="48" y="30" fontSize="5" fill="black">B</text>
+      {/* Círculo central (B) */}
+      <circle cx="200" cy="200" r="60" fill="#d3d3d3" stroke="black" strokeWidth="3" data-label="B" onClick={handleSectionClick} />
+      <text x="170" y="220" fontSize="18" fontWeight="bold" fill="black" textAnchor="middle">B</text>
 
-      <polygon points="30,50 50,30 70,50" fill="lightgray" stroke="black" strokeWidth="1" data-label="C" onClick={handleSectionClick} />
-      <text x="48" y="45" fontSize="5" fill="black">C</text>
+      {/* Rectángulo central vertical (C) */}
+      <rect x="180" y="120" width="40" height="160" fill="#d3d3d3" stroke="black" strokeWidth="3" data-label="C" onClick={handleSectionClick} />
+      <text x="200" y="200" fontSize="18" fontWeight="bold" fill="black" textAnchor="middle">C</text>
 
-      {/* Tronco */}
-      <rect x="47" y="50" width="6" height="40" fill="lightgray" stroke="black" strokeWidth="1" data-label="D" onClick={handleSectionClick} />
-      <text x="48" y="70" fontSize="5" fill="black">D</text>
+      {/* Triángulo inferior (D) */}
+      <polygon points="200,360 160,280 240,280" fill="#d3d3d3" stroke="black" strokeWidth="3" data-label="D" onClick={handleSectionClick} />
+      <text x="200" y="320" fontSize="18" fontWeight="bold" fill="black" textAnchor="middle">D</text>
 
-      {/* Ramas */}
-      <polygon points="35,55 47,50 47,60" fill="lightgray" stroke="black" strokeWidth="1" data-label="E" onClick={handleSectionClick} />
-      <text x="38" y="58" fontSize="5" fill="black">E</text>
+      {/* Rectángulo izquierdo (E) */}
+      <rect x="100" y="160" width="40" height="80" fill="#d3d3d3" stroke="black" strokeWidth="3" data-label="E" onClick={handleSectionClick} />
+      <text x="120" y="200" fontSize="18" fontWeight="bold" fill="black" textAnchor="middle">E</text>
 
-      <polygon points="65,55 53,50 53,60" fill="lightgray" stroke="black" strokeWidth="1" data-label="F" onClick={handleSectionClick} />
-      <text x="58" y="58" fontSize="5" fill="black">F</text>
+      {/* Rectángulo derecho (F) */}
+      <rect x="260" y="160" width="40" height="80" fill="#d3d3d3" stroke="black" strokeWidth="3" data-label="F" onClick={handleSectionClick} />
+      <text x="280" y="200" fontSize="18" fontWeight="bold" fill="black" textAnchor="middle">F</text>
     </svg>
   );
 }
 
-export default Tangram3;
+export default AbstractShape;
