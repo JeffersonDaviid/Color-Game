@@ -16,12 +16,12 @@ const colors = [
 ]
 
 const fondos = [
-	'src/assets/fondo1.avif',
-	'src/assets/fondo2.avif',
-	'src/assets/fondo3.avif',
-	'src/assets/fondo4.avif',
-	'src/assets/fondo5.avif',
-	'src/assets/fondo6.avif',
+	'./assets/fondo1.avif',
+	'./assets/fondo2.avif',
+	'./assets/fondo3.avif',
+	'./assets/fondo4.avif',
+	'./assets/fondo5.avif',
+	'./assets/fondo6.avif',
 ]
 
 function MainGame() {
@@ -57,9 +57,23 @@ function MainGame() {
 		setBgImg(randomImg)
 	}, [])
 
+	const [time, setTime] = useState(0)
+
+	useEffect(() => {
+		const timer = setInterval(() => {
+			setTime((time) => time + 1)
+		}, 1000)
+
+		return () => {
+			setTime(timer)
+			clearInterval(timer)
+		}
+	}, [])
+
 	return (
 		<div className='main-game'>
 			<h1>Infinite Quality</h1>
+			<h2>{time} segundos</h2>
 			<div className='game-layout'>
 				<div
 					className='tangram-area'

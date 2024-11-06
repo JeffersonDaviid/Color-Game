@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Tangram1({ selectedColor, selectedLabel }) {
+
+const [numCorrectedColors, setNumCorrectedColors] = useState(0);
+
   const handleSectionClick = (event) => {
     const label = event.target.getAttribute('data-label');
     // Si estamos en modo "BORRAR" (selectedColor es 'lightgray'), ignora la etiqueta
     if (selectedColor === 'lightgray' || label === selectedLabel) {
       event.target.style.fill = selectedColor;
+      
+      if(selectedColor !== 'lightgray'){
+          setNumCorrectedColors(numCorrectedColors + 1);
+      }
+      if(selectedColor === 'lightgray'){
+        setNumCorrectedColors(numCorrectedColors - 1);
+      }
     }
   };
+
+ useEffect(() => {
+   if(numCorrectedColors === 7){
+     alert('¡Felicidades! Has completado el tangram');
+   }
+ }, [numCorrectedColors]);
+ 
 
   return (
     <svg width="100%" height="100%" viewBox="0 0 100 100">
