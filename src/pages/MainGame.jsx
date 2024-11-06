@@ -6,13 +6,34 @@ import Tangram4 from '../tangram/tangram4'
 import Tangram5 from '../tangram/tangram5'
 import './mainGame.css'
 
+function getRandomColor() {
+	const letters = '0123456789ABCDEF'
+	let color = '#'
+	for (let i = 0; i < 6; i++) {
+		color += letters[Math.floor(Math.random() * 16)]
+	}
+	return color
+}
+
+function getUniqueLetters() {
+	const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+	// Barajamos las letras
+	for (let i = letters.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1))
+		;[letters[i], letters[j]] = [letters[j], letters[i]]
+	}
+	return letters.slice(0, 6)
+}
+
+const labels = getUniqueLetters()
+
 const colors = [
-	{ label: 'A', color: 'pink' },
-	{ label: 'B', color: 'green' },
-	{ label: 'C', color: 'brown' },
-	{ label: 'D', color: 'blue' },
-	{ label: 'E', color: 'skyblue' },
-	{ label: 'F', color: 'lime' },
+	{ label: labels[0], color: getRandomColor() },
+	{ label: labels[1], color: getRandomColor() },
+	{ label: labels[2], color: getRandomColor() },
+	{ label: labels[3], color: getRandomColor() },
+	{ label: labels[4], color: getRandomColor() },
+	{ label: labels[5], color: getRandomColor() },
 ]
 
 const fondos = [
@@ -24,6 +45,9 @@ const fondos = [
 	'./assets/fondo6.avif',
 ]
 
+// const tangrams = [Tangram1, Tangram2, Tangram3, Tangram4, Tangram5]
+const tangrams = [Tangram1, Tangram2]
+
 function MainGame() {
 	const [bgImg, setBgImg] = useState('')
 
@@ -33,7 +57,6 @@ function MainGame() {
 
 	// Función para seleccionar dos tangrams aleatorios
 	useEffect(() => {
-		const tangrams = [Tangram1, Tangram2, Tangram3, Tangram4, Tangram5]
 		const randomTangrams = tangrams
 			.sort(() => Math.random() - 0.5) // Mezcla aleatoriamente el arreglo
 			.slice(0, 2) // Selecciona los primeros dos elementos
@@ -57,23 +80,30 @@ function MainGame() {
 		setBgImg(randomImg)
 	}, [])
 
-	const [time, setTime] = useState(0)
+	const [isCompleted, setIsCompleted] = useState(false)
+	const [timePainting, setTimePainting] = useState(0)
 
 	useEffect(() => {
-		const timer = setInterval(() => {
-			setTime((time) => time + 1)
-		}, 1000)
+		if (timePainting === 5) {
+			setIsCompleted(true)
+			console.log('Termino')
+		}
 
-		return () => {
-			setTime(timer)
-			clearInterval(timer)
+		if (!isCompleted) {
+			const timer = setInterval(() => {
+				setTimePainting((time) => time + 1)
+			}, 1000)
+
+			return () => {
+				clearInterval(timer)
+			}
 		}
 	}, [])
 
 	return (
 		<div className='main-game'>
 			<h1>Infinite Quality</h1>
-			<h2>{time} segundos</h2>
+			<h2>{timePainting} segundos</h2>
 			<div className='game-layout'>
 				<div
 					className='tangram-area'
@@ -88,6 +118,7 @@ function MainGame() {
 							key={index}
 							selectedColor={selectedColor}
 							selectedLabel={selectedLabel}
+							letters={labels}
 						/>
 					))}
 				</div>
