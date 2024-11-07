@@ -2,7 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import './App.css'
 import { GameRulesProvider } from './context/GameRules'
 import Home from './pages/Home'
-import MainGame from './pages/MainGame'
+import MainGame from './pages/mainGame'
 
 function App() {
 	return (

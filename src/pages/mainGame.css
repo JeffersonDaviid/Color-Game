@@ -128,7 +128,7 @@ h1 {
 	left: 0;
 }
 
-.feedback h2 {
+.feedback .incorrect-txt {
 	background-color: #f5f5dc; /* Fondo suave, como pergamino */
 	border: 3px solid #8b5a2b; /* Borde marrón oscuro, estilo rústico */
 	border-radius: 12px;
@@ -141,4 +141,43 @@ h1 {
 	position: fixed;
 	top: 45%;
 	left: 15%;
+}
+
+.feedback .winner-img {
+	width: 75vw;
+	height: 60vh;
+	object-fit: contain;
+	object-position: center;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.feedback .winner-txt {
+	position: fixed;
+	top: 25%;
+	left: 50%;
+	transform: translateX(-50%);
+	color: #ffdd1a; /* Color dorado para resaltar */
+	font-size: 3rem;
+	font-weight: bold;
+	text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7), 0 0 15px #ff9a00, 0 0 25px #ffdd1a,
+		0 0 35px #ffd700; /* Efecto de brillo */
+	animation: winnerFlash 1.5s ease-in-out infinite alternate; /* Animación */
+	text-align: center;
+	z-index: 1000; /* Asegura que esté encima de otros elementos */
+}
+
+/* Animación de parpadeo suave */
+@keyframes winnerFlash {
+	0% {
+		opacity: 1;
+		transform: translateX(-50%) scale(1);
+	}
+	100% {
+		opacity: 0.8;
+		transform: translateX(-50%) scale(1.1);
+	}
 }

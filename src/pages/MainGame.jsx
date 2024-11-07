@@ -1,56 +1,11 @@
 import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Tangram1 from '../tangram/tangram1'
-import Tangram2 from '../tangram/tangram2'
-import './mainGame.css'
 import { GameRulesContext } from '../context/GameRules'
-
-function getRandomColor() {
-	const letters = '0123456789ABCDEF'
-	let color = '#'
-	for (let i = 0; i < 6; i++) {
-		color += letters[Math.floor(Math.random() * 16)]
-	}
-	return color
-}
-
-function getUniqueLetters() {
-	const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
-	for (let i = letters.length - 1; i > 0; i--) {
-		const j = Math.floor(Math.random() * (i + 1))
-		;[letters[i], letters[j]] = [letters[j], letters[i]]
-	}
-	return letters.slice(0, 6)
-}
-
-const labels = getUniqueLetters()
-
-const colors = [
-	{ label: labels[0], color: getRandomColor() },
-	{ label: labels[1], color: getRandomColor() },
-	{ label: labels[2], color: getRandomColor() },
-	{ label: labels[3], color: getRandomColor() },
-	{ label: labels[4], color: getRandomColor() },
-	{ label: labels[5], color: getRandomColor() },
-]
-
-const fondos = [
-	'./assets/fondo1.avif',
-	'./assets/fondo2.avif',
-	'./assets/fondo3.avif',
-	'./assets/fondo4.avif',
-	'./assets/fondo5.avif',
-	'./assets/fondo6.avif',
-	'./assets/JAPAN.avif',
-	'./assets/POP.avif',
-]
-
-const personajes = ['./assets/personaje.png']
-
-const tangrams = [Tangram1, Tangram2]
+import { COLORS, LABELS, PERSONAJES, TANGRAMS, WALLPAPERS } from '../utils/constantes'
+import './mainGame.css'
 
 function MainGame() {
-	const { isWrongColor } = useContext(GameRulesContext)
+	const { isWrongColor, isWinner, setIsWinner } = useContext(GameRulesContext)
 	const navigate = useNavigate()
 	const [bgImg, setBgImg] = useState('')
 	const [selectedColor, setSelectedColor] = useState(null)
@@ -62,7 +17,7 @@ function MainGame() {
 	const [totalTime, setTotalTime] = useState(null)
 
 	useEffect(() => {
-		const randomTangrams = tangrams.sort(() => Math.random() - 0.5).slice(0, 2)
+		const randomTangrams = TANGRAMS.sort(() => Math.random() - 0.5).slice(0, 2)
 		setSelectedTangrams(randomTangrams)
 		setStartTime(Date.now())
 	}, [])
@@ -78,7 +33,7 @@ function MainGame() {
 	}
 
 	useEffect(() => {
-		const randomImg = fondos[Math.floor(Math.random() * fondos.length)]
+		const randomImg = WALLPAPERS[Math.floor(Math.random() * WALLPAPERS.length)]
 		setBgImg(randomImg)
 	}, [])
 
@@ -100,6 +55,7 @@ function MainGame() {
 				clearInterval(timer)
 			}
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isCompleted])
 
 	const handleCompleteTangram = () => {
@@ -112,6 +68,7 @@ function MainGame() {
 		if (completedTangrams + 1 === selectedTangrams.length) {
 			const total = tangramTimes.reduce((sum, time) => sum + time, timeTaken)
 			setTotalTime(Math.round(total))
+			setIsWinner(true)
 		} else {
 			setStartTime(Date.now())
 		}
@@ -133,7 +90,7 @@ function MainGame() {
 							key={index}
 							selectedColor={selectedColor}
 							selectedLabel={selectedLabel}
-							letters={labels}
+							letters={LABELS}
 							onComplete={handleCompleteTangram}
 						/>
 					))}
@@ -141,7 +98,7 @@ function MainGame() {
 				<div className='color-section'>
 					<div className='color-columns'>
 						<div className='color-column'>
-							{colors.slice(0, 3).map((colorObj, index) => (
+							{COLORS.slice(0, 3).map((colorObj, index) => (
 								<div
 									key={index}
 									className='color-item'>
@@ -155,7 +112,7 @@ function MainGame() {
 							))}
 						</div>
 						<div className='color-column'>
-							{colors.slice(3, 6).map((colorObj, index) => (
+							{COLORS.slice(3, 6).map((colorObj, index) => (
 								<div
 									key={index}
 									className='color-item'>
@@ -195,8 +152,23 @@ function MainGame() {
 			<div className='feedback'>
 				{isWrongColor && (
 					<>
-						<h2>¡Ups! Ese color no es correcto</h2>
-						<img src={personajes[0]} />
+						<h2 className='incorrect-txt'>¡Ups! Ese color no es correcto</h2>
+						<img
+							src={PERSONAJES[0]}
+							className='incorrect'
+						/>
+					</>
+				)}
+
+				{isWinner && (
+					<>
+						<h2 className='winner-txt'>
+							¡GANASTE! <br /> ¡FELICITACIONES!
+						</h2>
+						<img
+							src={PERSONAJES[1]}
+							className='winner-img'
+						/>
 					</>
 				)}
 			</div>
