@@ -119,7 +119,6 @@ function MainGame() {
 
 	return (
 		<div className='main-game'>
-			{/* <BrushCursor color={selectedColor} /> */}
 			<h1>MEMORIA ARTISTICA</h1>
 			<div className='game-layout'>
 				<div

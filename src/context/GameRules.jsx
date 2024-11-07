@@ -7,17 +7,6 @@ export const GameRulesProvider = ({ children }) => {
 	const [isCompletedT1, setIsCompletedT1] = useState(false)
 	const [isWrongColor, setIsWrongColor] = useState(false)
 
-	const handleWrongColor = () => {
-		setIsWrongColor(true)
-
-		const timeoutId = setTimeout(() => {
-			setIsWrongColor(false)
-		}, 10000)
-
-		// Limpia el temporizador si el componente se desmonta
-		return () => clearTimeout(timeoutId)
-	}
-
 	/**	Manejar color incorrecto */
 	useEffect(() => {
 		if (isWrongColor) {
