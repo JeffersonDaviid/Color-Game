@@ -7,7 +7,7 @@ export const GameRulesProvider = ({ children }) => {
 	const [isCompletedT1, setIsCompletedT1] = useState(false)
 
 	return (
-		<GameRulesContext.Provider value={{ isCompletedT1 }}>
+		<GameRulesContext.Provider value={{ isCompletedT1, setIsCompletedT1 }}>
 			{children}
 		</GameRulesContext.Provider>
 	)

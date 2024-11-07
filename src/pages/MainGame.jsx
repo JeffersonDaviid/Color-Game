@@ -128,81 +128,79 @@ function MainGame() {
 		<div className='main-game'>
 			<BrushCursor color={selectedColor} />
 			<h1>MEMORIA ARTISTICA</h1>
-			<GameRulesContext>
-				<div className='game-layout'>
-					<div
-						className='tangram-area'
-						style={{
-							backgroundImage: `url(${bgImg})`,
-							backgroundSize: 'cover',
-							backgroundPosition: 'center',
-						}}>
-						{/* Renderizamos los tangrams seleccionados aleatoriamente */}
-						{selectedTangrams.map((TangramComponent, index) => (
-							<TangramComponent
-								key={index}
-								selectedColor={selectedColor}
-								selectedLabel={selectedLabel}
-								letters={labels}
-								onComplete={handleCompleteTangram} // Llama cuando se complete el tangram
-							/>
-						))}
-					</div>
-					<div className='color-section'>
-						<div className='color-columns'>
-							<div className='color-column'>
-								{colors.slice(0, 3).map((colorObj, index) => (
-									<div
-										key={index}
-										className='color-item'>
-										<span className='color-label'>{colorObj.label}</span>
-										<button
-											className='color-button'
-											style={{ backgroundColor: colorObj.color }}
-											onClick={() => handleColorSelection(colorObj)}
-										/>
-									</div>
-								))}
-							</div>
-							<div className='color-column'>
-								{colors.slice(3, 6).map((colorObj, index) => (
-									<div
-										key={index}
-										className='color-item'>
-										<button
-											className='color-button'
-											style={{ backgroundColor: colorObj.color }}
-											onClick={() => handleColorSelection(colorObj)}
-										/>
-										<span className='color-label'>{colorObj.label}</span>
-									</div>
-								))}
-							</div>
-						</div>
-						<button
-							className='action-button'
-							onClick={handleClearSelection}>
-							BORRAR
-						</button>
-						{totalTime !== null && (
-							<div className='stats'>
-								<h2>Estadísticas</h2>
-								{tangramTimes.map((time, index) => (
-									<p key={index}>
-										Tangram {index + 1}: {time} segundos
-									</p>
-								))}
-								<p>Tiempo Total: {totalTime} segundos</p>
-							</div>
-						)}
-						<button
-							className='action-button'
-							onClick={() => navigate('/')}>
-							VOLVER
-						</button>
-					</div>
+			<div className='game-layout'>
+				<div
+					className='tangram-area'
+					style={{
+						backgroundImage: `url(${bgImg})`,
+						backgroundSize: 'cover',
+						backgroundPosition: 'center',
+					}}>
+					{/* Renderizamos los tangrams seleccionados aleatoriamente */}
+					{selectedTangrams.map((TangramComponent, index) => (
+						<TangramComponent
+							key={index}
+							selectedColor={selectedColor}
+							selectedLabel={selectedLabel}
+							letters={labels}
+							onComplete={handleCompleteTangram} // Llama cuando se complete el tangram
+						/>
+					))}
 				</div>
-			</GameRulesContext>
+				<div className='color-section'>
+					<div className='color-columns'>
+						<div className='color-column'>
+							{colors.slice(0, 3).map((colorObj, index) => (
+								<div
+									key={index}
+									className='color-item'>
+									<span className='color-label'>{colorObj.label}</span>
+									<button
+										className='color-button'
+										style={{ backgroundColor: colorObj.color }}
+										onClick={() => handleColorSelection(colorObj)}
+									/>
+								</div>
+							))}
+						</div>
+						<div className='color-column'>
+							{colors.slice(3, 6).map((colorObj, index) => (
+								<div
+									key={index}
+									className='color-item'>
+									<button
+										className='color-button'
+										style={{ backgroundColor: colorObj.color }}
+										onClick={() => handleColorSelection(colorObj)}
+									/>
+									<span className='color-label'>{colorObj.label}</span>
+								</div>
+							))}
+						</div>
+					</div>
+					<button
+						className='action-button'
+						onClick={handleClearSelection}>
+						BORRAR
+					</button>
+					{totalTime !== null && (
+						<div className='stats'>
+							<h2>Estadísticas</h2>
+							{tangramTimes.map((time, index) => (
+								<p key={index}>
+									Tangram {index + 1}: {time} segundos
+								</p>
+							))}
+							<p>Tiempo Total: {totalTime} segundos</p>
+						</div>
+					)}
+					<button
+						className='action-button'
+						onClick={() => navigate('/')}>
+						VOLVER
+					</button>
+				</div>
+			</div>
 		</div>
 	)
 }

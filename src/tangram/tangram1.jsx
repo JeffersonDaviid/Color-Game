@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import { GameRulesContext } from '../context/GameRules'
 
 function Tangram1({ selectedColor, selectedLabel, letters }) {
-	const {} = useContext(GameRulesContext)
+	const { isCompletedT1, setIsCompletedT1 } = useContext(GameRulesContext)
 	const [numCorrectedColors, setNumCorrectedColors] = useState(0)
 
 	const handleSectionClick = (event) => {
