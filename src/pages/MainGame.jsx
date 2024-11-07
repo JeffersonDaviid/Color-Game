@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import Tangram1 from '../tangram/tangram1'
 import Tangram2 from '../tangram/tangram2'
 import './mainGame.css'
-import BrushCursor from '../config/BrushCursor'
 import { GameRulesProvider } from '../context/GameRules'
 
 function getRandomColor() {
@@ -119,7 +118,6 @@ function MainGame() {
 
 	return (
 		<div className='main-game'>
-			<BrushCursor color={selectedColor} />
 			<h1>MEMORIA ARTISTICA</h1>
 			<GameRulesProvider>
 				<div className='game-layout'>
