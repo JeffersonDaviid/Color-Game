@@ -1,31 +1,69 @@
 /* Home.css */
+
 .home-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #282c34;
+    background: linear-gradient(135deg, #ff6b6b, #fbc531, #4cd137, #00a8ff, #9c88ff);
+    background-size: 200% 200%;
+    animation: backgroundAnimation 10s ease infinite;
     color: white;
     text-align: center;
+    overflow: hidden; /* Para que no se muestren elementos fuera del contenedor */
+    position: relative;
+}
+
+@keyframes backgroundAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .game-title {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
+    font-size: 4rem;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.85); /* Título en un tono oscuro */
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.5);
 }
 
+/* Estilo para las salpicaduras de fondo */
+.splash {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.7;
+    filter: blur(8px);
+    animation: splashAnimation 12s infinite alternate ease-in-out;
+}
+
+@keyframes splashAnimation {
+    0% { transform: scale(0.9) translateY(0px); }
+    50% { transform: scale(1.1) translateY(-20px); }
+    100% { transform: scale(0.9) translateY(0px); }
+}
+
+.splash:nth-child(1) { width: 150px; height: 150px; background-color: #ff4757; top: 20%; left: 15%; }
+.splash:nth-child(2) { width: 200px; height: 200px; background-color: #1e90ff; top: 30%; left: 70%; }
+.splash:nth-child(3) { width: 180px; height: 180px; background-color: #fbc531; top: 60%; left: 30%; }
+.splash:nth-child(4) { width: 220px; height: 220px; background-color: #4cd137; top: 75%; left: 15%; }
+.splash:nth-child(5) { width: 160px; height: 160px; background-color: #9c88ff; top: 50%; left: 80%; }
+
 .play-button {
-    padding: 0.8rem 1.5rem;
-    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    background-color: #61dafb;
-    border: none;
-    border-radius: 5px;
+    color: black; /* Solo texto en negro */
+    background-color: #ffffff; /* Fondo blanco para resaltar el botón */
+    border: 2px solid black;
+    border-radius: 12px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-shadow: none;
 }
 
 .play-button:hover {
-    background-color: #21a1f1;
+    transform: scale(1.1);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
 }

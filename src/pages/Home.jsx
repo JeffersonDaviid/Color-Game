@@ -12,7 +12,15 @@ function Home() {
 
   return (
     <div className="home-container">
-      <h1 className="game-title">JUEGO</h1>
+      {/* Salpicaduras de pintura */}
+      <div className="splash"></div>
+      <div className="splash"></div>
+      <div className="splash"></div>
+      <div className="splash"></div>
+      <div className="splash"></div>
+
+      {/* Título y botón de juego */}
+      <h1 className="game-title">PINTAME SUAVE</h1>
       <button className="play-button" onClick={handlePlayClick}>
         Play
       </button>
