@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { GameRulesContext } from '../context/GameRules'
 
-function Tangram1({ selectedColor, selectedLabel, letters, onComplete }) {
+function Tangram1({ selectedColor, selectedLabel, letters }) {
+	const {} = useContext(GameRulesContext)
 	const [numCorrectedColors, setNumCorrectedColors] = useState(0)
 
 	const handleSectionClick = (event) => {
