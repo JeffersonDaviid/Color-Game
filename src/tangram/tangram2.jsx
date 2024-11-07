@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { GameRulesContext } from '../context/GameRules'
 
 function TangramTV({ selectedColor, selectedLabel, letters, onComplete }) {
+	const { setIsWrongColor } = useContext(GameRulesContext)
 	const [numCorrectedColors, setNumCorrectedColors] = useState(0)
 
 	const handleSectionClick = (event) => {
@@ -15,6 +17,8 @@ function TangramTV({ selectedColor, selectedLabel, letters, onComplete }) {
 			if (selectedColor === 'lightgray') {
 				setNumCorrectedColors(numCorrectedColors - 1)
 			}
+		} else {
+			setIsWrongColor(true)
 		}
 	}
 

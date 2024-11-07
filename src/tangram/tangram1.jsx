@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import { GameRulesContext } from '../context/GameRules'
 
 function Tangram1({ selectedColor, selectedLabel, letters, onComplete }) {
-	const { setIsCompletedT1 } = useContext(GameRulesContext)
+	const { setIsWrongColor } = useContext(GameRulesContext)
 	const [numCorrectedColors, setNumCorrectedColors] = useState(0)
 
 	const handleSectionClick = (event) => {
@@ -17,6 +17,8 @@ function Tangram1({ selectedColor, selectedLabel, letters, onComplete }) {
 			if (selectedColor === 'lightgray') {
 				setNumCorrectedColors(numCorrectedColors - 1)
 			}
+		} else {
+			setIsWrongColor(true)
 		}
 	}
 
