@@ -43,6 +43,8 @@ const fondos = [
 	'./assets/fondo4.avif',
 	'./assets/fondo5.avif',
 	'./assets/fondo6.avif',
+	'./assets/JAPAN.avif',
+	'./assets/POP.avif',
 ]
 
 // const tangrams = [Tangram1, Tangram2, Tangram3, Tangram4, Tangram5]
@@ -102,7 +104,7 @@ function MainGame() {
 
 	return (
 		<div className='main-game'>
-			<h1>Infinite Quality</h1>
+			<h1>LOCURA DE COLORES</h1>
 			<h2>{timePainting} segundos</h2>
 			<div className='game-layout'>
 				<div
