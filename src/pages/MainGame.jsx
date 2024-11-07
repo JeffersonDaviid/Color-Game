@@ -4,7 +4,7 @@ import Tangram1 from '../tangram/tangram1'
 import Tangram2 from '../tangram/tangram2'
 import './mainGame.css'
 import BrushCursor from '../config/BrushCursor'
-import { GameRulesContext } from '../context/GameRules'
+import { GameRulesProvider } from '../context/GameRules'
 
 function getRandomColor() {
 	const letters = '0123456789ABCDEF'
@@ -17,7 +17,6 @@ function getRandomColor() {
 
 function getUniqueLetters() {
 	const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
-	// Barajamos las letras
 	for (let i = letters.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1))
 		;[letters[i], letters[j]] = [letters[j], letters[i]]
@@ -47,41 +46,35 @@ const fondos = [
 	'./assets/POP.avif',
 ]
 
-// const tangrams = [Tangram1, Tangram2, Tangram3, Tangram4, Tangram5]
 const tangrams = [Tangram1, Tangram2]
 
 function MainGame() {
 	const navigate = useNavigate()
 	const [bgImg, setBgImg] = useState('')
-
 	const [selectedColor, setSelectedColor] = useState(null)
 	const [selectedLabel, setSelectedLabel] = useState(null)
 	const [selectedTangrams, setSelectedTangrams] = useState([])
+	const [startTime, setStartTime] = useState(null)
+	const [tangramTimes, setTangramTimes] = useState([])
+	const [completedTangrams, setCompletedTangrams] = useState(0)
+	const [totalTime, setTotalTime] = useState(null)
 
-	const [startTime, setStartTime] = useState(null) // Tiempo de inicio de cada tangram
-	const [tangramTimes, setTangramTimes] = useState([]) // Tiempos individuales de cada tangram
-	const [completedTangrams, setCompletedTangrams] = useState(0) // Cantidad de tangrams completados
-	const [totalTime, setTotalTime] = useState(null) // Tiempo total al completar ambos
-
-	// Función para seleccionar dos tangrams aleatorios
 	useEffect(() => {
 		const randomTangrams = tangrams
-			.sort(() => Math.random() - 0.5) // Mezcla aleatoriamente el arreglo
-			.slice(0, 2) // Selecciona los primeros dos elementos
+			.sort(() => Math.random() - 0.5)
+			.slice(0, 2)
 		setSelectedTangrams(randomTangrams)
-		setStartTime(Date.now()) // Establece el tiempo de inicio para el primer tangram
+		setStartTime(Date.now())
 	}, [])
 
-	// Función para seleccionar un color (incluyendo el "color" de borrar)
 	const handleColorSelection = (colorObj) => {
 		setSelectedColor(colorObj.color)
 		setSelectedLabel(colorObj.label)
 	}
 
-	// Función para "borrar" colores de las figuras específicas
 	const handleClearSelection = () => {
-		setSelectedColor('lightgray') // Configura el color de "borrar" a gris claro
-		setSelectedLabel(null) // No se necesita una etiqueta específica para borrar
+		setSelectedColor('lightgray')
+		setSelectedLabel(null)
 	}
 
 	useEffect(() => {
@@ -107,20 +100,20 @@ function MainGame() {
 				clearInterval(timer)
 			}
 		}
-	}, [])
+	}, [isCompleted])
 
 	const handleCompleteTangram = () => {
 		const endTime = Date.now()
-		const timeTaken = Math.round((endTime - startTime) / 1000) // Tiempo en segundos
+		const timeTaken = Math.round((endTime - startTime) / 1000)
 
 		setTangramTimes((prevTimes) => [...prevTimes, timeTaken])
 		setCompletedTangrams((prevCompleted) => prevCompleted + 1)
 
 		if (completedTangrams + 1 === selectedTangrams.length) {
 			const total = tangramTimes.reduce((sum, time) => sum + time, timeTaken)
-			setTotalTime(Math.round(total)) // Guarda el tiempo total
+			setTotalTime(Math.round(total))
 		} else {
-			setStartTime(Date.now()) // Reinicia el tiempo de inicio para el siguiente tangram
+			setStartTime(Date.now())
 		}
 	}
 
@@ -128,7 +121,7 @@ function MainGame() {
 		<div className='main-game'>
 			<BrushCursor color={selectedColor} />
 			<h1>MEMORIA ARTISTICA</h1>
-			<GameRulesContext>
+			<GameRulesProvider>
 				<div className='game-layout'>
 					<div
 						className='tangram-area'
@@ -137,14 +130,13 @@ function MainGame() {
 							backgroundSize: 'cover',
 							backgroundPosition: 'center',
 						}}>
-						{/* Renderizamos los tangrams seleccionados aleatoriamente */}
 						{selectedTangrams.map((TangramComponent, index) => (
 							<TangramComponent
 								key={index}
 								selectedColor={selectedColor}
 								selectedLabel={selectedLabel}
 								letters={labels}
-								onComplete={handleCompleteTangram} // Llama cuando se complete el tangram
+								onComplete={handleCompleteTangram}
 							/>
 						))}
 					</div>
@@ -152,9 +144,7 @@ function MainGame() {
 						<div className='color-columns'>
 							<div className='color-column'>
 								{colors.slice(0, 3).map((colorObj, index) => (
-									<div
-										key={index}
-										className='color-item'>
+									<div key={index} className='color-item'>
 										<span className='color-label'>{colorObj.label}</span>
 										<button
 											className='color-button'
@@ -166,9 +156,7 @@ function MainGame() {
 							</div>
 							<div className='color-column'>
 								{colors.slice(3, 6).map((colorObj, index) => (
-									<div
-										key={index}
-										className='color-item'>
+									<div key={index} className='color-item'>
 										<button
 											className='color-button'
 											style={{ backgroundColor: colorObj.color }}
@@ -179,9 +167,7 @@ function MainGame() {
 								))}
 							</div>
 						</div>
-						<button
-							className='action-button'
-							onClick={handleClearSelection}>
+						<button className='action-button' onClick={handleClearSelection}>
 							BORRAR
 						</button>
 						{totalTime !== null && (
@@ -195,14 +181,12 @@ function MainGame() {
 								<p>Tiempo Total: {totalTime} segundos</p>
 							</div>
 						)}
-						<button
-							className='action-button'
-							onClick={() => navigate('/')}>
+						<button className='action-button' onClick={() => navigate('/')}>
 							VOLVER
 						</button>
 					</div>
 				</div>
-			</GameRulesContext>
+			</GameRulesProvider>
 		</div>
 	)
 }
