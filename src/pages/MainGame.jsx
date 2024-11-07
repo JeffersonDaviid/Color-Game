@@ -124,7 +124,7 @@ function MainGame() {
 
   return (
     <div className="main-game">
-      <h1>PINTAME SUAVE</h1>
+      <h1>MEMORIA ARTISTICA</h1>
       <div className="game-layout">
         <div
           className="tangram-area"
