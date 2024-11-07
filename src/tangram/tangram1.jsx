@@ -18,11 +18,6 @@ function Tangram1({ selectedColor, selectedLabel, letters, onComplete }) {
     }
   };
 
-  let lettersAleatory = letters;
-  useEffect(() => {
-    lettersAleatory = letters.sort(() => Math.random() - 0.5);
-  }, [letters]);
-
   useEffect(() => {
     if (numCorrectedColors === 6) {
       alert("¡Felicidades! Has completado el tangram");
@@ -38,11 +33,11 @@ function Tangram1({ selectedColor, selectedLabel, letters, onComplete }) {
         fill="lightgray"
         stroke="black"
         strokeWidth="3"
-        data-label={lettersAleatory[0]}
+        data-label={letters[0]}
         onClick={handleSectionClick}
       />
       <text x="95" y="55" fontSize="10" fontWeight="bold" fill="black">
-        {lettersAleatory[0]}
+        {letters[0]}
       </text>
 
       {/* Chimenea */}
@@ -54,11 +49,11 @@ function Tangram1({ selectedColor, selectedLabel, letters, onComplete }) {
         fill="lightgray"
         stroke="black"
         strokeWidth="3"
-        data-label={lettersAleatory[1]}
+        data-label={letters[1]}
         onClick={handleSectionClick}
       />
       <text x="133" y="50" fontSize="10" fontWeight="bold" fill="black">
-        {lettersAleatory[1]}
+        {letters[1]}
       </text>
 
       {/* Paredes */}
@@ -70,11 +65,11 @@ function Tangram1({ selectedColor, selectedLabel, letters, onComplete }) {
         fill="lightgray"
         stroke="black"
         strokeWidth="3"
-        data-label={lettersAleatory[2]}
+        data-label={letters[2]}
         onClick={handleSectionClick}
       />
       <text x="95" y="130" fontSize="10" fontWeight="bold" fill="black">
-        {lettersAleatory[2]}
+        {letters[2]}
       </text>
 
       {/* Puerta */}
@@ -86,43 +81,43 @@ function Tangram1({ selectedColor, selectedLabel, letters, onComplete }) {
         fill="lightgray"
         stroke="black"
         strokeWidth="3"
-        data-label={lettersAleatory[3]}
+        data-label={letters[3]}
         onClick={handleSectionClick}
       />
       <text x="93" y="160" fontSize="10" fontWeight="bold" fill="black">
-        {lettersAleatory[3]}
+        {letters[3]}
       </text>
 
-      {/* Ventana izquierda */}
+      {/* Ventana izquierda (agrandada a 30x30) */}
       <rect
-        x="50"
-        y="100"
-        width="20"
-        height="20"
+        x="45"
+        y="95"
+        width="30"
+        height="30"
         fill="lightgray"
         stroke="black"
         strokeWidth="3"
-        data-label={lettersAleatory[4]}
+        data-label={letters[4]}
         onClick={handleSectionClick}
       />
-      <text x="57" y="115" fontSize="10" fontWeight="bold" fill="black">
-        {lettersAleatory[4]}
+      <text x="55" y="115" fontSize="10" fontWeight="bold" fill="black">
+        {letters[4]}
       </text>
 
-      {/* Ventana derecha */}
+      {/* Ventana derecha (agrandada a 30x30) */}
       <rect
-        x="130"
-        y="100"
-        width="20"
-        height="20"
+        x="125"
+        y="95"
+        width="30"
+        height="30"
         fill="lightgray"
         stroke="black"
         strokeWidth="3"
-        data-label={lettersAleatory[5]}
+        data-label={letters[5]}
         onClick={handleSectionClick}
       />
-      <text x="137" y="115" fontSize="10" fontWeight="bold" fill="black">
-        {lettersAleatory[5]}
+      <text x="135" y="115" fontSize="10" fontWeight="bold" fill="black">
+        {letters[5]}
       </text>
     </svg>
   );

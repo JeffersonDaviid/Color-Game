@@ -18,11 +18,6 @@ function TangramTV({ selectedColor, selectedLabel, letters, onComplete }) {
     }
   };
 
-  let lettersAleatory = letters;
-  useEffect(() => {
-    lettersAleatory = letters.sort(() => Math.random() - 0.5);
-  }, [letters]);
-
   useEffect(() => {
     if (numCorrectedColors === 6) {
       alert("¡Felicidades! Has completado el tangram");
@@ -41,11 +36,11 @@ function TangramTV({ selectedColor, selectedLabel, letters, onComplete }) {
         fill="#d3d3d3"
         stroke="black"
         strokeWidth="4"
-        data-label={lettersAleatory[0]}
+        data-label={letters[0]}
         onClick={handleSectionClick}
       />
       <text x="30" y="35" fontSize="18" fontWeight="bold" fill="black">
-        {lettersAleatory[0]}
+        {letters[0]}
       </text>
 
       {/* Pantalla (B) */}
@@ -57,11 +52,11 @@ function TangramTV({ selectedColor, selectedLabel, letters, onComplete }) {
         fill="#d3d3d3"
         stroke="black"
         strokeWidth="4"
-        data-label={lettersAleatory[1]}
+        data-label={letters[1]}
         onClick={handleSectionClick}
       />
       <text x="50" y="90" fontSize="18" fontWeight="bold" fill="black">
-        {lettersAleatory[1]}
+        {letters[1]}
       </text>
 
       {/* Botón superior derecho (C) */}
@@ -72,11 +67,11 @@ function TangramTV({ selectedColor, selectedLabel, letters, onComplete }) {
         fill="#d3d3d3"
         stroke="black"
         strokeWidth="2"
-        data-label={lettersAleatory[2]}
+        data-label={letters[2]}
         onClick={handleSectionClick}
       />
       <text x="345" y="85" fontSize="18" fontWeight="bold" fill="black">
-        {lettersAleatory[2]}
+        {letters[2]}
       </text>
 
       {/* Botón medio derecho (D) */}
@@ -87,11 +82,11 @@ function TangramTV({ selectedColor, selectedLabel, letters, onComplete }) {
         fill="#d3d3d3"
         stroke="black"
         strokeWidth="2"
-        data-label={lettersAleatory[3]}
+        data-label={letters[3]}
         onClick={handleSectionClick}
       />
       <text x="345" y="135" fontSize="18" fontWeight="bold" fill="black">
-        {lettersAleatory[3]}
+        {letters[3]}
       </text>
 
       {/* Botón inferior derecho (E) */}
@@ -102,11 +97,11 @@ function TangramTV({ selectedColor, selectedLabel, letters, onComplete }) {
         fill="#d3d3d3"
         stroke="black"
         strokeWidth="2"
-        data-label={lettersAleatory[4]}
+        data-label={letters[4]}
         onClick={handleSectionClick}
       />
       <text x="345" y="185" fontSize="18" fontWeight="bold" fill="black">
-        {lettersAleatory[4]}
+        {letters[4]}
       </text>
 
       {/* Indicador de encendido (F) */}
@@ -118,7 +113,7 @@ function TangramTV({ selectedColor, selectedLabel, letters, onComplete }) {
         fill="#d3d3d3"
         stroke="black"
         strokeWidth="2"
-        data-label={lettersAleatory[5]}
+        data-label={letters[5]}
         onClick={handleSectionClick}
       />
       <text
@@ -129,7 +124,7 @@ function TangramTV({ selectedColor, selectedLabel, letters, onComplete }) {
         fill="black"
         textAnchor="middle"
       >
-        {lettersAleatory[5]}
+        {letters[5]}
       </text>
     </svg>
   );
