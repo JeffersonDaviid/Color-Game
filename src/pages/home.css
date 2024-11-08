@@ -1,17 +1,22 @@
-/* Home.css */
-
 .home-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: linear-gradient(135deg, #ff6b6b, #fbc531, #4cd137, #00a8ff, #9c88ff);
+    background: linear-gradient(
+        135deg,
+        rgba(173, 216, 230, 0.6), /* Azul claro */
+        rgba(255, 255, 204, 0.6), /* Amarillo pastel */
+        rgba(144, 238, 144, 0.6), /* Verde claro */
+        rgba(245, 245, 220, 0.6), /* Beige */
+        rgba(211, 211, 211, 0.6)  /* Gris claro */
+    );
     background-size: 200% 200%;
     animation: backgroundAnimation 10s ease infinite;
     color: white;
     text-align: center;
-    overflow: hidden; /* Para que no se muestren elementos fuera del contenedor */
+    overflow: hidden;
     position: relative;
 }
 
@@ -29,7 +34,6 @@
     text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.5);
 }
 
-/* Estilo para las salpicaduras de fondo */
 .splash {
     position: absolute;
     border-radius: 50%;
@@ -44,18 +48,18 @@
     100% { transform: scale(0.9) translateY(0px); }
 }
 
-.splash:nth-child(1) { width: 150px; height: 150px; background-color: #ff4757; top: 20%; left: 15%; }
-.splash:nth-child(2) { width: 200px; height: 200px; background-color: #1e90ff; top: 30%; left: 70%; }
-.splash:nth-child(3) { width: 180px; height: 180px; background-color: #fbc531; top: 60%; left: 30%; }
-.splash:nth-child(4) { width: 220px; height: 220px; background-color: #4cd137; top: 75%; left: 15%; }
-.splash:nth-child(5) { width: 160px; height: 160px; background-color: #9c88ff; top: 50%; left: 80%; }
+.splash:nth-child(1) { width: 150px; height: 150px; background-color: rgba(173, 216, 230, 0.6); top: 20%; left: 15%; }
+.splash:nth-child(2) { width: 200px; height: 200px; background-color: rgba(255, 255, 204, 0.6); top: 30%; left: 70%; }
+.splash:nth-child(3) { width: 180px; height: 180px; background-color: rgba(144, 238, 144, 0.6); top: 60%; left: 30%; }
+.splash:nth-child(4) { width: 220px; height: 220px; background-color: rgba(245, 245, 220, 0.6); top: 75%; left: 15%; }
+.splash:nth-child(5) { width: 160px; height: 160px; background-color: rgba(211, 211, 211, 0.6); top: 50%; left: 80%; }
 
 .play-button {
     padding: 1rem 2rem;
     font-size: 1.5rem;
     font-weight: bold;
-    color: black; /* Solo texto en negro */
-    background-color: #ffffff; /* Fondo blanco para resaltar el botón */
+    color: black;
+    background-color: #ffffff;
     border: 2px solid black;
     border-radius: 12px;
     cursor: pointer;
