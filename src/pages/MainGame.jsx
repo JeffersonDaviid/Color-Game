@@ -131,17 +131,6 @@ function MainGame() {
 						onClick={handleClearSelection}>
 						BORRAR
 					</button>
-					{totalTime !== null && (
-						<div className='stats'>
-							<h2>Estadísticas</h2>
-							{tangramTimes.map((time, index) => (
-								<p key={index}>
-									Tangram {index + 1}: {time} segundos
-								</p>
-							))}
-							<p>Tiempo Total: {totalTime} segundos</p>
-						</div>
-					)}
 					<button
 						className='action-button'
 						onClick={() => navigate('/')}>
