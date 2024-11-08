@@ -1,17 +1,19 @@
 import Tangram1 from "../tangram/tangram1"
 import TangramTV from "../tangram/tangram2"
-import { getRandomColor, getUniqueLetters } from "./utils"
+import { getRandomColors, getSuffleList, getUniqueLetters } from "./utils"
 
 export const LABELS = getUniqueLetters()
+const COLORS_HSL = getSuffleList(getRandomColors())
 
 export const COLORS = [
-	{ label: LABELS[0], color: getRandomColor() },
-	{ label: LABELS[1], color: getRandomColor() },
-	{ label: LABELS[2], color: getRandomColor() },
-	{ label: LABELS[3], color: getRandomColor() },
-	{ label: LABELS[4], color: getRandomColor() },
-	{ label: LABELS[5], color: getRandomColor() },
+	{ label: LABELS[0], color: COLORS_HSL[0] },
+	{ label: LABELS[1], color: COLORS_HSL[1] },
+	{ label: LABELS[2], color: COLORS_HSL[2] },
+	{ label: LABELS[3], color: COLORS_HSL[3] },
+	{ label: LABELS[4], color: COLORS_HSL[4] },
+	{ label: LABELS[5], color: COLORS_HSL[5] },
 ]
+
 
 export const WALLPAPERS = [
 	'./assets/fondo1.avif',

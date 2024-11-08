@@ -1,8 +1,11 @@
 import { useContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { GameRulesContext } from '../context/GameRules'
+import { LABELS } from '../utils/constantes'
+import { getSuffleList } from '../utils/utils'
 
-function Tangram2({ selectedColor, selectedLabel, letters, onComplete }) {
+function Tangram2({ selectedColor, selectedLabel, onComplete }) {
+	const [letters, setLetters] = useState([...LABELS])
 	const { setIsWrongColor } = useContext(GameRulesContext)
 	const [paintedSections, setPaintedSections] = useState(new Set()) // Set para rastrear secciones pintadas
 	const [isTangramCompleted, setIsTangramCompleted] = useState(false) // Estado para controlar si el tangram ya está completo
@@ -35,6 +38,12 @@ function Tangram2({ selectedColor, selectedLabel, letters, onComplete }) {
 			if (onComplete) onComplete()
 		}
 	}, [paintedSections, letters.length, onComplete, isTangramCompleted])
+
+	useEffect(() => {
+		const shuffledLetters = getSuffleList(letters)
+		setLetters(shuffledLetters)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	return (
 		<svg

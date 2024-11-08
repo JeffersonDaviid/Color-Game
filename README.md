@@ -35,6 +35,13 @@ Este proyecto fue desarrollado utilizando:
 - **CSS** para el diseño visual y animaciones suaves, que resultan atractivas y fáciles de seguir para los usuarios.
 - **JavaScript** para la lógica de coloración y funcionalidad de la aplicación.
 
+## Cómo Desplegar
+Para desplegar la aplicacion vamos a necesitar seguir los siguientes pasos desde la terminal:
+1. **Descargar Node.js**: Vamos a descargar node.js desde la pagina oficial.
+2. **Descargar Vite**: Descargamos Vite con el comando *npm install vite --save-dev*
+3. **Descargar Libreria de React**: Descargamos la libreria de React con el comando npm install *react-router-dom*
+4. **Ejecucion de la aplicación**: Para la ejecución desde una terminal vamos a colocar *npm run dev*
+
 ## Cómo Usar
 
 1. **Selecciona un Color**: Elige entre varias colores disponibles en la aplicación.
