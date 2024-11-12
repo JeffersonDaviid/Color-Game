@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { GameRulesContext } from '../context/GameRules'
 import { COLORS, LABELS, PERSONAJES, TANGRAMS, WALLPAPERS } from '../utils/constantes'
 import './mainGame.css'
+import { AuthContext } from '../context/AuthProvider'
 
 function MainGame() {
 	const { isWrongColor, isWinner, setIsWinner } = useContext(GameRulesContext)
+	const { isAuthenticated } = useContext(AuthContext)
 	const navigate = useNavigate()
 	const [bgImg, setBgImg] = useState('')
 	const [selectedColor, setSelectedColor] = useState(null)
@@ -15,6 +17,8 @@ function MainGame() {
 	const [tangramTimes, setTangramTimes] = useState([])
 	const [completedTangrams, setCompletedTangrams] = useState(0)
 	const [totalTime, setTotalTime] = useState(null)
+	const [showResume, setShowResume] = useState(false)
+	const [isPaused, setIsPaused] = useState(false)
 
 	useEffect(() => {
 		const randomTangrams = TANGRAMS.sort(() => Math.random() - 0.5).slice(0, 2)
@@ -69,6 +73,10 @@ function MainGame() {
 			const total = tangramTimes.reduce((sum, time) => sum + time, timeTaken)
 			setTotalTime(Math.round(total))
 			setIsWinner(true)
+			// if (isAuthenticated)
+			setTimeout(() => {
+				setShowResume(true)
+			}, 5000)
 		} else {
 			setStartTime(Date.now())
 		}
@@ -126,10 +134,17 @@ function MainGame() {
 							))}
 						</div>
 					</div>
-					<button
+					{/* <button
 						className='action-button'
 						onClick={handleClearSelection}>
 						BORRAR
+					</button> */}
+					<button
+						className='action-button'
+						onClick={() => {
+							setIsPaused(true)
+						}}>
+						PAUSAR
 					</button>
 					<button
 						className='action-button'
@@ -138,6 +153,24 @@ function MainGame() {
 					</button>
 				</div>
 			</div>
+			{isPaused && (
+				<div className='paused'>
+					<div className='personajes'>
+						<h1>¡Recarguemos energías! </h1>
+						{/* <h1>Es hora de un descanso </h1> */}
+						<img src={PERSONAJES[2]} />
+						<img src={PERSONAJES[3]} />
+					</div>
+					<button
+						className='action-button'
+						onClick={() => {
+							setIsPaused(false)
+						}}>
+						CONTINUAR
+					</button>
+				</div>
+			)}
+			{showResume && <section className='resume'>AQUI VAN LAS ESTADISTICAS</section>}
 			<div className='feedback'>
 				{isWrongColor && (
 					<>

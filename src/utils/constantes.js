@@ -1,6 +1,12 @@
-import Tangram1 from "../tangram/tangram1"
-import TangramTV from "../tangram/tangram2"
-import { getRandomColors, getSuffleList, getUniqueLetters } from "./utils"
+import Tangram1 from '../tangram/tangram1'
+import TangramTV from '../tangram/tangram2'
+import { getRandomColors, getSuffleList, getUniqueLetters } from './utils'
+
+export const API_AUTH = 'http......'
+export const API_HISTORY_TRANSFER = 'http......'
+export const API_PATIENT = 'HTTTPASDJF'
+export const API_SESSION = 'HTTTP'
+export const API_THERAPIST = ''
 
 export const LABELS = getUniqueLetters()
 const COLORS_HSL = getSuffleList(getRandomColors())
@@ -13,7 +19,6 @@ export const COLORS = [
 	{ label: LABELS[4], color: COLORS_HSL[4] },
 	{ label: LABELS[5], color: COLORS_HSL[5] },
 ]
-
 
 export const WALLPAPERS = [
 	'./assets/fondo1.avif',
@@ -29,6 +34,9 @@ export const WALLPAPERS = [
 export const PERSONAJES = [
 	'./assets/personaje-mujer-ok.png',
 	'./assets/personaje-hombre-feliz.png',
+	'./assets/personaje-hombre-descanso.png',
+	'./assets/personaje-mujer-descanso.png',
+	'./assets/personaje-mujer-comienzo.png',
 ]
 
 export const TANGRAMS = [Tangram1, TangramTV]

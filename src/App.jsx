@@ -3,6 +3,8 @@ import './App.css'
 import { GameRulesProvider } from './context/GameRules'
 import Home from './pages/Home'
 import MainGame from './pages/mainGame'
+import Patient from './pages/Patient'
+import ProtectedRouter from './components/ProtectRoute'
 
 function App() {
 	return (
@@ -21,6 +23,10 @@ function App() {
 								<MainGame />
 							</GameRulesProvider>
 						}
+					/>
+					<Route
+						path='/patient'
+						element={<Patient />}
 					/>
 				</Routes>
 			</div>

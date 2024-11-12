@@ -1,0 +1,41 @@
+.patient-container {
+	position: relative;
+	display: flex;
+}
+
+.patient-statistics {
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+}
+
+.patient-container .transfer-history {
+	position: fixed;
+	right: 0;
+	top: 0;
+	width: 50%;
+	padding: 1.5rem;
+	overflow-y: auto;
+	height: 100vh;
+	background-color: red;
+}
+
+.sessions-history {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.transfer-history table {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+}
+.transfer-history tbody tr,
+.transfer-history thead tr {
+	display: flex;
+	gap: 10px;
+	justify-content: space-between;
+}
