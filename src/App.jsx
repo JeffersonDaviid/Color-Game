@@ -5,6 +5,9 @@ import Home from './pages/Home'
 import MainGame from './pages/mainGame'
 import Patient from './pages/Patient'
 import ProtectedRouter from './components/ProtectRoute'
+import Login from './pages/Login'
+import RegisterTherapist from './pages/RegisterTherapist'
+import TherapistDashboard from './pages/TherapistDashboard'
 
 function App() {
 	return (
@@ -25,8 +28,20 @@ function App() {
 						}
 					/>
 					<Route
+						path='/register'
+						element={<RegisterTherapist />}
+					/>
+					<Route
+						path='/login'
+						element={<Login />}
+					/>
+					<Route
+						path='dashboard'
+						element={<ProtectedRouter element={<TherapistDashboard />} />}
+					/>
+					<Route
 						path='/patient'
-						element={<Patient />}
+						element={<ProtectedRouter element={<Patient />} />}
 					/>
 				</Routes>
 			</div>

@@ -197,20 +197,6 @@ h1 {
 	background-color: red;
 }
 
-.main-game .paused {
-	position: absolute;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	/* padding-top: 20vh; */
-	gap: 2rem;
-	z-index: 9999999;
-	width: 100vw;
-	height: 100vh;
-	background-color: #ccffcc;
-}
-
 .main-game .paused .personajes {
 	height: 65vh;
 }
@@ -221,17 +207,16 @@ h1 {
 }
 
 .paused {
-	display: none; /* Inicialmente oculta */
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	font-size: 30px;
-	color: white;
-	background-color: rgba(0, 0, 0, 0.7);
-	padding: 20px;
-	border-radius: 10px;
-	opacity: 0;
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 5rem;
+	z-index: 9999999;
+	width: 100vw;
+	height: 100vh;
+	background-color: #ccffcc;
 	animation: fadeIn 1s forwards; /* Animación de entrada */
 }
 @keyframes fadeIn {
@@ -241,4 +226,9 @@ h1 {
 	100% {
 		opacity: 1;
 	}
+}
+
+.paused button {
+	min-width: fit-content;
+	padding: 0 20px;
 }

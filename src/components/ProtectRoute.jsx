@@ -7,6 +7,7 @@ const ProtectedRouter = ({ element }) => {
 
 	useEffect(() => {
 		if (!isAuthenticated) sessionStorage.clear()
+		console.log(isAuthenticated)
 	}, [isAuthenticated])
 
 	return isAuthenticated ? element : <Navigate to='/login' />

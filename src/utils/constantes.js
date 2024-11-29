@@ -2,7 +2,7 @@ import Tangram1 from '../tangram/tangram1'
 import TangramTV from '../tangram/tangram2'
 import { getRandomColors, getSuffleList, getUniqueLetters } from './utils'
 
-export const API_AUTH = 'http......'
+export const API_AUTH = 'http://localhost:8000/api/v1/auth'
 export const API_HISTORY_TRANSFER = 'http......'
 export const API_PATIENT = 'HTTTPASDJF'
 export const API_SESSION = 'HTTTP'

@@ -2,57 +2,36 @@ import { API_AUTH } from '../utils/constantes'
 
 export const loginService = async (user) => {
 	try {
-		const data = {
-			username: user.username,
-			password: user.password,
-		}
+		const response = await fetch(API_AUTH + '/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(user),
+		})
 
-		// const response = await fetch(API_AUTH + '/login', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'Aplication/json',
-		// 	},
-		// 	body: JSON.stringify(data),
-		// })
+		const objData = await response.json()
 
-		// const respData = await response.json()
-
-		//TODO: JEFF - ver la respuesta
-		console.log(data)
-		return {
-			token: 'superToken',
-			cedulaT: '1777777777',
-		}
+		return objData
 	} catch (error) {
 		console.error('Error login user:', error)
 		throw error
 	}
 }
 
-//TODO:implementar
-export const registerService = async (user) => {
+export const registerTherapistService = async (user) => {
 	try {
-		const data = {
-			username: user.username,
-			password: user.password,
-		}
+		const response = await fetch(API_AUTH + '/register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(user),
+		})
 
-		// const response = await fetch(API_AUTH + '/login', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'Aplication/json',
-		// 	},
-		// 	body: JSON.stringify(data),
-		// })
-
-		// const respData = await response.json()
-
-		//TODO: JEFF - ver la respuesta
-		console.log(data)
-		return {
-			token: 'superToken',
-			cedulaT: '1777777777',
-		}
+		const respData = await response.json()
+		console.log(respData)
+		return respData
 	} catch (error) {
 		console.error('Error login user:', error)
 		throw error

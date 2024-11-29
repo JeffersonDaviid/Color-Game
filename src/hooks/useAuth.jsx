@@ -1,14 +1,25 @@
 import { useContext, useEffect, useState } from 'react'
 import { StateFetchContext } from '../context/StateFetchContext'
-import { loginService, logoutService } from '../services/authService'
+import {
+	loginService,
+	logoutService,
+	registerTherapistService,
+} from '../services/authService'
 import { handleAPIError } from '../utils/HandleAPIError'
 
 const useAuth = () => {
 	const { setLoading } = useContext(StateFetchContext)
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
+	const [isSuccessRegisterTherapist, setIsSuccessRegisterTherapist] = useState(false)
 	const [userloged, setUserLoged] = useState({
 		token: '',
-		cedulaT: '',
+		therapist: {
+			cedulaT: '',
+			nombre: '',
+			apellido: '',
+			telefono: '',
+			correo: '',
+		},
 	})
 
 	useEffect(() => {
@@ -21,20 +32,34 @@ const useAuth = () => {
 		}
 	}, [])
 
+	const registerTherapist = async (data) => {
+		setLoading(true)
+		try {
+			const response = await registerTherapistService(data)
+			if (response.status === 201) {
+				setIsSuccessRegisterTherapist(true)
+			}
+		} catch (error) {
+			handleAPIError(error)
+		} finally {
+			setLoading(false)
+		}
+	}
+
 	const login = async (data) => {
 		setLoading(true)
 		try {
 			const response = await loginService(data)
-
+			console.log(response)
 			if (response.status === 200) {
 				setUserLoged({
-					cedulaT: response.data.cedulaT,
+					therapist: response.data.therapist,
 					token: response.data.token,
 				})
 				setIsAuthenticated(true)
 				window.sessionStorage.setItem(
 					'userLoged',
-					JSON.stringify({ cedulaT: response.data.cedulaT, token: response.data.token })
+					JSON.stringify({ cedulaT: response.data.therapist, token: response.data.token })
 				)
 			}
 		} catch (error) {
@@ -57,7 +82,14 @@ const useAuth = () => {
 		}
 	}
 
-	return { isAuthenticated, userloged, login, logout }
+	return {
+		isAuthenticated,
+		userloged,
+		isSuccessRegisterTherapist,
+		registerTherapist,
+		login,
+		logout,
+	}
 }
 
 export default useAuth

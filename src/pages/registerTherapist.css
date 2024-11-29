@@ -1,0 +1,134 @@
+.register-container {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	min-height: 100vh;
+	min-width: 100vw;
+	overflow: hidden;
+	background: linear-gradient(135deg, #74ebd5, #acb6e5);
+}
+
+.register-box {
+	width: 100%;
+	max-width: 600px;
+	background-color: #ffffff;
+	border-radius: 15px;
+	padding: 40px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	transition: transform 0.3s ease-in-out;
+}
+
+/* Título principal */
+.register-title {
+	font-size: 1.8rem;
+	margin-bottom: 20px;
+	color: #333;
+	font-weight: 600;
+	letter-spacing: 1px;
+}
+
+/* Estilo de las etiquetas de los campos de texto */
+.register-form .form-group label {
+	display: block;
+	font-size: 1rem;
+	font-weight: 500;
+	margin-bottom: 8px;
+	color: #555;
+	text-align: left;
+}
+
+/* Estilo de los inputs, bordes suaves, foco con sombra */
+.register-form .form-group input {
+	width: 100%;
+	padding: 12px;
+	font-size: 1rem;
+	border: 1px solid #dcdfe1;
+	border-radius: 8px;
+	margin-bottom: 15px;
+	background-color: #f9f9f9;
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.register-form .form-group input:focus {
+	outline: none;
+	border-color: #4caf50;
+	box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+}
+
+/* Estilo para organizar los campos en dos columnas */
+.register-form {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Ajustes para los inputs en la segunda columna */
+.register-form .form-group:nth-child(odd) {
+	grid-column: span 1;
+}
+
+.register-form .form-group:nth-child(even) {
+	grid-column: span 1;
+}
+
+/* Mensajes de error */
+.error-message {
+	color: #e74c3c;
+	font-size: 0.9rem;
+	margin-top: -8px;
+	text-align: left;
+}
+
+/* Botón de submit, con colores y transición */
+.register-form .register-button {
+	background-color: #4caf50;
+	color: white;
+	padding: 14px;
+	font-size: 1.1rem;
+	font-weight: 600;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.register-form .register-button i {
+	font-size: 1.3rem;
+}
+
+/* Cambio de color del botón al pasar el mouse */
+.register-form .register-button:hover {
+	background-color: #45a049;
+	transform: translateY(-2px);
+}
+
+/* Caja de texto dentro del formulario */
+.register-form .form-group {
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+/* Fondo más suave para el formulario */
+.register-container {
+	background: linear-gradient(to top right, #f8fafc, #cce7ff);
+}
+
+/* Añadir un pequeño margen inferior en el formulario */
+.register-box {
+	margin-bottom: 30px;
+}
+
+/* Agregar una sombra sutil al fondo del botón para un efecto más elegante */
+.register-form .register-button:active {
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
