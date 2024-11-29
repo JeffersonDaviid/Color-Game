@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import './Home.css'
 import { AuthContext } from '../context/AuthProvider'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
 function Home() {
 	const navigate = useNavigate()
@@ -11,34 +11,35 @@ function Home() {
 		navigate('/game')
 	}
 
-	return isAuthenticated ? (
-		navigate('/dashboard')
-	) : (
-		<>
-			<div className='home-container'>
-				{/* Salpicaduras de pintura */}
-				<div className='splash'></div>
-				<div className='splash'></div>
-				<div className='splash'></div>
-				<div className='splash'></div>
-				<div className='splash'></div>
+	useEffect(() => {
+		if (isAuthenticated) navigate('/dashboard')
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isAuthenticated])
 
-				{/* Título y botón de juego */}
-				<h1 className='game-title'>MEMORIA ARTÍSTICA</h1>
-				<button
-					className='play-button'
-					onClick={handlePlayClick}>
-					Play
-				</button>
+	return (
+		<div className='home-container'>
+			{/* Salpicaduras de pintura */}
+			<div className='splash'></div>
+			<div className='splash'></div>
+			<div className='splash'></div>
+			<div className='splash'></div>
+			<div className='splash'></div>
 
-				<button
-					type='submit'
-					className='login-button login-icon'
-					onClick={() => navigate('/login')}>
-					<i className='fas fa-user'></i> Iniciar sesión
-				</button>
-			</div>
-		</>
+			{/* Título y botón de juego */}
+			<h1 className='game-title'>MEMORIA ARTÍSTICA</h1>
+			<button
+				className='play-button'
+				onClick={handlePlayClick}>
+				Play
+			</button>
+
+			<button
+				type='submit'
+				className='login-button login-icon'
+				onClick={() => navigate('/login')}>
+				<i className='fas fa-user'></i> Iniciar sesión
+			</button>
+		</div>
 	)
 }
 

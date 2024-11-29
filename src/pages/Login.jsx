@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthProvider'
 import './Login.css'
@@ -35,6 +35,11 @@ const Login = () => {
 
 		if (isAuthenticated) navigate('/dashboard')
 	}
+
+	useEffect(() => {
+		if (isAuthenticated) navigate('/dashboard')
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isAuthenticated])
 
 	return (
 		<div className='login-container'>
