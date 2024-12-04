@@ -104,6 +104,14 @@ function MainGame() {
 					))}
 				</div>
 				<div className='color-section'>
+					{/* Frase encima del color seleccionado */}
+					<div className="color-selected-text">Color Seleccionado</div>
+
+					{/* Mostrar el color seleccionado */}
+					<div className="selected-color-box" style={{ backgroundColor: selectedColor }}>
+						{selectedLabel}
+					</div>
+
 					<div className='color-columns'>
 						<div className='color-column'>
 							{COLORS.slice(0, 3).map((colorObj, index) => (
@@ -134,11 +142,7 @@ function MainGame() {
 							))}
 						</div>
 					</div>
-					{/* <button
-						className='action-button'
-						onClick={handleClearSelection}>
-						BORRAR
-					</button> */}
+
 					<button
 						className='action-button'
 						onClick={() => {
@@ -157,7 +161,6 @@ function MainGame() {
 				<div className='paused'>
 					<div className='personajes'>
 						<h1>¡Recarguemos energías! </h1>
-						{/* <h1>Es hora de un descanso </h1> */}
 						<img src={PERSONAJES[2]} />
 						<img src={PERSONAJES[3]} />
 					</div>

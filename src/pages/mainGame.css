@@ -41,7 +41,7 @@
 }
 
 h1 {
-	font-size: 2.5rem;
+	font-size: 2.8rem;
 	color: #000000d8;
 }
 
@@ -191,7 +191,6 @@ h1 {
 	bottom: 0;
 	margin: auto;
 	z-index: 999;
-	width: e;
 	width: 60vw;
 	height: 70vh;
 	background-color: red;
@@ -219,6 +218,7 @@ h1 {
 	background-color: #ccffcc;
 	animation: fadeIn 1s forwards; /* Animación de entrada */
 }
+
 @keyframes fadeIn {
 	0% {
 		opacity: 0;
@@ -228,7 +228,32 @@ h1 {
 	}
 }
 
-.paused button {
-	min-width: fit-content;
-	padding: 0 20px;
+/* Mostrar el color seleccionado sobre la frase */
+.selected-color-box {
+	width: 80px;
+	height: 80px;
+	border-radius: 8px;
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: black;
+	font-weight: bold;
+	font-size: 1.2rem;
+	text-align: center;
+	border: 2px solid #000;
+	transition: all 0.3s ease;
+}
+
+
+.selected-color-box {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Título "Color Seleccionado" */
+.color-selected-text {
+	font-size: 1.5rem; 
+	color: #333;
+	font-weight: bold;
+	margin-bottom: 10px;
 }
