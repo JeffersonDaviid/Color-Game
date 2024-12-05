@@ -1,8 +1,6 @@
-import { createContext } from 'react'
-
+import PropTypes from 'prop-types'
 import useStateFetch from '../hooks/useStateFetch.jsx'
-
-export const StateFetchContext = createContext()
+import StateFetchContext from './StateFetchContext.js'
 
 export const StateFetchContextProvider = ({ children }) => {
 	const { loading, setLoading } = useStateFetch()
@@ -17,4 +15,8 @@ export const StateFetchContextProvider = ({ children }) => {
 			{children}
 		</StateFetchContext.Provider>
 	)
+}
+
+StateFetchContextProvider.propTypes = {
+	children: PropTypes.node.isRequired,
 }

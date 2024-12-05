@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
-import './registerTherapist.css'
 import { useNavigate } from 'react-router-dom'
-import { AuthContext } from '../context/AuthProvider'
+import AuthContext from '../context/AuthContext'
+import './registerTherapist.css'
 
 const RegisterTherapist = () => {
 	const { isSuccessRegisterTherapist, registerTherapist } = useContext(AuthContext)

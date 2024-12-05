@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { GameRulesContext } from '../context/GameRules'
+import AuthContext from '../context/AuthContext'
+import GameRulesContext from '../context/GameRulesContext'
 import { COLORS, LABELS, PERSONAJES, TANGRAMS, WALLPAPERS } from '../utils/constantes'
 import './mainGame.css'
-import { AuthContext } from '../context/AuthProvider'
 
 function MainGame() {
 	const { isWrongColor, isWinner, setIsWinner } = useContext(GameRulesContext)
@@ -105,10 +105,12 @@ function MainGame() {
 				</div>
 				<div className='color-section'>
 					{/* Frase encima del color seleccionado */}
-					<div className="color-selected-text">Color Seleccionado</div>
+					<div className='color-selected-text'>Color Seleccionado</div>
 
 					{/* Mostrar el color seleccionado */}
-					<div className="selected-color-box" style={{ backgroundColor: selectedColor }}>
+					<div
+						className='selected-color-box'
+						style={{ backgroundColor: selectedColor }}>
 						{selectedLabel}
 					</div>
 

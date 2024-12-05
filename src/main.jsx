@@ -1,10 +1,10 @@
+import { SnackbarProvider } from 'notistack'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App'
 import { AuthProvider } from './context/AuthProvider'
-import { StateFetchContextProvider } from './context/StateFetchContext'
+import { StateFetchContextProvider } from './context/StateFetchProvider'
 import './index.css'
-import { SnackbarProvider } from 'notistack'
 
 const root = createRoot(document.getElementById('root'))
 root.render(
