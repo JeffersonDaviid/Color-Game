@@ -5,7 +5,7 @@ import {
 	logoutService,
 	registerTherapistService,
 } from '../services/authService'
-import { handleAPIError } from '../utils/HandleAPIError'
+import { handleAPIError, handleAPIMessages } from '../utils/HandleAPIError'
 
 const useAuth = () => {
 	const { setLoading } = useContext(StateFetchContext)
@@ -39,6 +39,8 @@ const useAuth = () => {
 			if (response.status === 201) {
 				setIsSuccessRegisterTherapist(true)
 			}
+
+			handleAPIMessages(response.status, response.message)
 		} catch (error) {
 			handleAPIError(error)
 		} finally {
@@ -50,7 +52,6 @@ const useAuth = () => {
 		setLoading(true)
 		try {
 			const response = await loginService(data)
-			console.log(response)
 			if (response.status === 200) {
 				setUserLoged({
 					therapist: response.data.therapist,
@@ -62,6 +63,7 @@ const useAuth = () => {
 					JSON.stringify({ cedulaT: response.data.therapist, token: response.data.token })
 				)
 			}
+			handleAPIMessages(response.status, response.message)
 		} catch (error) {
 			handleAPIError(error)
 		} finally {

@@ -20,10 +20,22 @@ const RegisterTherapist = () => {
 
 	const handleChange = (e) => {
 		const { name, value } = e.target
-		setFormData({
-			...formData,
-			[name]: value,
-		})
+
+		// Validar campos específicos
+		if (name === 'cedulaT' || name === 'phone') {
+			// Permitir solo números y máximo de 10 dígitos
+			if (/^\d{0,10}$/.test(value)) {
+				setFormData({
+					...formData,
+					[name]: value,
+				})
+			}
+		} else {
+			setFormData({
+				...formData,
+				[name]: value,
+			})
+		}
 	}
 
 	const handleSubmit = async (e) => {
@@ -34,7 +46,7 @@ const RegisterTherapist = () => {
 		if (formData.cedulaT.length !== 10) newErrors.cedulaT = 'Cédula debe tener 10 dígitos'
 		if (formData.password !== formData.confirmPassword)
 			newErrors.confirmPassword = 'Las contraseñas no coinciden'
-		if (!formData.phone.match(/^\d{10}$/))
+		if (formData.phone.length !== 10)
 			newErrors.phone = 'El teléfono debe tener 10 dígitos'
 
 		setErrors(newErrors)
