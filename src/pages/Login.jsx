@@ -57,7 +57,7 @@ const Login = () => {
 					<div className='form-group'>
 						<label htmlFor='cedula'>Cédula</label>
 						<input
-							type='number'
+							type='text'
 							id='cedula'
 							name='cedula'
 							placeholder='Introduce tu cédula'
