@@ -1,9 +1,7 @@
-import { createContext, useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import confetti from 'canvas-confetti'
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const GameRulesContext = createContext()
+import PropTypes from 'prop-types'
+import { useEffect, useState } from 'react'
+import GameRulesContext from './GameRulesContext'
 
 export const GameRulesProvider = ({ children }) => {
 	const [isWrongColor, setIsWrongColor] = useState(false)

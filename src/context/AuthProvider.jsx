@@ -1,7 +1,7 @@
-import { createContext } from 'react'
+import PropTypes from 'prop-types'
+import { useMemo } from 'react'
+import AuthContext from '../context/AuthContext' // Correct import for default export
 import useAuth from '../hooks/useAuth'
-
-export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
 	const {
@@ -13,17 +13,28 @@ export const AuthProvider = ({ children }) => {
 		logout,
 	} = useAuth()
 
-	return (
-		<AuthContext.Provider
-			value={{
-				isAuthenticated,
-				userloged,
-				isSuccessRegisterTherapist,
-				registerTherapist,
-				login,
-				logout,
-			}}>
-			{children}
-		</AuthContext.Provider>
+	const authContextValue = useMemo(
+		() => ({
+			isAuthenticated,
+			userloged,
+			isSuccessRegisterTherapist,
+			registerTherapist,
+			login,
+			logout,
+		}),
+		[
+			isAuthenticated,
+			userloged,
+			isSuccessRegisterTherapist,
+			registerTherapist,
+			login,
+			logout,
+		]
 	)
+
+	return <AuthContext.Provider value={authContextValue}>{children}</AuthContext.Provider>
+}
+
+AuthProvider.propTypes = {
+	children: PropTypes.node.isRequired,
 }

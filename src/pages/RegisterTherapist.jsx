@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AuthContext } from '../context/AuthProvider'
+import AuthContext from '../context/AuthContext'
 import './registerTherapist.css'
 
 const RegisterTherapist = () => {
@@ -51,14 +51,14 @@ const RegisterTherapist = () => {
 
 		setErrors(newErrors)
 		if (Object.keys(newErrors).length === 0) {
-			registerTherapist(formData);
+			registerTherapist(formData)
 		}
 	}
 
 	useEffect(() => {
-  			if (isSuccessRegisterTherapist) navigate("/login");
-  			// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isSuccessRegisterTherapist]);
+		if (isSuccessRegisterTherapist) navigate('/login')
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isSuccessRegisterTherapist])
 
 	return (
 		<div className='register-container'>

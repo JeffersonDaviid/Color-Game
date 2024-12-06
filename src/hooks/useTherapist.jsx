@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
-import { AuthContext } from "../context/AuthProvider";
-import { StateFetchContext } from "../context/StateFetchContext";
+import { useContext, useState } from 'react'
+import AuthContext from '../context/AuthContext'
+import StateFetchContext from '../context/StateFetchContext'
 import {
   getPatientSessionsServ,
   getPatientsServ,

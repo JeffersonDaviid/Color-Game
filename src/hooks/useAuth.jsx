@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react'
-import { StateFetchContext } from '../context/StateFetchContext'
 import {
 	loginService,
 	logoutService,
 	registerTherapistService,
 } from '../services/authService'
 import { handleAPIError, handleAPIMessages } from '../utils/HandleAPIError'
+import StateFetchContext from '../context/StateFetchContext'
 
 const useAuth = () => {
 	const { setLoading } = useContext(StateFetchContext)

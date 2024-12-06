@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { GameRulesContext } from '../context/GameRules'
 import { LABELS } from '../utils/constantes'
 import { getSuffleList } from '../utils/utils'
+import GameRulesContext from '../context/GameRulesContext'
 
 function Tangram2({ selectedColor, selectedLabel, onComplete }) {
 	const [letters, setLetters] = useState([...LABELS])
