@@ -1,7 +1,7 @@
-import { useContext, useState } from 'react'
-import './registerTherapist.css'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthProvider'
+import './registerTherapist.css'
 
 const RegisterTherapist = () => {
 	const { isSuccessRegisterTherapist, registerTherapist } = useContext(AuthContext)
@@ -38,7 +38,7 @@ const RegisterTherapist = () => {
 		}
 	}
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault()
 		const newErrors = {}
 
@@ -51,10 +51,14 @@ const RegisterTherapist = () => {
 
 		setErrors(newErrors)
 		if (Object.keys(newErrors).length === 0) {
-			await registerTherapist(formData)
-			if (isSuccessRegisterTherapist) navigate('/login')
+			registerTherapist(formData);
 		}
 	}
+
+	useEffect(() => {
+  			if (isSuccessRegisterTherapist) navigate("/login");
+  			// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isSuccessRegisterTherapist]);
 
 	return (
 		<div className='register-container'>
