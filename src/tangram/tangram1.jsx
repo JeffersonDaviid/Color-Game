@@ -4,7 +4,7 @@ import GameRulesContext from '../context/GameRulesContext'
 import { LABELS } from '../utils/constantes'
 import { getSuffleList } from '../utils/utils'
 
-function Tangram1({ selectedColor, selectedLabel, onComplete }) {
+function Tangram1({ selectedColor, selectedLabel, onComplete, updateStats }) {
 	const [letters, setLetters] = useState([...LABELS])
 	const { setIsWrongColor } = useContext(GameRulesContext)
 	const [paintedSections, setPaintedSections] = useState(new Set()) // Set para rastrear secciones pintadas
@@ -25,10 +25,12 @@ function Tangram1({ selectedColor, selectedLabel, onComplete }) {
 				const updated = new Set(prev)
 				updated.add(label)
 				event.target.style.fill = selectedColor
+				updateStats({ correct: true })
 				return updated
 			})
 		} else {
 			setIsWrongColor(true)
+			updateStats({ correct: false })
 		}
 	}
 
@@ -42,7 +44,6 @@ function Tangram1({ selectedColor, selectedLabel, onComplete }) {
 	useEffect(() => {
 		const shuffledLetters = getSuffleList(letters)
 		setLetters(shuffledLetters)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	return (
@@ -182,11 +183,11 @@ function Tangram1({ selectedColor, selectedLabel, onComplete }) {
 	)
 }
 
-export default Tangram1
-
 Tangram1.propTypes = {
 	selectedColor: PropTypes.string.isRequired,
 	selectedLabel: PropTypes.string.isRequired,
-	letters: PropTypes.arrayOf(PropTypes.string).isRequired,
 	onComplete: PropTypes.func,
+	updateStats: PropTypes.func.isRequired,
 }
+
+export default Tangram1

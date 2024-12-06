@@ -17,6 +17,9 @@ function MainGame() {
 	const [tangramTimes, setTangramTimes] = useState([])
 	const [completedTangrams, setCompletedTangrams] = useState(0)
 	const [totalTime, setTotalTime] = useState(null)
+	const [numCorrects, setNumCorrects] = useState(0)
+	const [numIncorrects, setNumIncorrects] = useState(0)
+	const [totalAttempts, setTotalAttempts] = useState(0)
 	const [showResume, setShowResume] = useState(false)
 	const [isPaused, setIsPaused] = useState(false)
 
@@ -41,27 +44,6 @@ function MainGame() {
 		setBgImg(randomImg)
 	}, [])
 
-	const [isCompleted, setIsCompleted] = useState(false)
-	const [timePainting, setTimePainting] = useState(0)
-
-	useEffect(() => {
-		if (timePainting === 5) {
-			setIsCompleted(true)
-			console.log('Termino')
-		}
-
-		if (!isCompleted) {
-			const timer = setInterval(() => {
-				setTimePainting((time) => time + 1)
-			}, 1000)
-
-			return () => {
-				clearInterval(timer)
-			}
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isCompleted])
-
 	const handleCompleteTangram = () => {
 		const endTime = Date.now()
 		const timeTaken = Math.round((endTime - startTime) / 1000)
@@ -73,12 +55,20 @@ function MainGame() {
 			const total = tangramTimes.reduce((sum, time) => sum + time, timeTaken)
 			setTotalTime(Math.round(total))
 			setIsWinner(true)
-			// if (isAuthenticated)
 			setTimeout(() => {
 				setShowResume(true)
 			}, 5000)
 		} else {
 			setStartTime(Date.now())
+		}
+	}
+
+	const updateStats = ({ correct }) => {
+		setTotalAttempts((prev) => prev + 1)
+		if (correct) {
+			setNumCorrects((prev) => prev + 1)
+		} else {
+			setNumIncorrects((prev) => prev + 1)
 		}
 	}
 
@@ -100,26 +90,21 @@ function MainGame() {
 							selectedLabel={selectedLabel}
 							letters={LABELS}
 							onComplete={handleCompleteTangram}
+							updateStats={updateStats}
 						/>
 					))}
 				</div>
 				<div className='color-section'>
-					{/* Frase encima del color seleccionado */}
 					<div className='color-selected-text'>Color Seleccionado</div>
-
-					{/* Mostrar el color seleccionado */}
 					<div
 						className='selected-color-box'
 						style={{ backgroundColor: selectedColor }}>
 						{selectedLabel}
 					</div>
-
 					<div className='color-columns'>
 						<div className='color-column'>
 							{COLORS.slice(0, 3).map((colorObj, index) => (
-								<div
-									key={index}
-									className='color-item'>
+								<div key={index} className='color-item'>
 									<span className='color-label'>{colorObj.label}</span>
 									<button
 										className='color-button'
@@ -131,9 +116,7 @@ function MainGame() {
 						</div>
 						<div className='color-column'>
 							{COLORS.slice(3, 6).map((colorObj, index) => (
-								<div
-									key={index}
-									className='color-item'>
+								<div key={index} className='color-item'>
 									<button
 										className='color-button'
 										style={{ backgroundColor: colorObj.color }}
@@ -144,7 +127,6 @@ function MainGame() {
 							))}
 						</div>
 					</div>
-
 					<button
 						className='action-button'
 						onClick={() => {
@@ -175,27 +157,26 @@ function MainGame() {
 					</button>
 				</div>
 			)}
-			{showResume && <section className='resume'>AQUI VAN LAS ESTADISTICAS</section>}
+			{showResume && (
+				<section className='resume'>
+					<h2>Estadísticas</h2>
+					<p>Aciertos: {numCorrects}</p>
+					<p>Errores: {numIncorrects}</p>
+					<p>Intentos Totales: {totalAttempts}</p>
+					<p>Tiempo Total: {totalTime}s</p>
+				</section>
+			)}
 			<div className='feedback'>
 				{isWrongColor && (
 					<>
 						<h2 className='incorrect-txt'>¡Ups! Ese color no es correcto</h2>
-						<img
-							src={PERSONAJES[0]}
-							className='incorrect'
-						/>
+						<img src={PERSONAJES[0]} className='incorrect' />
 					</>
 				)}
-
 				{isWinner && (
 					<>
-						<h2 className='winner-txt'>
-							¡GANASTE! <br /> ¡FELICITACIONES!
-						</h2>
-						<img
-							src={PERSONAJES[1]}
-							className='winner-img'
-						/>
+						<h2 className='winner-txt'>¡GANASTE! <br /> ¡FELICITACIONES!</h2>
+						<img src={PERSONAJES[1]} className='winner-img' />
 					</>
 				)}
 			</div>
