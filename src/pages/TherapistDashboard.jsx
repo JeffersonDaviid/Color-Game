@@ -1,6 +1,12 @@
-import { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
-import AuthContext from '../context/AuthContext'
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
+
+import {
+  getPatientsServ,
+  registerPatientService,
+} from "../services/crudService";
+import "./TherapistDashboard.css";
 
 const TherapistDashboard = () => {
   const navigate = useNavigate();
