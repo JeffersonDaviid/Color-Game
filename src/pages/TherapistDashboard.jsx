@@ -10,29 +10,30 @@ import "./therapistDashboard.css";
 
 const TherapistDashboard = () => {
   const navigate = useNavigate();
-  const { logout, userloged } = useContext(AuthContext); // Obtén los datos del terapeuta desde el contexto
+  const { logout, userloged } = useContext(AuthContext);
   const [patients, setPatients] = useState([]);
   const [newPatient, setNewPatient] = useState({
     cedulaP: "",
     name: "",
     lastname: "",
     phone: "",
+    cedulaT: userloged?.therapist?.cedulaT || "", // Incluye la cédula del terapeuta
   });
 
   // Función para obtener los pacientes del terapeuta
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        const response = await getPatientsServ(userloged.cedulaT);
-        setPatients(response.data || []); // Se asume que la respuesta tiene la propiedad `data`
+        console.log("userloged en TherapistDashboard:", userloged); // Verificar contenido
+        if (userloged && userloged.therapist && userloged.therapist.cedulaT) {
+          const response = await getPatientsServ(userloged.therapist.cedulaT);
+          setPatients(response.data || []);
+        }
       } catch (error) {
         handleAPIError(error);
       }
     };
-
-    if (userloged && userloged.cedulaT) {
-      fetchPatients(); // Llama a la función si el terapeuta está logueado
-    }
+    fetchPatients();
   }, [userloged]);
 
   // Manejador para los cambios en el formulario de registro de paciente
@@ -49,18 +50,25 @@ const TherapistDashboard = () => {
     e.preventDefault();
 
     try {
-      // Incluimos la cédula del terapeuta logueado en el objeto del nuevo paciente
-      const patientToRegister = {
-        ...newPatient,
-        cedulaT: userloged.cedulaT, // Aquí se asocia la cédula del terapeuta con el nuevo paciente
-      };
+      console.log(
+        "Datos enviados al backend desde TherapistDashboard:",
+        newPatient
+      );
 
       // Registra al paciente
-      await registerPatientService(patientToRegister);
-      setNewPatient({ cedulaP: "", name: "", lastname: "", phone: "" }); // Resetea el formulario
+      await registerPatientService(newPatient);
+
+      // Resetea el formulario pero conserva el campo 'cedulaT'
+      setNewPatient({
+        cedulaP: "",
+        name: "",
+        lastname: "",
+        phone: "",
+        cedulaT: userloged.therapist.cedulaT,
+      });
 
       // Vuelve a cargar la lista de pacientes
-      const response = await getPatientsServ(userloged.cedulaT);
+      const response = await getPatientsServ(userloged.therapist.cedulaT);
       setPatients(response.data || []);
     } catch (error) {
       handleAPIError(error);
@@ -70,7 +78,8 @@ const TherapistDashboard = () => {
   return (
     <div className="dashboard-container">
       <h1 className="dashboard-header">
-        Bienvenido, {userloged?.name} {userloged?.lastname}
+        Bienvenido, {userloged?.therapist?.name}{" "}
+        {userloged?.therapist?.lastname}
       </h1>
 
       <button
@@ -94,14 +103,15 @@ const TherapistDashboard = () => {
           </tr>
         </thead>
         <tbody>
-          {patients.map((patient) => (
-            <tr key={patient.cedulaP}>
-              <td>{patient.cedulaP}</td>
-              <td>{patient.name}</td>
-              <td>{patient.lastname}</td>
-              <td>{patient.phone}</td>
-            </tr>
-          ))}
+          {Array.isArray(patients) &&
+            patients.map((patient) => (
+              <tr key={patient.cedulaP}>
+                <td>{patient.cedulaP}</td>
+                <td>{patient.name}</td>
+                <td>{patient.lastname}</td>
+                <td>{patient.phone}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
 

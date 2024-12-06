@@ -3,10 +3,10 @@ import TangramTV from '../tangram/tangram2'
 import { getRandomColors, getSuffleList, getUniqueLetters } from './utils'
 
 export const API_AUTH = 'http://localhost:8000/api/v1/auth'
-export const API_HISTORY_TRANSFER = 'http......'
-export const API_PATIENT = 'HTTTPASDJF'
-export const API_SESSION = 'HTTTP'
-export const API_THERAPIST = ''
+export const API_HISTORY_TRANSFER = ''
+export const API_PATIENT = 'http://localhost:8000/api/v1/patient'
+export const API_SESSION = ''
+export const API_THERAPIST = 'http://localhost:8000/api/v1/therapist'
 
 export const LABELS = getUniqueLetters()
 const COLORS_HSL = getSuffleList(getRandomColors())

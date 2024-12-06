@@ -4,14 +4,9 @@ export const getTherapistServ = async (cedulaT) => {
 	try {
 		const response = await fetch(API_THERAPIST + '/' + cedulaT)
 		const respData = await response.json()
-
-		//TODO: JEFF - ver la respuesta
+			
 		console.log(respData)
-		return {
-			cedulaT: '8888888888',
-			name: 'Juanito',
-			lastname: 'Perez',
-		}
+		return respData
 	} catch (error) {
 		console.error('Error login user:', error)
 		throw error
@@ -23,30 +18,8 @@ export const getPatientsServ = async (cedulaT) => {
 		const response = await fetch(API_PATIENT + '/' + cedulaT)
 		const respData = await response.json()
 
-		//TODO: JEFF - ver la respuesta
 		console.log(respData)
-		return [
-			{
-				cedulaP: '1111111111',
-				name: 'Paciente 2',
-				lastname: 'Ap',
-			},
-			{
-				cedulaP: '2222222222',
-				name: 'Paciente 3',
-				lastname: 'Ap',
-			},
-			{
-				cedulaP: '33333333',
-				name: 'Paciente 4',
-				lastname: 'Ap',
-			},
-			{
-				cedulaP: '4444444',
-				name: 'Paciente 4',
-				lastname: 'Ap',
-			},
-		]
+		return respData
 	} catch (error) {
 		console.error('Error login user:', error)
 		throw error
@@ -148,22 +121,24 @@ export const registerSessionServ = async (session) => {
 //TODO:implementar
 export const registerPatientService = async (patient) => {
 	try {
-		// const response = await fetch(API_PATIENT + '/register', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'Aplication/json',
-		// 	},
-		// 	body: JSON.stringify(data),
-		// })
+		console.log("Datos enviados al backend desde crud-service", patient);
+		const response = await fetch(API_PATIENT + '/register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(patient),
+		})
 
-		// const respData = await response.json()
+		 if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Error en la solicitud POST:", errorData);
+            throw new Error(errorData.msg || "Error desconocido");
+        }
 
-		//TODO: JEFF - ver la respuesta
-		console.log(patient)
-		return {
-			token: 'superToken',
-			cedulaT: '1777777777',
-		}
+		const respData = await response.json();
+        console.log("Respuesta del backend:", respData);
+        return respData;
 	} catch (error) {
 		console.error('Error login user:', error)
 		throw error
