@@ -75,6 +75,24 @@ const TherapistDashboard = () => {
     }
   };
 
+  const generateSessionId = () => {
+    const randomPart = Math.floor(Math.random() * 10000);
+    const timePart = new Date().getTime() % 100000;
+    return `${timePart}${randomPart}`;
+  };
+
+  // Manejador para iniciar el juego con un paciente
+  const handleStartGame = (patient) => {
+    const sessionData = {
+      idSesion: generateSessionId(),
+      patient: patient.cedulaP,
+      patientName: `${patient.name} ${patient.lastname}`,
+      therapist: userloged.therapist.cedulaT,
+      session_at: new Date().toISOString(),
+    };
+    navigate("/game", { state: { sessionData } });
+  };
+
   return (
     <div className="dashboard-container">
       <h1 className="dashboard-header">
@@ -100,6 +118,7 @@ const TherapistDashboard = () => {
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Teléfono</th>
+            <th>Acción</th>
           </tr>
         </thead>
         <tbody>
@@ -110,6 +129,14 @@ const TherapistDashboard = () => {
                 <td>{patient.name}</td>
                 <td>{patient.lastname}</td>
                 <td>{patient.phone}</td>
+                <td>
+                  <button
+                    className="play-button"
+                    onClick={() => handleStartGame(patient)}
+                  >
+                    Play
+                  </button>
+                </td>
               </tr>
             ))}
         </tbody>

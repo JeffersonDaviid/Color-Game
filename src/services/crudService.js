@@ -98,23 +98,18 @@ export const getHistoryPatientTransferServ = async (cedulaP) => {
 //TODO:implementar
 export const registerSessionServ = async (session) => {
 	try {
-		// const response = await fetch(API_SESSION + '/register', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'Aplication/json',
-		// 	},
-		// 	body: JSON.stringify(session),
-		// })
-		// const respData = await response.json()
-
-		//TODO: JEFF - ver la respuesta
-		console.log(session)
-		return {
-			token: 'superToken',
-			cedulaT: '1777777777',
-		}
+		console.log("Datos enviados al backend desde crud-service", session);
+		const response = await fetch(API_SESSION + '/register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(session),
+		})
+		const respData = await response.json();
+    	console.log("Respuesta del backend:", respData);
 	} catch (error) {
-		console.error('Error login user:', error)
+		console.error('Error register session', error)
 		throw error
 	}
 }

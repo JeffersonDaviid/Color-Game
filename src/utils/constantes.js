@@ -8,7 +8,7 @@ import { getRandomColors, getSuffleList, getUniqueLetters } from './utils'
 export const API_AUTH = 'http://localhost:8000/api/v1/auth'
 export const API_HISTORY_TRANSFER = ''
 export const API_PATIENT = 'http://localhost:8000/api/v1/patient'
-export const API_SESSION = ''
+export const API_SESSION = 'http://localhost:8000/api/v1/session'
 export const API_THERAPIST = 'http://localhost:8000/api/v1/therapist'
 
 export const LABELS = getUniqueLetters()
