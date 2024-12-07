@@ -1,5 +1,8 @@
 import Tangram1 from '../tangram/tangram1'
 import TangramTV from '../tangram/tangram2'
+import Tangram3 from '../tangram/tangram3'
+import Tangram4 from '../tangram/tangram4'
+import Tangram5 from '../tangram/tangram5'
 import { getRandomColors, getSuffleList, getUniqueLetters } from './utils'
 
 export const API_AUTH = 'http://localhost:8000/api/v1/auth'
@@ -21,14 +24,21 @@ export const COLORS = [
 ]
 
 export const WALLPAPERS = [
-	'./assets/fondo1.avif',
-	'./assets/fondo2.avif',
-	'./assets/fondo3.avif',
-	'./assets/fondo4.avif',
-	'./assets/fondo5.avif',
-	'./assets/fondo6.avif',
-	'./assets/JAPAN.avif',
-	'./assets/POP.avif',
+	'./assets/fondos/fondo1.avif',
+	'./assets/fondos/fondo2.avif',
+	'./assets/fondos/fondo3.avif',
+	'./assets/fondos/fondo4.avif',
+	'./assets/fondos/fondo5.avif',
+	'./assets/fondos/fondo6.avif',
+	'./assets/fondos/fondo7.avif',
+	'./assets/fondos/fondo8.avif',
+	'./assets/fondos/fondo9.avif',
+	'./assets/fondos/fondo10.avif',
+	'./assets/fondos/fondo11.avif',
+	'./assets/fondos/fondo12.avif',
+	'./assets/fondos/fondo13.avif',
+	'./assets/fondos/fondo14.avif',
+	'./assets/fondos/fondo15.avif',
 ]
 
 export const PERSONAJES = [
@@ -39,4 +49,4 @@ export const PERSONAJES = [
 	'./assets/personaje-mujer-comienzo.png',
 ]
 
-export const TANGRAMS = [Tangram1, TangramTV]
+export const TANGRAMS = [Tangram1, TangramTV, Tangram3, Tangram4, Tangram5]
