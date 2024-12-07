@@ -1,109 +1,190 @@
-import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import PropTypes from 'prop-types';
+import { useContext, useEffect, useState } from 'react';
+import GameRulesContext from '../context/GameRulesContext';
+import { getSuffleList } from '../utils/utils';
+import { LABELS } from '../utils/constantes';
 
-function Tangram3({ selectedColor, selectedLabel, letters, onComplete }) {
-  const [numCorrectedColors, setNumCorrectedColors] = useState(0);
+function Tangram3({ selectedColor, selectedLabel, onComplete, updateStats }) {
+  const [letters, setLetters] = useState([...LABELS]);
+  const { setIsWrongColor } = useContext(GameRulesContext);
+  const [paintedSections, setPaintedSections] = useState(new Set());
+  const [isTangramCompleted, setIsTangramCompleted] = useState(false);
 
   const handleSectionClick = (event) => {
-    const label = event.target.getAttribute("data-label");
-    if (selectedColor === "lightgray" || label === selectedLabel) {
-      event.target.style.fill = selectedColor;
+    const label = event.target.getAttribute('data-label');
 
-      if (selectedColor !== "lightgray") {
-        setNumCorrectedColors(numCorrectedColors + 1);
-      }
-      if (selectedColor === "lightgray") {
-        setNumCorrectedColors(numCorrectedColors - 1);
-      }
+    if (selectedColor === 'lightgray') {
+      setPaintedSections((prev) => {
+        const updated = new Set(prev);
+        updated.delete(label);
+        event.target.style.fill = 'lightgray';
+        return updated;
+      });
+    } else if (label === selectedLabel) {
+      setPaintedSections((prev) => {
+        const updated = new Set(prev);
+        updated.add(label);
+        event.target.style.fill = selectedColor;
+        updateStats({ correct: true }); // Registro de acierto
+        return updated;
+      });
+    } else {
+      setIsWrongColor(true);
+      updateStats({ correct: false }); // Registro de error
     }
   };
 
   useEffect(() => {
-    if (numCorrectedColors === 6) {
-      alert("¡Felicidades! Has completado el tangram");
+    if (paintedSections.size === letters.length && !isTangramCompleted) {
+      setIsTangramCompleted(true);
       if (onComplete) onComplete();
     }
-  }, [numCorrectedColors]);
+  }, [paintedSections, letters.length, onComplete, isTangramCompleted]);
+
+  useEffect(() => {
+    const shuffledLetters = getSuffleList(letters);
+    setLetters(shuffledLetters);
+  }, []);
 
   return (
-    <svg width="100%" height="100%" viewBox="0 0 200 200">
-      {/* Cuerpo del pez (triángulo grande) */}
-      <polygon
-        points="50,100 150,100 100,150"
-        fill="lightgray"
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 400 700">
+      {/* Carcasa del Nokia */}
+      <rect
+        x="50"
+        y="20"
+        width="300"
+        height="660"
+        rx="40"
+        ry="40"
+        fill="#d3d3d3"
         stroke="black"
-        strokeWidth="3"
+        strokeWidth="6"
         data-label={letters[0]}
         onClick={handleSectionClick}
       />
-      <text x="90" y="120" fontSize="10" fontWeight="bold" fill="black">
+      <text
+        x="200"
+        y="50"
+        fontSize="24"
+        fontWeight="bold"
+        fill="black"
+        textAnchor="middle"
+        style={{ pointerEvents: 'none' }}>
         {letters[0]}
       </text>
 
-      {/* Aleta superior (triángulo mediano) */}
-      <polygon
-        points="50,100 80,70 110,100"
+      {/* Pantalla */}
+      <rect
+        x="80"
+        y="80"
+        width="240"
+        height="200"
         fill="lightgray"
         stroke="black"
-        strokeWidth="3"
+        strokeWidth="6"
         data-label={letters[1]}
         onClick={handleSectionClick}
       />
-      <text x="75" y="90" fontSize="10" fontWeight="bold" fill="black">
+      <text
+        x="200"
+        y="180"
+        fontSize="24"
+        fontWeight="bold"
+        fill="black"
+        textAnchor="middle"
+        style={{ pointerEvents: 'none' }}>
         {letters[1]}
       </text>
 
-      {/* Aleta inferior (triángulo mediano) */}
-      <polygon
-        points="50,100 80,130 110,100"
-        fill="lightgray"
+      {/* Botón de navegación */}
+      <circle
+        cx="200"
+        cy="320"
+        r="40"
+        fill="#d3d3d3"
         stroke="black"
-        strokeWidth="3"
+        strokeWidth="6"
         data-label={letters[2]}
         onClick={handleSectionClick}
       />
-      <text x="75" y="110" fontSize="10" fontWeight="bold" fill="black">
+      <text
+        x="200"
+        y="325"
+        fontSize="24"
+        fontWeight="bold"
+        fill="black"
+        textAnchor="middle"
+        style={{ pointerEvents: 'none' }}>
         {letters[2]}
       </text>
 
-      {/* Cola (triángulo pequeño) */}
-      <polygon
-        points="10,100 30,90 30,110"
-        fill="lightgray"
+      {/* Botón izquierdo */}
+      <circle
+        cx="120"
+        cy="320"
+        r="25"
+        fill="#d3d3d3"
         stroke="black"
-        strokeWidth="3"
+        strokeWidth="6"
         data-label={letters[3]}
         onClick={handleSectionClick}
       />
-      <text x="20" y="105" fontSize="10" fontWeight="bold" fill="black">
+      <text
+        x="120"
+        y="325"
+        fontSize="18"
+        fontWeight="bold"
+        fill="black"
+        textAnchor="middle"
+        style={{ pointerEvents: 'none' }}>
         {letters[3]}
       </text>
 
-      {/* Ojo (círculo pequeño) */}
+      {/* Botón derecho */}
       <circle
-        cx="120"
-        cy="90"
-        r="5"
-        fill="lightgray"
+        cx="280"
+        cy="320"
+        r="25"
+        fill="#d3d3d3"
         stroke="black"
-        strokeWidth="2"
+        strokeWidth="6"
         data-label={letters[4]}
         onClick={handleSectionClick}
       />
-      <text x="115" y="85" fontSize="10" fontWeight="bold" fill="black">
+      <text
+        x="280"
+        y="325"
+        fontSize="18"
+        fontWeight="bold"
+        fill="black"
+        textAnchor="middle"
+        style={{ pointerEvents: 'none' }}>
         {letters[4]}
       </text>
 
-      {/* Boca (triángulo pequeño) */}
-      <polygon
-        points="130,105 140,100 130,95"
-        fill="lightgray"
+      {/* Botón de llamada */}
+      <rect
+        x="120"
+        y="400"
+        width="160"
+        height="40"
+        fill="#d3d3d3"
         stroke="black"
-        strokeWidth="3"
+        strokeWidth="4"
         data-label={letters[5]}
         onClick={handleSectionClick}
       />
-      <text x="125" y="100" fontSize="10" fontWeight="bold" fill="black">
+      <text
+        x="200"
+        y="425"
+        fontSize="24"
+        fontWeight="bold"
+        fill="black"
+        textAnchor="middle"
+        style={{ pointerEvents: 'none' }}>
         {letters[5]}
       </text>
     </svg>
@@ -115,6 +196,6 @@ export default Tangram3;
 Tangram3.propTypes = {
   selectedColor: PropTypes.string.isRequired,
   selectedLabel: PropTypes.string.isRequired,
-  letters: PropTypes.arrayOf(PropTypes.string).isRequired,
   onComplete: PropTypes.func,
+  updateStats: PropTypes.func.isRequired, // Requerido para estadísticas
 };
