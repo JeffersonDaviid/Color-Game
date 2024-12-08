@@ -1,221 +1,149 @@
-import { useState } from 'react'
-import LinesDiagram from '../components/LinesDiagram'
-import './patient.css'
-
-const dates = [
-	'2023-12-31',
-	'2023-12-30',
-	'2023-12-29',
-	'2023-12-28',
-	'2023-12-27',
-	'2023-12-26',
-	'2023-12-25',
-	'2023-12-24',
-	'2023-12-23',
-	'2023-12-22',
-	'2023-12-21',
-	'2023-12-20',
-	'2023-12-19',
-	'2023-12-18',
-	'2023-12-17',
-	'2023-12-16',
-	'2023-12-15',
-	'2023-12-14',
-	'2023-12-13',
-	'2023-12-12',
-	'2023-12-11',
-	'2023-12-10',
-	'2023-12-09',
-	'2023-12-08',
-	'2023-12-07',
-	'2023-12-06',
-	'2023-12-05',
-	'2023-12-04',
-	'2023-12-03',
-	'2023-12-02',
-	'2023-12-01',
-	'2023-11-30',
-	'2023-11-29',
-	'2023-11-28',
-	'2023-11-27',
-	'2023-11-26',
-	'2023-11-25',
-	'2023-11-24',
-	'2023-11-23',
-	'2023-11-22',
-	'2023-11-21',
-	'2023-11-20',
-	'2023-11-19',
-	'2023-11-18',
-	'2023-11-17',
-	'2023-11-16',
-	'2023-11-15',
-	'2023-11-14',
-	'2023-11-13',
-	'2023-11-12',
-]
-
-const times = Array.from({ length: 50 }, () => (Math.random() * 60 + 30).toFixed(2))
-
-const correctAnswers = Array.from(
-	{ length: 50 },
-	() => Math.floor(Math.random() * 6) + 10
-)
-
-const wrongAnswers = Array.from({ length: 50 }, () => Math.floor(Math.random() * 7))
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import LinesDiagram from "../components/LinesDiagram";
+import {
+  getPatientSessionsServ,
+  getPatientsServ,
+} from "../services/crudService";
+import "./Patient.css";
 
 const Patient = () => {
-	const [isTransferHistoryActive, setIsTransferHistoryActive] = useState(false)
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  const [sessions, setSessions] = useState([]);
+  const [patient, setPatient] = useState({});
+  const [chartData, setChartData] = useState({
+    dates: [],
+    times: [],
+    correctAnswers: [],
+    wrongAnswers: [],
+  });
+  const [showTransfers, setShowTransfers] = useState(false); // Oculto por defecto
 
-	const handleClick = () => {
-		setIsTransferHistoryActive(!isTransferHistoryActive)
-	}
+  // Fetch patient information and sessions
+  useEffect(() => {
+    const fetchPatientData = async () => {
+      try {
+        if (!state || !state.cedulaP || !state.cedulaT) {
+          navigate("/dashboard");
+          return;
+        }
 
-	return (
-		<div className='patient-container'>
-			<section className='patient-statistics'>
-				<h3>Estadísticas del paciente😷</h3>
-				<div className='patient-data'>
-					<label>
-						<strong>Nombre:</strong> Juan Perez
-					</label>
-					<label>
-						<strong>Edad:</strong> 25
-					</label>
-					<label>
-						<strong>Sexo:</strong> Masculino
-					</label>
-				</div>
-				<button
-					onClick={handleClick}
-					className={isTransferHistoryActive ? 'active' : ''}>
-					{isTransferHistoryActive ? 'Ocultar' : 'Mostrar'} historial de transferencias
-				</button>
-				<button>Tranferir</button>
+        
 
-				<LinesDiagram
-					dates={dates}
-					times={times}
-					correctAnswers={correctAnswers}
-					wrongAnswers={wrongAnswers}
-				/>
+        // Get patient sessions
+        const sessionResponse = await getPatientSessionsServ(state.cedulaP);
+        if (sessionResponse?.data) {
+          setSessions(sessionResponse.data);
 
-				<div className='sessions-history'>
-					<h4>Historial de sesiones</h4>
-					<table>
-						<thead>
-							<tr>
-								<th>Fecha</th>
-								<th>Terapeuta</th>
-								<th>Tiempo</th>
-								<th>Número de aciertos</th>
-								<th>Número de errores</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>2021-12-12</td>
-								<td>Jefferson Macias</td>
-								<td>84s</td>
-								<td>10</td>
-								<td>28</td>
-							</tr>
-							<tr>
-								<td>2021-12-12</td>
-								<td>Juan Perez</td>
-								<td>65.66s</td>
-								<td>15</td>
-								<td>17</td>
-							</tr>
-							<tr>
-								<td>2021-12-12</td>
-								<td>Juan Perez</td>
-								<td>65.66s</td>
-								<td>15</td>
-								<td>17</td>
-							</tr>
-							<tr>
-								<td>2021-12-12</td>
-								<td>Juan Perez</td>
-								<td>65.66s</td>
-								<td>15</td>
-								<td>17</td>
-							</tr>
-							<tr>
-								<td>2021-12-12</td>
-								<td>Juan Perez</td>
-								<td>65.66s</td>
-								<td>15</td>
-								<td>17</td>
-							</tr>
-							<tr>
-								<td>2021-12-12</td>
-								<td>Juan Perez</td>
-								<td>65.66s</td>
-								<td>15</td>
-								<td>17</td>
-							</tr>
-							<tr>
-								<td>2021-12-12</td>
-								<td>Juan Perez</td>
-								<td>65.66s</td>
-								<td>15</td>
-								<td>17</td>
-							</tr>
-							<tr>
-								<td>2021-12-12</td>
-								<td>Juan Perez</td>
-								<td>65.66s</td>
-								<td>15</td>
-								<td>17</td>
-							</tr>
-							<tr>
-								<td>2021-12-12</td>
-								<td>Juan Perez</td>
-								<td>65.66s</td>
-								<td>15</td>
-								<td>17</td>
-							</tr>
-							<tr>
-								<td>2021-12-12</td>
-								<td>Juan Perez</td>
-								<td>65.66s</td>
-								<td>15</td>
-								<td>17</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</section>
-			<section
-				className={`transfer-history  ${isTransferHistoryActive ? 'show' : 'hidden'}`}>
-				<h3>Historial de transferencias</h3>
+          // Prepare chart data
+          const datesSet = [
+            ...new Set(
+              sessionResponse.data.map(
+                (session) => session.session_at.split("T")[0]
+              )
+            ),
+          ];
+          const timesByDate = {};
+          const correctAnswersByDate = {};
+          const wrongAnswersByDate = {};
 
-				<div>
-					<br />
-					<table>
-						<thead>
-							<tr>
-								<th>Fecha</th>
-								<th>De</th>
-								<th>Para</th>
-								<th>Observación</th>
-							</tr>
-						</thead>
-						<tbody>
-							{Array.from({ length: 20 }).map((_, index) => (
-								<tr key={index}>
-									<td>{`2021-12-${String(index + 1).padStart(2, '0')}`}</td>
-									<td>{`Persona ${index + 1}`}</td>
-									<td>{`Persona ${index + 21}`}</td>
-									<td>{index % 2 === 0 ? 'Completada' : 'Pendiente'}</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-				</div>
-			</section>
-		</div>
-	)
-}
-export default Patient
+          sessionResponse.data.forEach((session) => {
+            const date = session.session_at.split("T")[0];
+            if (!timesByDate[date]) {
+              timesByDate[date] = [];
+              correctAnswersByDate[date] = [];
+              wrongAnswersByDate[date] = [];
+            }
+            timesByDate[date].push(session.time_total);
+            correctAnswersByDate[date].push(session.num_corrects);
+            wrongAnswersByDate[date].push(session.num_incorrects);
+          });
+
+          const dates = datesSet;
+          const times = dates.map((date) => {
+            const sum = timesByDate[date].reduce((a, b) => a + b, 0);
+            return sum / timesByDate[date].length; // Promedio
+          });
+          const correctAnswers = dates.map((date) => {
+            const sum = correctAnswersByDate[date].reduce((a, b) => a + b, 0);
+            return sum / correctAnswersByDate[date].length; // Promedio
+          });
+          const wrongAnswers = dates.map((date) => {
+            const sum = wrongAnswersByDate[date].reduce((a, b) => a + b, 0);
+            return sum / wrongAnswersByDate[date].length; // Promedio
+          });
+
+          setChartData({ dates, times, correctAnswers, wrongAnswers });
+        }
+      } catch (error) {
+        console.error("Error fetching patient data or sessions:", error);
+      }
+    };
+
+    fetchPatientData();
+  }, [state, navigate]);
+
+  return (
+    <div className="patient-container">
+      <div className="patient-statistics">
+        <button className="back-button" onClick={() => navigate("/dashboard")}>
+          Volver al Dashboard
+        </button>
+        <button
+          className="back-button"
+          onClick={() => setShowTransfers((prev) => !prev)}
+        >
+          {showTransfers ? "Ocultar Transferencias" : "Mostrar Transferencias"}
+        </button>
+        <h2>Paciente: {state?.patientName || "No disponible"}</h2>
+        <div className="chart-container">
+          <h2>Estadísticas de Sesiones</h2>
+          <LinesDiagram
+            dates={chartData.dates}
+            times={chartData.times}
+            correctAnswers={chartData.correctAnswers}
+            wrongAnswers={chartData.wrongAnswers}
+          />
+        </div>
+
+        <div className="sessions-history">
+          <h3>Historial de Sesiones</h3>
+          <table className="sessions-table">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Terapeuta</th>
+                <th>Tiempo</th>
+                <th>Aciertos</th>
+                <th>Errores</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sessions.map((session) => (
+                <tr key={session.idSesion}>
+                  <td>{session.session_at.split("T")[0]}</td>
+                  <td>{state?.therapistName || session.therapist}</td>
+                  <td>{session.time_total} s</td>
+                  <td>{session.num_corrects}</td>
+                  <td>{session.num_incorrects}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {showTransfers && (
+        <div className="transfer-history">
+          <h3>Transferencias</h3>
+          <p>
+            Información de transferencias será añadida aquí si está disponible.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Patient;

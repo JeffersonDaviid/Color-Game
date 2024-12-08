@@ -31,31 +31,8 @@ export const getPatientSessionsServ = async (cedulaP) => {
 		const response = await fetch(API_SESSION + '/' + cedulaP)
 		const respData = await response.json()
 
-		//TODO: JEFF - ver la respuesta
 		console.log(respData)
-		return [
-			{
-				date: '2021-10-15',
-				therapisth: 'Manolo Perez',
-				time: 15,
-				correctAnswers: 5,
-				wrongAnswers: 3,
-			},
-			{
-				date: '2021-10-15',
-				therapisth: 'Juanito Perez',
-				time: 15,
-				correctAnswers: 5,
-				wrongAnswers: 3,
-			},
-			{
-				date: '2021-10-15',
-				therapisth: 'Juanito Perez',
-				time: 15,
-				correctAnswers: 5,
-				wrongAnswers: 3,
-			},
-		]
+		return respData
 	} catch (error) {
 		console.error('Error login user:', error)
 		throw error
@@ -98,23 +75,18 @@ export const getHistoryPatientTransferServ = async (cedulaP) => {
 //TODO:implementar
 export const registerSessionServ = async (session) => {
 	try {
-		// const response = await fetch(API_SESSION + '/register', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'Aplication/json',
-		// 	},
-		// 	body: JSON.stringify(session),
-		// })
-		// const respData = await response.json()
-
-		//TODO: JEFF - ver la respuesta
-		console.log(session)
-		return {
-			token: 'superToken',
-			cedulaT: '1777777777',
-		}
+		console.log("Datos enviados al backend desde crud-service", session);
+		const response = await fetch(API_SESSION + '/register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(session),
+		})
+		const respData = await response.json();
+    	console.log("Respuesta del backend:", respData);
 	} catch (error) {
-		console.error('Error login user:', error)
+		console.error('Error register session', error)
 		throw error
 	}
 }
