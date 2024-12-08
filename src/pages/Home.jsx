@@ -26,7 +26,7 @@ function Home() {
 			<div className='splash'></div>
 
 			{/* Título y botón de juego */}
-			<h1 className='game-title'>MEMORIA ARTÍSTICA</h1>
+			<h4 className='game-title'>MEMORIA ARTÍSTICA</h4>
 			<button
 				className='play-button'
 				onClick={handlePlayClick}>

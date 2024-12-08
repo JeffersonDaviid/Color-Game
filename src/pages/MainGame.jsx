@@ -77,7 +77,6 @@ function MainGame() {
 
     if (completedTangrams + 1 === selectedTangrams.length) {
       stopGameTimer();
-      setNumCorrects(12); // Forzar 12 aciertos al final del juego
       setIsWinner(true);
       setTimeout(() => {
         setShowResume(true);
@@ -100,7 +99,7 @@ function MainGame() {
         idSesion: sessionData.idSesion,
         patient: sessionData.patient,
         therapist: sessionData.therapist,
-        num_corrects: 12, // Aseguramos que siempre sean 12
+        num_corrects: parseInt(numCorrects, 10),
         num_incorrects: parseInt(numIncorrects, 10),
         time_total: parseFloat(totalTime),
         session_at: new Date(sessionData.session_at).toISOString(),
@@ -130,7 +129,17 @@ function MainGame() {
 
   return (
     <div className="main-game">
-      <h1>MEMORIA ARTÍSTICA</h1>
+      <div className="header">
+        <div className="header-buttons">
+          <button className="action-button" onClick={handlePause}>
+            PAUSAR
+          </button>
+          <button className="action-button" onClick={() => navigate("/")}>
+            VOLVER
+          </button>
+        </div>
+        <h1>MEMORIA ARTÍSTICA</h1>
+      </div>
       <h2>Jugando: {patientName}</h2>
       <div className="game-layout">
         <div
@@ -172,12 +181,6 @@ function MainGame() {
               </div>
             ))}
           </div>
-          <button className="action-button" onClick={handlePause}>
-            PAUSAR
-          </button>
-          <button className="action-button" onClick={() => navigate("/")}>
-            VOLVER
-          </button>
         </div>
       </div>
       {isPaused && (
@@ -195,15 +198,16 @@ function MainGame() {
       {showResume && (
         <section className="resume">
           <h2>Estadísticas</h2>
-          <p>Aciertos: 12</p>
+          <p>Aciertos: {numCorrects}</p>
           <p>Errores: {numIncorrects}</p>
           <p>Intentos Totales: {totalAttempts}</p>
           <p>Tiempo Total: {totalTime}s</p>
-          <button className="action-button" onClick={() => navigate("/")}>
+          <button className="action-button" onClick={() => navigate("/dashboard")}>
             VOLVER
           </button>
         </section>
       )}
+
       <div className="feedback">
         {isWrongColor && (
           <>

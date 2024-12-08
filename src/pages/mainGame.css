@@ -17,7 +17,7 @@
 		/* Azul claro */ rgba(255, 255, 204, 0.6),
 		/* Amarillo pastel */ rgba(144, 238, 144, 0.6),
 		/* Verde claro */ rgba(245, 245, 220, 0.6),
-		/* Beige */ rgba(211, 211, 211, 0.6) /* Gris claro */
+		 rgba(211, 211, 211, 0.6)
 	);
 	background-size: 190% 190%;
 	animation: backgroundAnimation 10s ease infinite;
@@ -43,6 +43,77 @@
 h1 {
 	font-size: 2.8rem;
 	color: #000000d8;
+	margin-top: -10px;
+	text-align: center;
+	position: relative;
+	margin-left: 150px; /* Ajusta la cantidad según lo que necesites */
+}
+h2 {
+	
+	color: #000103d8;
+	margin-top: -10px;
+	text-align: center;
+	position: relative;
+}
+
+h3 {
+	
+	color: #000103d8;
+	margin-top: -10px;
+	text-align: center;
+	position: relative;
+}
+
+h4 {
+	
+	color: #000103d8;
+	margin-top: -10px;
+	text-align: center;
+	position: relative;
+}
+
+h5 {
+	
+	color: #000103d8;
+	margin-top: -10px;
+	text-align: center;
+	position: relative;
+}
+
+.header {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	gap: 20px;
+}
+
+.header-buttons {
+	display: flex;
+	gap: 10px;
+	margin-top: 10px; /* Ajusta el valor para moverlos más abajo */
+}
+
+
+.action-button {
+	width: 155px;
+	height: 55px;
+	font-size: 1.2rem;
+	background-color: #ed5f3f;
+	border: none;
+	cursor: pointer;
+	border-radius: 8px;
+	text-align: center;
+}
+
+.action-button:hover {
+	background-color: #ed5f3f;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.action-button:active {
+	background-color: #91c991;
+	transform: scale(0.98);
 }
 
 .game-layout {
@@ -59,13 +130,15 @@ h1 {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	width: 85%;
+	width: 80%;
 	height: 600px;
 	padding: 20px;
 	border-radius: 8px;
 	border: 2px solid #555;
 	box-sizing: border-box;
 	background-color: rgba(255, 255, 255, 0.8); /* Fondo claro para el área de tangram */
+	/* Subir el elemento */
+	transform: translateY(-20px); /* Ajusta este valor según lo necesites */
 }
 
 .color-section {
@@ -73,6 +146,7 @@ h1 {
 	flex-direction: column;
 	align-items: center;
 	gap: 15px;
+	transform: translateY(-60px); /* Ajusta este valor según lo necesites */
 }
 
 .color-columns {
@@ -81,23 +155,23 @@ h1 {
 	gap: 20px; /* Espaciado entre filas y columnas */
 	justify-content: center;
 	align-items: center;
-  }
-  
-  .color-item {
+}
+
+.color-item {
 	display: flex;
 	flex-direction: column; /* Coloca el span encima del botón */
 	align-items: center; /* Centra elementos vertical y horizontalmente */
 	justify-content: center;
 	text-align: center;
 	gap: 10px; /* Espaciado entre etiqueta y botón */
-  }
-  
-  .color-label {
+}
+
+.color-label {
 	font-size: 1.8rem;
 	color: #333;
-  }
-  
-  .color-button {
+}
+
+.color-button {
 	width: 80px;
 	height: 80px;
 	border: none;
@@ -105,23 +179,11 @@ h1 {
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 	transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .color-button:hover {
+}
+
+.color-button:hover {
 	transform: scale(1.1);
 	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-  }
-
-.action-button {
-	width: 130px;
-	height: 70px;
-	font-size: 1.5rem;
-	background-color: #b2e6b2;
-	border: none;
-	cursor: pointer;
-	border-radius: 8px;
-	text-align: center;
-	margin-top: 10px;
 }
 
 .feedback {
@@ -248,7 +310,6 @@ h1 {
 	}
 }
 
-/* Mostrar el color seleccionado sobre la frase */
 .selected-color-box {
 	width: 80px;
 	height: 80px;
@@ -263,40 +324,12 @@ h1 {
 	text-align: center;
 	border: 2px solid #000;
 	transition: all 0.3s ease;
-}
-
-.selected-color-box {
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Título "Color Seleccionado" */
 .color-selected-text {
-	font-size: 1.5rem; 
+	font-size: 1.5rem;
 	color: #333;
 	font-weight: bold;
 	margin-bottom: 10px;
-}
-
-.ok-button {
-	width: 150px;
-	height: 50px;
-	font-size: 1.2rem;
-	background-color: #4caf50; /* Verde */
-	color: #ffffff; /* Blanco */
-	border: none;
-	border-radius: 8px;
-	cursor: pointer;
-	margin-top: 20px;
-	transition: all 0.3s ease;
-}
-
-.ok-button:hover {
-	background-color: #45a049; /* Verde oscuro */
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-	transform: scale(1.1);
-}
-
-.ok-button:active {
-	transform: scale(1);
-	background-color: #3e8e41; /* Más oscuro */
 }

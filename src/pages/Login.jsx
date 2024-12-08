@@ -49,7 +49,7 @@ const Login = () => {
 				<i className='fas fa-home'></i> Volver al Home
 			</button>
 			<div className='login-box'>
-				<h1 className='login-title'>Memoria Artística</h1>
+				<h3 className='login-title'>Memoria Artística</h3>
 				<p className='login-subtitle'>Inicia sesión como terapista</p>
 				<form
 					onSubmit={handleSubmit}

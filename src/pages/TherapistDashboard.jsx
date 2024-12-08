@@ -107,10 +107,10 @@ const TherapistDashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <h1 className="dashboard-header">
+      <h5 className="dashboard-header">
         Bienvenido, {userloged?.therapist?.name}{" "}
         {userloged?.therapist?.lastname}
-      </h1>
+      </h5>
 
       <button
         className="dashboard-button"
