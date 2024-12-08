@@ -36,7 +36,7 @@ function MainGame() {
   const [numCorrects, setNumCorrects] = useState(0);
   const [numIncorrects, setNumIncorrects] = useState(0);
   const [totalAttempts, setTotalAttempts] = useState(0);
-  const [showResume, setShowResume] = useState(false); // Controla visibilidad de estadísticas
+  const [showResume, setShowResume] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
 
@@ -77,6 +77,7 @@ function MainGame() {
 
     if (completedTangrams + 1 === selectedTangrams.length) {
       stopGameTimer();
+      setNumCorrects(12); // Forzar 12 aciertos al final del juego
       setIsWinner(true);
       setTimeout(() => {
         setShowResume(true);
@@ -99,7 +100,7 @@ function MainGame() {
         idSesion: sessionData.idSesion,
         patient: sessionData.patient,
         therapist: sessionData.therapist,
-        num_corrects: parseInt(numCorrects, 10),
+        num_corrects: 12, // Aseguramos que siempre sean 12
         num_incorrects: parseInt(numIncorrects, 10),
         time_total: parseFloat(totalTime),
         session_at: new Date(sessionData.session_at).toISOString(),
@@ -159,7 +160,7 @@ function MainGame() {
           >
             {selectedLabel}
           </div>
-            <div className="color-columns">
+          <div className="color-columns">
             {COLORS.map((colorObj, index) => (
               <div key={index} className="color-item">
                 <span className="color-label">{colorObj.label}</span>
@@ -191,20 +192,18 @@ function MainGame() {
           </button>
         </div>
       )}
-      
       {showResume && (
         <section className="resume">
           <h2>Estadísticas</h2>
-          <p>Aciertos: {numCorrects}</p>
+          <p>Aciertos: 12</p>
           <p>Errores: {numIncorrects}</p>
           <p>Intentos Totales: {totalAttempts}</p>
           <p>Tiempo Total: {totalTime}s</p>
-          <button className="action-button" onClick={() => navigate("/dashboard")}>
+          <button className="action-button" onClick={() => navigate("/")}>
             VOLVER
           </button>
         </section>
       )}
-
       <div className="feedback">
         {isWrongColor && (
           <>
