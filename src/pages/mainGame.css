@@ -76,41 +76,41 @@ h1 {
 }
 
 .color-columns {
-	display: flex;
-	flex-direction: row;
-	gap: 20px;
-}
-
-.color-column {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-}
-
-.color-item {
-	display: flex;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
+	gap: 20px; /* Espaciado entre filas y columnas */
+	justify-content: center;
 	align-items: center;
-	gap: 12px;
-}
-
-.color-label {
+  }
+  
+  .color-item {
+	display: flex;
+	flex-direction: column; /* Coloca el span encima del botón */
+	align-items: center; /* Centra elementos vertical y horizontalmente */
+	justify-content: center;
+	text-align: center;
+	gap: 10px; /* Espaciado entre etiqueta y botón */
+  }
+  
+  .color-label {
 	font-size: 1.8rem;
 	color: #333;
-}
-
-.color-button {
+  }
+  
+  .color-button {
 	width: 80px;
 	height: 80px;
 	border: none;
 	cursor: pointer;
 	border-radius: 8px;
-}
-
-.color-button:hover {
-	transform: scale(1.1);
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 	transition: transform 0.2s, box-shadow 0.2s;
-}
+  }
+  
+  .color-button:hover {
+	transform: scale(1.1);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  }
 
 .action-button {
 	width: 130px;

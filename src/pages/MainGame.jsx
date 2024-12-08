@@ -159,31 +159,17 @@ function MainGame() {
           >
             {selectedLabel}
           </div>
-          <div className="color-columns">
-            <div className="color-column">
-              {COLORS.slice(0, 3).map((colorObj, index) => (
-                <div key={index} className="color-item">
-                  <span className="color-label">{colorObj.label}</span>
-                  <button
-                    className="color-button"
-                    style={{ backgroundColor: colorObj.color }}
-                    onClick={() => handleColorSelection(colorObj)}
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="color-column">
-              {COLORS.slice(3, 6).map((colorObj, index) => (
-                <div key={index} className="color-item">
-                  <button
-                    className="color-button"
-                    style={{ backgroundColor: colorObj.color }}
-                    onClick={() => handleColorSelection(colorObj)}
-                  />
-                  <span className="color-label">{colorObj.label}</span>
-                </div>
-              ))}
-            </div>
+            <div className="color-columns">
+            {COLORS.map((colorObj, index) => (
+              <div key={index} className="color-item">
+                <span className="color-label">{colorObj.label}</span>
+                <button
+                  className="color-button"
+                  style={{ backgroundColor: colorObj.color }}
+                  onClick={() => handleColorSelection(colorObj)}
+                />
+              </div>
+            ))}
           </div>
           <button className="action-button" onClick={handlePause}>
             PAUSAR
@@ -205,6 +191,7 @@ function MainGame() {
           </button>
         </div>
       )}
+      
       {showResume && (
         <section className="resume">
           <h2>Estadísticas</h2>
@@ -212,15 +199,12 @@ function MainGame() {
           <p>Errores: {numIncorrects}</p>
           <p>Intentos Totales: {totalAttempts}</p>
           <p>Tiempo Total: {totalTime}s</p>
-          {/* Botón "Ok" para cerrar estadísticas */}
-          <button
-            className="ok-button"
-            onClick={() => setShowResume(false)}
-          >
-            Ok
+          <button className="action-button" onClick={() => navigate("/dashboard")}>
+            VOLVER
           </button>
         </section>
       )}
+
       <div className="feedback">
         {isWrongColor && (
           <>

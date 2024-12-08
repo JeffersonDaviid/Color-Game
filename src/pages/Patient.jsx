@@ -87,15 +87,17 @@ const Patient = () => {
   return (
     <div className="patient-container">
       <div className="patient-statistics">
-        <button className="back-button" onClick={() => navigate("/dashboard")}>
-          Volver al Dashboard
-        </button>
-        <button
-          className="back-button"
-          onClick={() => setShowTransfers((prev) => !prev)}
-        >
-          {showTransfers ? "Ocultar Transferencias" : "Mostrar Transferencias"}
-        </button>
+        <div className="button-container">
+          <button className="back-button" onClick={() => navigate("/dashboard")}>
+            Volver al Dashboard
+          </button>
+          <button
+            className="back-button"
+            onClick={() => setShowTransfers((prev) => !prev)}
+          >
+            {showTransfers ? "Ocultar Transferencias" : "Mostrar Transferencias"}
+          </button>
+        </div>
         <h2>Paciente: {state?.patientName || "No disponible"}</h2>
         <div className="chart-container">
           <h2>Estadísticas de Sesiones</h2>
@@ -106,6 +108,8 @@ const Patient = () => {
             wrongAnswers={chartData.wrongAnswers}
           />
         </div>
+      </div>
+
 
         <div className="sessions-history">
           <h3>Historial de Sesiones</h3>
@@ -133,16 +137,6 @@ const Patient = () => {
           </table>
         </div>
       </div>
-
-      {showTransfers && (
-        <div className="transfer-history">
-          <h3>Transferencias</h3>
-          <p>
-            Información de transferencias será añadida aquí si está disponible.
-          </p>
-        </div>
-      )}
-    </div>
   );
 };
 
