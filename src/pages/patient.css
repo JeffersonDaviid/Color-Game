@@ -1,6 +1,23 @@
-.patient-container {
-	position: relative;
+.button-container {
 	display: flex;
+	justify-content: center; /* Centra horizontalmente */
+	gap: 20px; /* Espacio entre los botones */
+	margin-bottom: 20px; /* Separación del contenido inferior */
+}
+
+.back-button {
+	background-color: #000000;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 10px 20px;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+	background-color: #2980b9;
 }
 
 .patient-statistics {
