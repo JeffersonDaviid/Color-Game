@@ -30,15 +30,9 @@ function Home() {
 			<button
 				className='play-button'
 				onClick={handlePlayClick}>
-				Play
+				PLAY
 			</button>
-
-			<button
-				type='submit'
-				className='login-button login-icon'
-				onClick={() => navigate('/login')}>
-				<i className='fas fa-user'></i> Iniciar sesión
-			</button>
+			
 		</div>
 	)
 }
