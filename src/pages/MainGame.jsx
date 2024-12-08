@@ -14,7 +14,16 @@ import "./mainGame.css";
 
 function MainGame() {
   const { state } = useLocation();
-  const { isWrongColor, isWinner, setIsWinner } = useContext(GameRulesContext);
+  const {
+    isWrongColor,
+    isWinner,
+    setIsWinner,
+    startGameTimer,
+    stopGameTimer,
+    pauseGameTimer,
+    resumeGameTimer,
+    totalTime,
+  } = useContext(GameRulesContext);
   const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
   const [sessionData] = useState(state?.sessionData || {});
@@ -23,17 +32,14 @@ function MainGame() {
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedLabel, setSelectedLabel] = useState(null);
   const [selectedTangrams, setSelectedTangrams] = useState([]);
-  const [startTime, setStartTime] = useState(null);
-  const [tangramTimes, setTangramTimes] = useState([]);
   const [completedTangrams, setCompletedTangrams] = useState(0);
-  const [totalTime, setTotalTime] = useState(null);
   const [numCorrects, setNumCorrects] = useState(0);
   const [numIncorrects, setNumIncorrects] = useState(0);
   const [totalAttempts, setTotalAttempts] = useState(0);
-  const [showResume, setShowResume] = useState(false);
+  const [showResume, setShowResume] = useState(false); // Controla visibilidad de estadísticas
   const [isPaused, setIsPaused] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
 
-  // Validar si se pasó correctamente la información de la sesión
   useEffect(() => {
     if (!sessionData?.patient || !sessionData?.therapist) {
       console.error("Datos de la sesión no proporcionados.");
@@ -44,12 +50,16 @@ function MainGame() {
   useEffect(() => {
     const randomTangrams = TANGRAMS.sort(() => Math.random() - 0.5).slice(0, 2);
     setSelectedTangrams(randomTangrams);
-    setStartTime(Date.now());
   }, []);
 
   const handleColorSelection = (colorObj) => {
     setSelectedColor(colorObj.color);
     setSelectedLabel(colorObj.label);
+
+    if (!gameStarted) {
+      setGameStarted(true);
+      startGameTimer();
+    }
   };
 
   const handleClearSelection = () => {
@@ -63,21 +73,14 @@ function MainGame() {
   }, []);
 
   const handleCompleteTangram = () => {
-    const endTime = Date.now();
-    const timeTaken = Math.round((endTime - startTime) / 1000);
-
-    setTangramTimes((prevTimes) => [...prevTimes, timeTaken]);
-    setCompletedTangrams((prevCompleted) => prevCompleted + 1);
+    setCompletedTangrams((prev) => prev + 1);
 
     if (completedTangrams + 1 === selectedTangrams.length) {
-      const total = tangramTimes.reduce((sum, time) => sum + time, timeTaken);
-      setTotalTime(Math.round(total));
+      stopGameTimer();
       setIsWinner(true);
       setTimeout(() => {
         setShowResume(true);
       }, 5000);
-    } else {
-      setStartTime(Date.now());
     }
   };
 
@@ -90,32 +93,39 @@ function MainGame() {
     }
   };
 
-  // Función para enviar la sesión al backend
   const handleEndGame = async () => {
     try {
       const finalSession = {
-        idSesion: sessionData.idSesion, // Número entero
-        patient: sessionData.patient, // String (cédula del paciente)
-        therapist: sessionData.therapist, // String (cédula del terapeuta)
-        num_corrects: parseInt(numCorrects, 10), // Número entero
-        num_incorrects: parseInt(numIncorrects, 10), // Número entero
-        time_total: parseFloat(totalTime), // Número decimal
-        session_at: new Date(sessionData.session_at).toISOString(), // Formato ISO 8601
+        idSesion: sessionData.idSesion,
+        patient: sessionData.patient,
+        therapist: sessionData.therapist,
+        num_corrects: parseInt(numCorrects, 10),
+        num_incorrects: parseInt(numIncorrects, 10),
+        time_total: parseFloat(totalTime),
+        session_at: new Date(sessionData.session_at).toISOString(),
       };
 
-      console.log("Datos enviados desde el front-MainGame:", finalSession);
       await registerSessionServ(finalSession);
     } catch (error) {
       console.error("Error al registrar la sesión:", error);
     }
   };
 
-  // Llama a `handleEndGame` cuando el jugador gana
   useEffect(() => {
     if (isWinner) {
       handleEndGame();
     }
   }, [isWinner]);
+
+  const handlePause = () => {
+    setIsPaused(true);
+    pauseGameTimer();
+  };
+
+  const handleResume = () => {
+    setIsPaused(false);
+    resumeGameTimer();
+  };
 
   return (
     <div className="main-game">
@@ -175,12 +185,7 @@ function MainGame() {
               ))}
             </div>
           </div>
-          <button
-            className="action-button"
-            onClick={() => {
-              setIsPaused(true);
-            }}
-          >
+          <button className="action-button" onClick={handlePause}>
             PAUSAR
           </button>
           <button className="action-button" onClick={() => navigate("/")}>
@@ -192,15 +197,10 @@ function MainGame() {
         <div className="paused">
           <div className="personajes">
             <h1>¡Recarguemos energías! </h1>
-            <img src={PERSONAJES[2]} />
-            <img src={PERSONAJES[3]} />
+            <img src={PERSONAJES[2]} alt="Personaje descansando" />
+            <img src={PERSONAJES[3]} alt="Personaje descansando" />
           </div>
-          <button
-            className="action-button"
-            onClick={() => {
-              setIsPaused(false);
-            }}
-          >
+          <button className="action-button" onClick={handleResume}>
             CONTINUAR
           </button>
         </div>
@@ -212,13 +212,20 @@ function MainGame() {
           <p>Errores: {numIncorrects}</p>
           <p>Intentos Totales: {totalAttempts}</p>
           <p>Tiempo Total: {totalTime}s</p>
+          {/* Botón "Ok" para cerrar estadísticas */}
+          <button
+            className="ok-button"
+            onClick={() => setShowResume(false)}
+          >
+            Ok
+          </button>
         </section>
       )}
       <div className="feedback">
         {isWrongColor && (
           <>
             <h2 className="incorrect-txt">¡Ups! Ese color no es correcto</h2>
-            <img src={PERSONAJES[0]} className="incorrect" />
+            <img src={PERSONAJES[0]} alt="Error" className="incorrect" />
           </>
         )}
         {isWinner && (
@@ -226,7 +233,7 @@ function MainGame() {
             <h2 className="winner-txt">
               ¡GANASTE! <br /> ¡FELICITACIONES!
             </h2>
-            <img src={PERSONAJES[1]} className="winner-img" />
+            <img src={PERSONAJES[1]} alt="Ganador" className="winner-img" />
           </>
         )}
       </div>

@@ -13,18 +13,37 @@ export const GameRulesProvider = ({ children }) => {
 	const [numIncorrects, setNumIncorrects] = useState(0);
 	const [attempts, setAttempts] = useState(0);
 	const [totalTime, setTotalTime] = useState(0);
+
+	// Tiempos
 	const [gameStartTime, setGameStartTime] = useState(null); // Marca del inicio del juego
+	const [pauseStartTime, setPauseStartTime] = useState(null); // Marca del inicio de la pausa
+	const [pausedTime, setPausedTime] = useState(0); // Tiempo total pausado
+
+	// Pausar el juego
+	const pauseGameTimer = () => {
+		setPauseStartTime(Date.now());
+	};
+
+	// Reanudar el juego
+	const resumeGameTimer = () => {
+		if (pauseStartTime) {
+			const pauseDuration = Date.now() - pauseStartTime;
+			setPausedTime((prev) => prev + pauseDuration);
+			setPauseStartTime(null);
+		}
+	};
 
 	// Iniciar el temporizador global al comienzo del juego
 	const startGameTimer = () => {
 		setGameStartTime(Date.now());
+		setPausedTime(0); // Reinicia el tiempo pausado
 	};
 
 	// Detener el temporizador global al final del juego
 	const stopGameTimer = () => {
 		if (gameStartTime) {
 			const endTime = Date.now();
-			const elapsed = Math.round((endTime - gameStartTime) / 1000); // Tiempo en segundos
+			const elapsed = Math.round((endTime - gameStartTime - pausedTime) / 1000); // Tiempo en segundos excluyendo pausas
 			setTotalTime(elapsed);
 		}
 	};
@@ -95,8 +114,8 @@ export const GameRulesProvider = ({ children }) => {
 				totalTime,
 				startGameTimer,
 				stopGameTimer,
-				updateCorrects,
-				updateIncorrects,
+				pauseGameTimer,
+				resumeGameTimer,
 			}}>
 			{children}
 		</GameRulesContext.Provider>

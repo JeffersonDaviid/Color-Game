@@ -276,3 +276,27 @@ h1 {
 	font-weight: bold;
 	margin-bottom: 10px;
 }
+
+.ok-button {
+	width: 150px;
+	height: 50px;
+	font-size: 1.2rem;
+	background-color: #4caf50; /* Verde */
+	color: #ffffff; /* Blanco */
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	margin-top: 20px;
+	transition: all 0.3s ease;
+}
+
+.ok-button:hover {
+	background-color: #45a049; /* Verde oscuro */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	transform: scale(1.1);
+}
+
+.ok-button:active {
+	transform: scale(1);
+	background-color: #3e8e41; /* Más oscuro */
+}
