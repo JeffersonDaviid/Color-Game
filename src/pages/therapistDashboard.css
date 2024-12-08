@@ -137,3 +137,50 @@
 .submit-button:active {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
+
+/* Botones de acción en la tabla */
+.play-button,
+.stats-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: white;
+}
+
+/* Botón Play */
+.play-button {
+    background-color: #4caf50;
+    /* Verde */
+}
+
+.play-button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.play-button:active {
+    background-color: #3e8e41;
+    transform: translateY(0);
+}
+
+/* Botón Ver estadísticas */
+.stats-button {
+    background-color: #007bb5;
+    /* Azul */
+    margin-left: 10px;
+    /* Espacio entre botones */
+}
+
+.stats-button:hover {
+    background-color: #005f87;
+    transform: translateY(-2px);
+}
+
+.stats-button:active {
+    background-color: #004466;
+    transform: translateY(0);
+}

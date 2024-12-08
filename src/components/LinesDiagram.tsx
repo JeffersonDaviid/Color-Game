@@ -76,7 +76,7 @@ const LinesDiagram = ({ dates, times, correctAnswers, wrongAnswers }) => {
 			window.removeEventListener('resize', handleResize)
 			chartInstance.dispose()
 		}
-	}, [])
+	}, [dates, times, correctAnswers, wrongAnswers]);
 
 	return (
 		// Creamos un contenedor para el gráfico y le asignamos un tamaño

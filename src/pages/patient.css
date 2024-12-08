@@ -39,3 +39,26 @@
 	gap: 10px;
 	justify-content: space-between;
 }
+.chart-container {
+	margin: 20px 0;
+	background: #ffffff;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-button {
+	background-color: #3498db;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 10px 15px;
+	cursor: pointer;
+	font-size: 1rem;
+	margin-bottom: 15px;
+	transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+	background-color: #2980b9;
+}

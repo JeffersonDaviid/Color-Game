@@ -93,6 +93,18 @@ const TherapistDashboard = () => {
     navigate("/game", { state: { sessionData } });
   };
 
+  // Manejador para redirigir a estadísticas de paciente
+  const handleViewStats = (patient) => {
+    navigate("/patient", {
+      state: {
+        cedulaP: patient.cedulaP,
+        patientName: `${patient.name} ${patient.lastname}`,
+        cedulaT: userloged.therapist.cedulaT,
+        therapistName: `${userloged.therapist.name} ${userloged.therapist.lastname}`,
+      },
+    });
+  };
+
   return (
     <div className="dashboard-container">
       <h1 className="dashboard-header">
@@ -119,6 +131,7 @@ const TherapistDashboard = () => {
             <th>Apellido</th>
             <th>Teléfono</th>
             <th>Acción</th>
+            <th>Estadísticas</th>
           </tr>
         </thead>
         <tbody>
@@ -135,6 +148,14 @@ const TherapistDashboard = () => {
                     onClick={() => handleStartGame(patient)}
                   >
                     Play
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="stats-button"
+                    onClick={() => handleViewStats(patient)}
+                  >
+                    Ver estadísticas
                   </button>
                 </td>
               </tr>

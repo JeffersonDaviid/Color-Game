@@ -31,31 +31,8 @@ export const getPatientSessionsServ = async (cedulaP) => {
 		const response = await fetch(API_SESSION + '/' + cedulaP)
 		const respData = await response.json()
 
-		//TODO: JEFF - ver la respuesta
 		console.log(respData)
-		return [
-			{
-				date: '2021-10-15',
-				therapisth: 'Manolo Perez',
-				time: 15,
-				correctAnswers: 5,
-				wrongAnswers: 3,
-			},
-			{
-				date: '2021-10-15',
-				therapisth: 'Juanito Perez',
-				time: 15,
-				correctAnswers: 5,
-				wrongAnswers: 3,
-			},
-			{
-				date: '2021-10-15',
-				therapisth: 'Juanito Perez',
-				time: 15,
-				correctAnswers: 5,
-				wrongAnswers: 3,
-			},
-		]
+		return respData
 	} catch (error) {
 		console.error('Error login user:', error)
 		throw error
