@@ -12,7 +12,12 @@ function Tangram5({ selectedColor, selectedLabel, onComplete, updateStats }) {
 
 	const handleSectionClick = (event) => {
 		const label = event.target.getAttribute('data-label');
-
+	
+		// Verifica si la sección ya ha sido pintada correctamente
+		if (paintedSections.has(label)) {
+			return; // Si la sección ya está pintada, no hacer nada
+		}
+	
 		if (selectedColor === 'lightgray') {
 			setPaintedSections((prev) => {
 				const updated = new Set(prev);
@@ -23,14 +28,14 @@ function Tangram5({ selectedColor, selectedLabel, onComplete, updateStats }) {
 		} else if (label === selectedLabel) {
 			setPaintedSections((prev) => {
 				const updated = new Set(prev);
-				updated.add(label);
+				updated.add(label); // Agrega la etiqueta a las pintadas
 				event.target.style.fill = selectedColor;
-				updateStats({ correct: true }); // Registrar acierto
+				updateStats({ correct: true });
 				return updated;
 			});
 		} else {
 			setIsWrongColor(true);
-			updateStats({ correct: false }); // Registrar error
+			updateStats({ correct: false });
 		}
 	};
 
