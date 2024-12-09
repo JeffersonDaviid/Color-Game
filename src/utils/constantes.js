@@ -5,11 +5,11 @@ import Tangram4 from '../tangram/tangram4'
 import Tangram5 from '../tangram/tangram5'
 import { getRandomColors, getSuffleList, getUniqueLetters } from './utils'
 
-export const API_AUTH = 'http://localhost:8000/api/v1/auth'
-export const API_TRANSFER = 'http://localhost:8000/api/v1/transfer'
-export const API_PATIENT = 'http://localhost:8000/api/v1/patient'
-export const API_SESSION = 'http://localhost:8000/api/v1/session'
-export const API_THERAPIST = 'http://localhost:8000/api/v1/therapist'
+export const API_AUTH = 'https://back-color-game.onrender.com/api/v1/auth'
+export const API_TRANSFER = 'https://back-color-game.onrender.com/api/v1/transfer'
+export const API_PATIENT = 'https://back-color-game.onrender.com/api/v1/patient'
+export const API_SESSION = 'https://back-color-game.onrender.com/api/v1/session'
+export const API_THERAPIST = 'https://back-color-game.onrender.com/api/v1/therapist'
 
 export const LABELS = getUniqueLetters()
 const COLORS_HSL = getSuffleList(getRandomColors())
