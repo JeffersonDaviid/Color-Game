@@ -21,7 +21,6 @@
 	);
 	background-size: 190% 190%;
 	animation: backgroundAnimation 10s ease infinite;
-	width: 100vw;
 	min-height: 100vh;
 	padding: 0 20px;
 	overflow: hidden;
@@ -78,8 +77,8 @@ h5 {
 	position: absolute;
 	display: flex;
 	gap: 10px;
-	margin-top: 1rem;
-	left: 1rem;
+	top: 0.5rem;
+	left: 0.5rem;
 }
 
 .action-button {
@@ -110,7 +109,6 @@ h5 {
 	align-items: center;
 	width: 100%;
 	max-width: 1600px;
-	gap: 40px;
 }
 
 .tangram-area {
@@ -133,13 +131,14 @@ h5 {
 	flex-direction: column;
 	align-items: center;
 	gap: 15px;
-	transform: translateY(-60px); /* Ajusta este valor según lo necesites */
+	transform: translateY(-40px);
 }
 
 .color-columns {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
-	gap: 20px; /* Espaciado entre filas y columnas */
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 30px;
+	row-gap: 20px;
 	justify-content: center;
 	align-items: center;
 }
@@ -150,7 +149,7 @@ h5 {
 	align-items: center; /* Centra elementos vertical y horizontalmente */
 	justify-content: center;
 	text-align: center;
-	gap: 10px; /* Espaciado entre etiqueta y botón */
+	gap: 5px;
 }
 
 .color-label {
