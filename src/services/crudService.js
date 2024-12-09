@@ -1,4 +1,4 @@
-import { API_HISTORY_TRANSFER, API_PATIENT, API_SESSION, API_THERAPIST } from '../utils/constantes'
+import { API_PATIENT, API_SESSION, API_THERAPIST, API_TRANSFER } from '../utils/constantes'
 
 export const getTherapistServ = async (cedulaT) => {
 	try {
@@ -121,23 +121,18 @@ export const registerPatientService = async (patient) => {
 export const transferPatientService = async (transfer) => {
 	try {
 		
+		console.log("Datos enviados al backend desde crud-service", transfer);
+		const response = await fetch(API_TRANSFER + '/register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(transfer),
+		})
 
-		// const response = await fetch(API_PATIENT + '/transer', {
-			// method: 'PATCH',
-		// 	headers: {
-		// 		'Content-Type': 'Aplication/json',
-		// 	},
-		// 	body: JSON.stringify(data),
-		// })
-
-		// const respData = await response.json()
-
-		//TODO: JEFF - ver la respuesta
-		console.log(transfer)
-		return {
-			token: 'superToken',
-			cedulaT: '1777777777',
-		}
+		 const respData = await response.json()
+		 console.log("Respuesta del backend:", respData);
+		 return respData
 	} catch (error) {
 		console.error('Error login user:', error)
 		throw error

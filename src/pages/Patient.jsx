@@ -91,12 +91,6 @@ const Patient = () => {
           <button className="back-button" onClick={() => navigate("/dashboard")}>
             Volver al Dashboard
           </button>
-          <button
-            className="back-button"
-            onClick={() => setShowTransfers((prev) => !prev)}
-          >
-            {showTransfers ? "Ocultar Transferencias" : "Mostrar Transferencias"}
-          </button>
         </div>
         <h2>Paciente: {state?.patientName || "No disponible"}</h2>
         <div className="chart-container">

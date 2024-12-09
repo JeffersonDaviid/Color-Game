@@ -5,6 +5,7 @@ import AuthContext from "../context/AuthContext";
 import {
   getPatientsServ,
   registerPatientService,
+  transferPatientService,
 } from "../services/crudService";
 import "./TherapistDashboard.css";
 
@@ -12,6 +13,12 @@ const TherapistDashboard = () => {
   const navigate = useNavigate();
   const { logout, userloged } = useContext(AuthContext);
   const [patients, setPatients] = useState([]);
+  const [showTransferDiv, setShowTransferDiv] = useState(false);
+  const [selectedPatient, setSelectedPatient] = useState(null);
+  const [transferData, setTransferData] = useState({
+    therapistTo: "",
+    detail: "",
+  });
   const [newPatient, setNewPatient] = useState({
     cedulaP: "",
     name: "",
@@ -43,6 +50,43 @@ const TherapistDashboard = () => {
       ...newPatient,
       [name]: value,
     });
+  };
+
+  const handleTransferChange = (e) => {
+    const { name, value } = e.target;
+    setTransferData({ ...transferData, [name]: value });
+  };
+
+  const handleTransferCancel = () => {
+    setShowTransferDiv(false);
+    setSelectedPatient(null);
+    setTransferData({ therapistTo: "", detail: "" });
+  };
+
+  const handleTransferAccept = async () => {
+    if (!transferData.therapistTo) {
+      alert("Debe ingresar la cédula del terapeuta destino.");
+      return;
+    }
+    try {
+      const transferPayload = {
+        idTransfer: generateSessionId(),
+        patient: selectedPatient.cedulaP,
+        therapist_from: userloged.therapist.cedulaT,
+        therapist_to: transferData.therapistTo,
+        detail: transferData.detail,
+        transfer_at: new Date().toISOString(),
+      };
+      console.log("Transferencia enviada:", transferPayload);
+      await transferPatientService(transferPayload);
+      setShowTransferDiv(false);
+      setSelectedPatient(null);
+      setTransferData({ therapistTo: "", detail: "" });
+      const response = await getPatientsServ(userloged.therapist.cedulaT);
+      setPatients(response.data || []);
+    } catch (error) {
+      console.error("Error al realizar la transferencia:", error);
+    }
   };
 
   // Manejador para el envío del formulario de registro de paciente
@@ -132,6 +176,7 @@ const TherapistDashboard = () => {
             <th>Teléfono</th>
             <th>Acción</th>
             <th>Estadísticas</th>
+            <th>Transferir</th>
           </tr>
         </thead>
         <tbody>
@@ -156,6 +201,17 @@ const TherapistDashboard = () => {
                     onClick={() => handleViewStats(patient)}
                   >
                     Ver estadísticas
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="transfer-button"
+                    onClick={() => {
+                      setSelectedPatient(patient);
+                      setShowTransferDiv(true);
+                    }}
+                  >
+                    Transferir
                   </button>
                 </td>
               </tr>
@@ -211,6 +267,45 @@ const TherapistDashboard = () => {
           </button>
         </form>
       </div>
+
+      {showTransferDiv && (
+        <>
+          <div className="overlay" onClick={handleTransferCancel}></div>
+          <div className="transfer-container">
+            <h3>Transferir Paciente</h3>
+            <p>
+              Paciente seleccionado: {selectedPatient?.name}{" "}
+              {selectedPatient?.lastname}
+            </p>
+            <div className="form-group">
+              <label>Cédula del terapeuta destino:</label>
+              <input
+                type="text"
+                name="therapistTo"
+                value={transferData.therapistTo}
+                onChange={handleTransferChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Detalle (opcional):</label>
+              <textarea
+                name="detail"
+                value={transferData.detail}
+                onChange={handleTransferChange}
+              />
+            </div>
+            <div className="transfer-buttons">
+              <button className="accept-button" onClick={handleTransferAccept}>
+                Aceptar
+              </button>
+              <button className="cancel-button" onClick={handleTransferCancel}>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
