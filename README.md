@@ -1,57 +1,160 @@
-# Proyecto de "Memoria Artistica"
 
-## Descripción del Proyecto
+# **Memoria Artística**
 
-**"Memoria Artistica"** es una aplicación web interactiva diseñada para ayudar a personas con Alzheimer mediante actividades visuales y cognitivas. Inspirado en la técnica de colorear por letras, el proyecto presenta una serie de ilustraciones donde cada sección está etiquetada con una letra que corresponde a un color específico. Los usuarios deben seleccionar los colores adecuados para completar la ilustración, lo cual estimula la memoria visual y la capacidad de asociación.
+## **Descripción Técnica del Proyecto**
 
-Este proyecto fue desarrollado por **Infinity Quality** con el objetivo de proporcionar una herramienta lúdica y terapéutica que contribuya a ralentizar el avance del Alzheimer.
+**"Memoria Artística"** es una aplicación web interactiva diseñada para asistir a personas con Alzheimer a través de actividades visuales y cognitivas. El proyecto emplea tecnologías modernas para garantizar una experiencia fluida, funcional y escalable. Está dirigido a desarrolladores interesados en comprender y colaborar en la evolución del sistema desde una perspectiva técnica.
 
-## Objetivo
+---
 
-La aplicación busca promover el bienestar cognitivo de los usuarios al ofrecer una actividad que:
+## **Arquitectura del Proyecto**
 
-- **Estimula la memoria y el reconocimiento visual:** al recordar y asociar cada letra con un color específico.
-- **Fomenta la concentración y la coordinación:** al colorear las áreas correctas.
-- **Ofrece una experiencia relajante y satisfactoria:** mediante ilustraciones atractivas y sencillas de completar.
+El sistema se compone de los siguientes módulos principales:
 
-## Público Objetivo
+1. **Frontend:**
+   - Construido con **React** y optimizado mediante **Vite**.
+   - Diseñado con **CSS** para asegurar una interfaz responsiva y transiciones fluidas.
+   - Comunicación con el backend a través de **Axios** para consumir APIs REST.
 
-La aplicación está diseñada específicamente para **adultos mayores** con principios de Alzheimer o deterioro cognitivo leve. Las actividades son simples pero efectivas, permitiendo que los usuarios disfruten de una actividad sin complejidad técnica y que les proporciona una sensación de logro al completarla.
+2. **Backend:**
+   - Implementado como una API RESTful utilizando **FastAPI**.
+   - La base de datos está gestionada con **PostgreSQL**, lo que permite un manejo robusto de la información.
 
-## Características Principales
+3. **Docker:**
+   - Despliegue basado en contenedores configurados con **Docker Compose**.
+   - Separación clara de entornos de desarrollo y producción.
 
-- **Interfaz Amigable:** Una interfaz limpia y clara para facilitar la interacción de usuarios mayores.
-- **Guía de Colores:** Cada letra está asociada con un color predefinido, de forma que el usuario pueda encontrar fácilmente el color correcto.
-- **Feedback Visual:** Los usuarios reciben indicaciones visuales que los guían y refuerzan su avance en la actividad.
-- **Diseño Adaptativo:** La aplicación es compatible con dispositivos móviles y tablets, lo que facilita el acceso desde cualquier lugar.
-- **Actividades Terapéuticas Personalizadas:** La aplicación presenta ilustraciones que varían en complejidad, ofreciendo retos de acuerdo con el nivel de habilidad del usuario.
+---
 
-## Tecnologías Utilizadas
+## **Requerimientos Previos**
 
-Este proyecto fue desarrollado utilizando:
+Para trabajar en este proyecto, es necesario contar con las siguientes herramientas instaladas:
 
-- **React** para la interfaz de usuario, que permite una experiencia fluida e interactiva.
-- **Vite** para optimizar el desarrollo y carga rápida de la aplicación.
-- **CSS** para el diseño visual y animaciones suaves, que resultan atractivas y fáciles de seguir para los usuarios.
-- **JavaScript** para la lógica de coloración y funcionalidad de la aplicación.
+- **Node.js** (versión 16 o superior)
+- **Docker** y **Docker Compose**
+- **NPM** (incluido con Node.js)
+- **Git** para clonar el repositorio.
 
-## Cómo Desplegar
-Para desplegar la aplicacion vamos a necesitar seguir los siguientes pasos desde la terminal:
-1. **Descargar Node.js**: Vamos a descargar node.js desde la pagina oficial.
-2. **Descargar Vite**: Descargamos Vite con el comando *npm install vite --save-dev*
-3. **Descargar Libreria de React**: Descargamos la libreria de React con el comando npm install *react-router-dom*
-4. **Ejecucion de la aplicación**: Para la ejecución desde una terminal vamos a colocar *npm run dev*
+---
 
-## Cómo Usar
+## **Cómo Configurar el Entorno**
 
-1. **Selecciona un Color**: Elige entre varias colores disponibles en la aplicación.
-2. **Colorea por Letras**: Cada sección de los tamgrams está etiquetada con una letra que corresponde a un color específico. Aplica el color a la sección deseada.
-3. **Completa la Imagen**: Continúa hasta colorear todas las ilustraciónes.
+### **1. Configuración del Backend y la Base de Datos**
 
-## Contribución al Bienestar Cognitivo
+Dentro del repositorio `API-COLOR-GAME`:
 
-La aplicación **"Memoria Artistica"** fue creada con la visión de ser una herramienta accesible para mejorar la calidad de vida de los usuarios, proporcionando actividades terapéuticas que promuevan la **estimulación cognitiva**. La técnica de colorear, combinada con el reconocimiento de letras y colores, se basa en estudios que sugieren que las actividades creativas y de concentración pueden ayudar a **ralentizar el deterioro cognitivo** en personas con Alzheimer.
+**Repositorio GitHub:** [https://github.com/JeffersonDaviid/api-color-game.git](https://github.com/JeffersonDaviid/api-color-game.git)
 
-## Acerca de Infinity Quality
+1. Modifica el archivo `docker-compose.dev.yml`, descomentando las líneas correspondientes a la configuración de puertos para PostgreSQL:
 
-**Infinity Quality** es una empresa comprometida con el desarrollo de soluciones tecnológicas que mejoren la vida de las personas. Nos especializamos en el diseño de aplicaciones orientadas a la salud y el bienestar, y estamos dedicados a ofrecer herramientas accesibles y útiles para distintos grupos de la sociedad. Creemos que el uso de la tecnología puede contribuir a mantener y mejorar las capacidades cognitivas de nuestros usuarios.
+   ```yaml
+   ports:
+     - "5433:5432"
+   ```
+
+2. Inicia únicamente el servicio de la base de datos con el siguiente comando:
+
+   ```bash
+   docker-compose -f docker-compose.dev.yml up database-ma
+   ```
+
+3. Para desplegar toda la API junto con sus servicios asociados, ejecuta:
+
+   ```bash
+   docker-compose -f docker-compose.dev.yml up
+   ```
+
+   Esto iniciará tanto el backend como la base de datos, permitiendo realizar pruebas y establecer conexiones con el frontend.
+
+### **2. Configuración del Frontend**
+
+Clona el repositorio correspondiente al frontend del proyecto:
+
+```bash
+git clone https://github.com/tu-repositorio/memoria-artistica.git
+cd memoria-artistica
+```
+
+Instala las dependencias necesarias:
+
+```bash
+npm install
+npm install axios
+```
+
+Inicia el servidor de desarrollo:
+
+```bash
+npm run dev
+```
+
+Accede a la aplicación en [http://localhost:5173](http://localhost:5173) o el puerto asignado por Vite.
+
+---
+
+## **Validación de la Base de Datos**
+
+Para comprobar la creación de usuarios, pacientes o cualquier otra entidad en la base de datos:
+
+1. Accede al contenedor de la base de datos con el siguiente comando:
+
+   ```bash
+   docker exec -it database-ma psql -U postgres -d memoria_artistica
+   ```
+
+2. Realiza consultas SQL para inspeccionar las tablas y su contenido. Por ejemplo:
+
+   ```sql
+   SELECT * FROM nombre_de_la_tabla;
+   ```
+
+   Sustituye `nombre_de_la_tabla` por la tabla que deseas consultar (ejemplo: `patient`, `therapist`, `session`, o `transfer`).
+
+---
+
+## **Estructura del Proyecto**
+
+### **Frontend**
+
+```bash
+/public
+├── assets          # Recursos como imágenes y fondos.
+│   ├── fondos      # Imágenes de fondo del juego.
+│   ├── personaje-hombre-descanso.png
+│   ├── personaje-mujer-comienzo.png
+│   ├── personaje-mujer-ok.png
+│   └── vite.svg
+/src
+├── components      # Componentes reutilizables como botones, formularios, etc.
+├── context         # Manejo de estados globales mediante React Context.
+├── hooks           # Hooks personalizados para lógica compartida.
+├── pages           # Páginas principales como el tablero de colores.
+├── services        # Lógica para la interacción con la API.
+└── App.jsx         # Punto de entrada del frontend.
+```
+
+### **Backend**
+
+```bash
+/src
+├── middlewares     # Middleware para gestionar solicitudes y respuestas.
+├── models          # Modelos de datos que interactúan con la base de datos.
+├── routes          # Rutas de la API.
+├── services        # Lógica de negocio y operaciones específicas.
+├── utils           # Funciones auxiliares y constantes.
+├── database.py     # Configuración de conexión a la base de datos.
+└── main.py         # Punto de entrada del servidor FastAPI.
+```
+
+### **Docker**
+
+```bash
+/docker-compose.dev.yml    # Configuración para el entorno de desarrollo.
+```
+
+---
+
+## **Notas Adicionales**
+
+- Al realizar cambios en la configuración de Docker o en el código del backend, es recomendable eliminar los contenedores existentes y recrearlos para evitar conflictos.
+- Asegúrese de que los servicios del backend estén en ejecución; de lo contrario, el frontend mostrará mensajes de error indicando que no se pudo establecer conexión con el servidor.
