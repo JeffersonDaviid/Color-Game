@@ -108,3 +108,6 @@ Cuando las funcionalidades y correcciones en `develop` están listas para una nu
 
 ---
 
+### **Nota:**
+
+    El código correspondiente a cada versión del juego está disponible en las ramas de tipo release. Por ejemplo, la rama release/1.0.0 contiene el código de la primera versión del juego, mientras que la rama release/2.0.0 incluye el código de la segunda versión.
