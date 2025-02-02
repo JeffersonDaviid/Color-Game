@@ -1,14 +1,18 @@
 import PropTypes from 'prop-types';
 import useTangram from './useTangram';
 
-function Tangram3({ selectedColor, selectedLabel, onComplete, updateStats }) {
+function Tangram3({
+  selectedColor = "", // Valor por defecto aquí
+  selectedLabel = "", // Valor por defecto aquí
+  onComplete = () => {},
+  updateStats,
+}) {
   const { letters, handleSectionClick } = useTangram({
     selectedColor,
     selectedLabel,
     onComplete,
     updateStats,
   });
-
   return (
     <svg
       width="100%"
@@ -154,11 +158,12 @@ function Tangram3({ selectedColor, selectedLabel, onComplete, updateStats }) {
   );
 }
 
-export default Tangram3;
-
+// PropTypes (sin .isRequired para las props con valores por defecto)
 Tangram3.propTypes = {
-  selectedColor: PropTypes.string.isRequired,
-  selectedLabel: PropTypes.string.isRequired,
+  selectedColor: PropTypes.string,
+  selectedLabel: PropTypes.string,
   onComplete: PropTypes.func,
-  updateStats: PropTypes.func.isRequired, // Requerido para estadísticas
+  updateStats: PropTypes.func.isRequired,
 };
+
+export default Tangram3;
