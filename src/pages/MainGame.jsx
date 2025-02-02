@@ -124,18 +124,21 @@ function MainGame() {
 	return (
 		<div className='main-game'>
 			{!isWinner && (
-				<div className='header-buttons'>
-					<button
-						className='action-button'
-						onClick={handlePause}>
-						PAUSAR
-					</button>
-					<button
-						className='action-button'
-						onClick={() => navigate('/')}>
-						VOLVER
-					</button>
-				</div>
+						<div className="header-buttons">
+						<button
+							className="action-button"
+							onClick={() => navigate('/')}
+						>
+							VOLVER
+						</button>
+						<button
+							className="action-button"
+							onClick={handlePause}
+						>
+							PAUSAR
+						</button>
+					</div>
+			
 			)}
 			<h1>MEMORIA ARTÍSTICA</h1>
 			<h2>Jugando: {patientName}</h2>
