@@ -44,6 +44,16 @@ Se crean a partir de `main` para corregir problemas críticos en producción. Un
 - **Ejemplo**:
   - `hotfix/solucion-error-critico`
 
+### **1.5 Ramas de Tareas Varias (Chore)**
+
+Se crean a partir de `develop` para realizar tareas de mantenimiento, configuraciones, actualizaciones de dependencias y otras tareas que no afectan directamente la funcionalidad del producto.
+
+- **Formato de nombre**: `chore/nombre-de-la-tarea`
+
+- **Ejemplos**:
+  - `chore/actualizacion-dependencias`
+  - `chore/configuracion-linter`
+
 ---
 
 ## **2. Roles en el Equipo**
