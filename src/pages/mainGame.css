@@ -17,11 +17,10 @@
 		/* Azul claro */ rgba(255, 255, 204, 0.6),
 		/* Amarillo pastel */ rgba(144, 238, 144, 0.6),
 		/* Verde claro */ rgba(245, 245, 220, 0.6),
-		 rgba(211, 211, 211, 0.6)
+		rgba(211, 211, 211, 0.6)
 	);
 	background-size: 190% 190%;
 	animation: backgroundAnimation 10s ease infinite;
-	width: 100vw;
 	min-height: 100vh;
 	padding: 0 20px;
 	overflow: hidden;
@@ -43,13 +42,10 @@
 h1 {
 	font-size: 2.8rem;
 	color: #000000d8;
-	margin-top: -10px;
 	text-align: center;
 	position: relative;
-	margin-left: 150px; /* Ajusta la cantidad según lo que necesites */
 }
 h2 {
-	
 	color: #000103d8;
 	margin-top: -10px;
 	text-align: center;
@@ -57,7 +53,6 @@ h2 {
 }
 
 h3 {
-	
 	color: #000103d8;
 	margin-top: -10px;
 	text-align: center;
@@ -65,7 +60,6 @@ h3 {
 }
 
 h4 {
-	
 	color: #000103d8;
 	margin-top: -10px;
 	text-align: center;
@@ -73,27 +67,19 @@ h4 {
 }
 
 h5 {
-	
 	color: #000103d8;
 	margin-top: -10px;
 	text-align: center;
 	position: relative;
 }
 
-.header {
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	width: 100%;
-	gap: 20px;
-}
-
 .header-buttons {
+	position: absolute;
 	display: flex;
 	gap: 10px;
-	margin-top: 10px; /* Ajusta el valor para moverlos más abajo */
+	top: 0.5rem;
+	left: 0.5rem;
 }
-
 
 .action-button {
 	width: 155px;
@@ -123,7 +109,6 @@ h5 {
 	align-items: center;
 	width: 100%;
 	max-width: 1600px;
-	gap: 40px;
 }
 
 .tangram-area {
@@ -146,13 +131,14 @@ h5 {
 	flex-direction: column;
 	align-items: center;
 	gap: 15px;
-	transform: translateY(-60px); /* Ajusta este valor según lo necesites */
+	transform: translateY(-40px);
 }
 
 .color-columns {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
-	gap: 20px; /* Espaciado entre filas y columnas */
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 30px;
+	row-gap: 20px;
 	justify-content: center;
 	align-items: center;
 }
@@ -163,7 +149,7 @@ h5 {
 	align-items: center; /* Centra elementos vertical y horizontalmente */
 	justify-content: center;
 	text-align: center;
-	gap: 10px; /* Espaciado entre etiqueta y botón */
+	gap: 5px;
 }
 
 .color-label {
@@ -332,4 +318,9 @@ h5 {
 	color: #333;
 	font-weight: bold;
 	margin-bottom: 10px;
+}
+
+.resume .action-button,
+.resume h2 {
+	margin: 3rem 0;
 }
