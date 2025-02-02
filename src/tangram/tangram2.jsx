@@ -1,56 +1,15 @@
-import { useContext, useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import { LABELS } from '../utils/constantes'
-import { getSuffleList } from '../utils/utils'
-import GameRulesContext from '../context/GameRulesContext'
+import PropTypes from 'prop-types';
+import useTangram from './useTangram';
 
 function Tangram2({ selectedColor, selectedLabel, onComplete, updateStats }) {
-	const [letters, setLetters] = useState([...LABELS])
-	const { setIsWrongColor } = useContext(GameRulesContext)
-	const [paintedSections, setPaintedSections] = useState(new Set()) // Set para rastrear secciones pintadas
-	const [isTangramCompleted, setIsTangramCompleted] = useState(false) // Estado para controlar si el tangram ya está completo
-
-	const handleSectionClick = (event) => {
-		const label = event.target.getAttribute('data-label');
+	const { letters, handleSectionClick } = useTangram({
+		selectedColor,
+		selectedLabel,
+		onComplete,
+		updateStats,
+	  });
 	
-		// Verifica si la sección ya ha sido pintada correctamente
-		if (paintedSections.has(label)) {
-			return; // Si la sección ya está pintada, no hacer nada
-		}
-	
-		if (selectedColor === 'lightgray') {
-			setPaintedSections((prev) => {
-				const updated = new Set(prev);
-				updated.delete(label);
-				event.target.style.fill = 'lightgray';
-				return updated;
-			});
-		} else if (label === selectedLabel) {
-			setPaintedSections((prev) => {
-				const updated = new Set(prev);
-				updated.add(label); // Agrega la etiqueta a las pintadas
-				event.target.style.fill = selectedColor;
-				updateStats({ correct: true });
-				return updated;
-			});
-		} else {
-			setIsWrongColor(true);
-			updateStats({ correct: false });
-		}
-	};
-
-	useEffect(() => {
-		if (paintedSections.size === letters.length && !isTangramCompleted) {
-			setIsTangramCompleted(true)
-			if (onComplete) onComplete()
-		}
-	}, [paintedSections, letters.length, onComplete, isTangramCompleted])
-
-	useEffect(() => {
-		const shuffledLetters = getSuffleList(letters)
-		setLetters(shuffledLetters)
-	}, [])
-
+	  
 	return (
 		<svg
 			width='100%'

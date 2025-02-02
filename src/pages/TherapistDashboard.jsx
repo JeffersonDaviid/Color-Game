@@ -33,7 +33,6 @@ const TherapistDashboard = () => {
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        console.log("userloged en TherapistDashboard:", userloged); // Verificar contenido
         if (userloged && userloged.therapist && userloged.therapist.cedulaT) {
           const response = await getPatientsServ(userloged.therapist.cedulaT);
           setPatients(response.data || []);
@@ -96,7 +95,6 @@ const TherapistDashboard = () => {
         detail: transferData.detail,
         transfer_at: new Date().toISOString(),
       };
-      console.log("Transferencia enviada:", transferPayload);
       await transferPatientService(transferPayload);
       setShowTransferDiv(false);
       setSelectedPatient(null);
@@ -135,10 +133,7 @@ const TherapistDashboard = () => {
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
       try {
-        console.log(
-          "Datos enviados al backend desde TherapistDashboard:",
-          newPatient
-        );
+        
 
         // Registra al paciente
         await registerPatientService(newPatient);
