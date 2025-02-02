@@ -27,6 +27,7 @@ const TherapistDashboard = () => {
     cedulaT: userloged?.therapist?.cedulaT || "", // Incluye la cédula del terapeuta
   });
   const [errors, setErrors] = useState({});
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   // Función para obtener los pacientes del terapeuta
   useEffect(() => {
@@ -190,6 +191,20 @@ const TherapistDashboard = () => {
     });
   };
 
+  // Manejador para cerrar sesión con confirmación
+  const handleLogout = async () => {
+    setShowLogoutModal(true);
+  };
+
+  const confirmLogout = async () => {
+    await logout();
+    navigate("/login");
+  };
+
+  const cancelLogout = () => {
+    setShowLogoutModal(false);
+  };
+
   return (
     <div className="dashboard-container">
       <h5 className="dashboard-header">
@@ -199,10 +214,7 @@ const TherapistDashboard = () => {
 
       <button
         className="dashboard-button"
-        onClick={async () => {
-          await logout();
-          navigate("/login");
-        }}
+        onClick={handleLogout}
       >
         CERRAR SESIÓN
       </button>
@@ -345,6 +357,23 @@ const TherapistDashboard = () => {
                 Aceptar
               </button>
               <button className="cancel-button" onClick={handleTransferCancel}>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+
+      {showLogoutModal && (
+        <>
+          <div className="overlay" onClick={cancelLogout}></div>
+          <div className="logout-modal">
+            <h3>¿Estás seguro de salir del juego?</h3>
+            <div className="logout-buttons">
+              <button className="accept-button" onClick={confirmLogout}>
+                Aceptar
+              </button>
+              <button className="cancel-button" onClick={cancelLogout}>
                 Cancelar
               </button>
             </div>
