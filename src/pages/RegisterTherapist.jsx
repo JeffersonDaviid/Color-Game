@@ -93,7 +93,7 @@ const RegisterTherapist = () => {
             <button
                 onClick={() => navigate('/login')}
                 className='home-button'>
-                <i className='fas fa-user'></i> Volver al Login
+                <i className='fas fa-user'></i> Volver a inicio de sesión
             </button>
             <div className='register-box'>
                 <h2 className='register-title'>Registrar Terapista</h2>

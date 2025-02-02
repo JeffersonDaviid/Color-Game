@@ -240,7 +240,7 @@ const TherapistDashboard = () => {
                     className="play-button"
                     onClick={() => handleStartGame(patient)}
                   >
-                    Play
+                    Jugar
                   </button>
                 </td>
                 <td>

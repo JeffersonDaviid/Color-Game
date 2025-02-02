@@ -84,7 +84,7 @@ const Patient = () => {
 					<button
 						className='back-button'
 						onClick={() => navigate('/dashboard')}>
-						Volver al Dashboard
+						Volver al tablero
 					</button>
 				</div>
 				<h2>Paciente: {state?.patientName || 'No disponible'}</h2>
