@@ -30,7 +30,6 @@ export const registerTherapistService = async (user) => {
 		})
 
 		const respData = await response.json()
-		console.log(respData)
 		return respData
 	} catch (error) {
 		console.error('Error login user:', error)
