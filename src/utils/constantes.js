@@ -24,21 +24,13 @@ export const COLORS = [
 ]
 
 export const WALLPAPERS = [
-	'./assets/fondos/fondo1.avif',
-	'./assets/fondos/fondo2.avif',
-	'./assets/fondos/fondo3.avif',
-	'./assets/fondos/fondo4.avif',
-	'./assets/fondos/fondo5.avif',
-	'./assets/fondos/fondo6.avif',
-	'./assets/fondos/fondo7.avif',
-	'./assets/fondos/fondo8.avif',
-	'./assets/fondos/fondo9.avif',
-	'./assets/fondos/fondo10.avif',
-	'./assets/fondos/fondo11.avif',
-	'./assets/fondos/fondo12.avif',
-	'./assets/fondos/fondo13.avif',
-	'./assets/fondos/fondo14.avif',
-	'./assets/fondos/fondo15.avif',
+	'./assets/fondos/fondo16.avif',
+	'./assets/fondos/fondo17.avif',
+	'./assets/fondos/fondo18.avif',
+	'./assets/fondos/fondo19.avif',
+	'./assets/fondos/fondo20.avif',
+	'./assets/fondos/fondo21.avif',
+	'./assets/fondos/fondo22.avif',
 ]
 
 export const PERSONAJES = [

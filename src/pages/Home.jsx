@@ -28,9 +28,9 @@ function Home() {
 			{/* Título y botón de juego */}
 			<h4 className='game-title'>MEMORIA ARTÍSTICA</h4>
 			<button
-				className='play-button'
+				className='play-buttonh'
 				onClick={handlePlayClick}>
-				PLAY
+				JUGAR
 			</button>
 			
 		</div>

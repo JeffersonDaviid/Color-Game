@@ -97,23 +97,33 @@
 	left: 80%;
 }
 
-.play-button {
-	padding: 1rem 2rem;
-	font-size: 1.5rem;
-	font-weight: bold;
-	color: black;
-	background-color: #ffffff;
-	border: 2px solid black;
-	border-radius: 12px;
-	cursor: pointer;
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-	text-shadow: none;
+.play-buttonh {
+	padding: 2rem 4rem !important; /* Tamaño reducido */
+	font-size: 2.5rem !important; /* Texto más pequeño */
+	font-weight: bold !important;
+	color: white !important; /* Texto blanco */
+	background-color: #e74c3c !important; /* Fondo rojo intenso */
+	border: 3px solid #c0392b !important; /* Borde más delgado */
+	border-radius: 15px !important; /* Bordes ligeramente menos redondeados */
+	cursor: pointer !important;
+	transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease !important;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5) !important; /* Sombra más suave para destacar el texto */
+	margin-top: 3rem !important; /* Mantiene espacio hacia abajo */
 }
 
-.play-button:hover {
-	transform: scale(1.1);
-	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+/* Hover: Resalta el botón con un efecto más llamativo */
+.play-buttonh:hover {
+	transform: scale(1.2) !important; 
+	box-shadow: 0px 0px 25px rgba(231, 76, 60, 0.8) !important; 
+	background-color: #c0392b !important; 
 }
+
+/* Active: Efecto al presionar */
+.play-buttonh:active {
+	transform: scale(1.1) !important; /* Reduce ligeramente el tamaño */
+	box-shadow: 0px 0px 10px rgba(192, 57, 43, 0.9) !important; /* Sombra más sutil */
+}
+
 
 .login-icon {
 	position: fixed;

@@ -4,6 +4,7 @@
 	justify-content: center;
 	align-items: center;
 	height: 100%;
+	width: 100%;
 	min-height: 100vh;
 	padding-top: 2rem;
 	overflow: hidden;
@@ -58,22 +59,18 @@
 	box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
 }
 
-/* Estilo para organizar los campos en dos columnas */
+/* Estilo para organizar los campos en una sola columna */
 .register-form {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 20px;
-	align-items: center;
-	justify-content: center;
+	display: flex;
+	flex-direction: column; /* Cambia a disposición en columna */
+	gap: 20px; /* Espaciado entre los campos */
+	align-items: stretch; /* Asegura que los campos ocupen todo el ancho */
 }
 
-/* Ajustes para los inputs en la segunda columna */
-.register-form .form-group:nth-child(odd) {
-	grid-column: span 1;
-}
-
-.register-form .form-group:nth-child(even) {
-	grid-column: span 1;
+/* Ajuste general para cada grupo de formulario */
+.register-form .form-group {
+	width: 100%; /* Asegura que los campos ocupen el ancho disponible */
+	text-align: left;
 }
 
 /* Mensajes de error */
@@ -85,6 +82,7 @@
 }
 
 /* Botón de submit, con colores y transición */
+
 .register-form .register-button {
 	background-color: #4caf50;
 	color: white;
@@ -99,6 +97,7 @@
 	align-items: center;
 	gap: 12px;
 	transition: background-color 0.3s ease, transform 0.2s ease;
+	width: 100%; /* Ajusta el ancho al 100% del contenedor */
 }
 
 .register-form .register-button i {
@@ -111,10 +110,9 @@
 	transform: translateY(-2px);
 }
 
-/* Caja de texto dentro del formulario */
-.register-form .form-group {
-	margin-bottom: 20px;
-	text-align: left;
+/* Agregar una sombra sutil al fondo del botón para un efecto más elegante */
+.register-form .register-button:active {
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Fondo más suave para el formulario */
@@ -127,7 +125,37 @@
 	margin-bottom: 30px;
 }
 
-/* Agregar una sombra sutil al fondo del botón para un efecto más elegante */
-.register-form .register-button:active {
+
+
+/* Botón "Volver al Login", tamaño más grande */
+.home-button {
+	background-color: #114f9a;
+	color: white;
+	padding: 16px 24px; /* Aumenta el tamaño del botón */
+	font-size: 1.2rem; /* Fuente más grande */
+	font-weight: 600;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	text-decoration: none; /* Asegura que no tenga subrayado */
+	transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Ícono dentro del botón */
+.home-button i {
+	font-size: 1.5rem; /* Tamaño del ícono más grande */
+}
+
+/* Efecto hover */
+.home-button:hover {
+	background-color: #114f9a;
+	transform: translateY(-2px); /* Efecto de desplazamiento */
+}
+
+/* Efecto al hacer clic */
+.home-button:active {
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }

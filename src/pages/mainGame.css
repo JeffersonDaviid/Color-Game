@@ -74,33 +74,52 @@ h5 {
 }
 
 .header-buttons {
-	position: absolute;
-	display: flex;
-	gap: 10px;
-	top: 0.5rem;
-	left: 0.5rem;
+    position: absolute;
+    width: 100%; /* Para alinear los botones en las esquinas */
+    top: 0.5rem; /* Ajusta la distancia desde el borde superior */
+    left: 0; /* Asegura que abarquen todo el ancho */
+    display: flex;
+    justify-content: space-between; /* Botones en esquinas opuestas */
+    padding: 0 2rem; /* Incrementa el padding para separar los botones de los bordes */
+    z-index: 1000; /* Asegura que los botones estén encima de otros elementos */
 }
 
 .action-button {
-	width: 155px;
-	height: 55px;
-	font-size: 1.2rem;
-	background-color: #ed5f3f;
-	border: none;
-	cursor: pointer;
-	border-radius: 8px;
-	text-align: center;
+    width: 155px;
+    height: 55px;
+    font-size: 1.2rem;
+    background-color: #ed5f3f;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.2s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para resaltarlos */
+}
+
+.action-button:first-child {
+    margin-left: 5rem; /* Ajusta el botón "Volver" hacia la derecha */
+	margin-top: 1rem; /* Ajusta el valor para mover más hacia abajo */
+}
+
+
+.action-button:last-child {
+    margin-right: 2rem; /* Ajusta el botón "Pausar" hacia la izquierda */
+	margin-top: 1rem; /* Ajusta el valor para mover más hacia abajo */
 }
 
 .action-button:hover {
-	background-color: #ed5f3f;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #c0392b; 
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); 
+    transform: scale(1.05); 
 }
 
 .action-button:active {
-	background-color: #91c991;
-	transform: scale(0.98);
+    transform: scale(0.95);
+    background-color: #b33a2b; 
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); 
 }
+
 
 .game-layout {
 	display: flex;

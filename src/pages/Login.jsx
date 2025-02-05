@@ -46,7 +46,7 @@ const Login = () => {
 			<button
 				onClick={() => navigate('/')}
 				className='home-button'>
-				<i className='fas fa-home'></i> Volver al Home
+				<i className='fas fa-home'></i> Volver a inicio
 			</button>
 			<div className='login-box'>
 				<h3 className='login-title'>Memoria Artística</h3>

@@ -26,12 +26,13 @@ const TherapistDashboard = () => {
     phone: "",
     cedulaT: userloged?.therapist?.cedulaT || "", // Incluye la cédula del terapeuta
   });
+  const [errors, setErrors] = useState({});
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   // Función para obtener los pacientes del terapeuta
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        console.log("userloged en TherapistDashboard:", userloged); // Verificar contenido
         if (userloged && userloged.therapist && userloged.therapist.cedulaT) {
           const response = await getPatientsServ(userloged.therapist.cedulaT);
           setPatients(response.data || []);
@@ -42,6 +43,23 @@ const TherapistDashboard = () => {
     };
     fetchPatients();
   }, [userloged]);
+
+  const validateEcuadorianID = (id) => {
+    if (id.length !== 10) return false;
+    const digits = id.split("").map(Number);
+    const provinceCode = digits[0] * 10 + digits[1];
+    if (provinceCode < 1 || provinceCode > 24) return false;
+    const lastDigit = digits.pop();
+    const total = digits.reduce((acc, digit, index) => {
+      if (index % 2 === 0) {
+        digit *= 2;
+        if (digit > 9) digit -= 9;
+      }
+      return acc + digit;
+    }, 0);
+    const verifier = 10 - (total % 10);
+    return verifier === lastDigit;
+  };
 
   // Manejador para los cambios en el formulario de registro de paciente
   const handleChange = (e) => {
@@ -77,7 +95,6 @@ const TherapistDashboard = () => {
         detail: transferData.detail,
         transfer_at: new Date().toISOString(),
       };
-      console.log("Transferencia enviada:", transferPayload);
       await transferPatientService(transferPayload);
       setShowTransferDiv(false);
       setSelectedPatient(null);
@@ -92,30 +109,50 @@ const TherapistDashboard = () => {
   // Manejador para el envío del formulario de registro de paciente
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const newErrors = {};
 
-    try {
-      console.log(
-        "Datos enviados al backend desde TherapistDashboard:",
-        newPatient
-      );
+    // Validaciones
+    if (!/^\d{10}$/.test(newPatient.cedulaP)) {
+      newErrors.cedulaP = "La cédula debe contener solo números y un máximo de 10 dígitos.";
+    } else if (!validateEcuadorianID(newPatient.cedulaP)) {
+      newErrors.cedulaP = "Ingresar una cédula ecuatoriana válida";
+    }
 
-      // Registra al paciente
-      await registerPatientService(newPatient);
+    if (!/^[a-zA-Z]{1,16}$/.test(newPatient.name)) {
+      newErrors.name = "El nombre debe contener solo letras y un máximo de 16 caracteres";
+    }
 
-      // Resetea el formulario pero conserva el campo 'cedulaT'
-      setNewPatient({
-        cedulaP: "",
-        name: "",
-        lastname: "",
-        phone: "",
-        cedulaT: userloged.therapist.cedulaT,
-      });
+    if (!/^[a-zA-Z]{1,16}$/.test(newPatient.lastname)) {
+      newErrors.lastname = "El apellido debe contener solo letras y un máximo de 16 caracteres";
+    }
 
-      // Vuelve a cargar la lista de pacientes
-      const response = await getPatientsServ(userloged.therapist.cedulaT);
-      setPatients(response.data || []);
-    } catch (error) {
-      handleAPIError(error);
+    if (!/^\d{0,10}$/.test(newPatient.phone)) {
+      newErrors.phone = "El teléfono debe contener solo números y un máximo de 10 dígitos";
+    }
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length === 0) {
+      try {
+        
+
+        // Registra al paciente
+        await registerPatientService(newPatient);
+
+        // Resetea el formulario pero conserva el campo 'cedulaT'
+        setNewPatient({
+          cedulaP: "",
+          name: "",
+          lastname: "",
+          phone: "",
+          cedulaT: userloged.therapist.cedulaT,
+        });
+
+        // Vuelve a cargar la lista de pacientes
+        const response = await getPatientsServ(userloged.therapist.cedulaT);
+        setPatients(response.data || []);
+      } catch (error) {
+        handleAPIError(error);
+      }
     }
   };
 
@@ -149,6 +186,20 @@ const TherapistDashboard = () => {
     });
   };
 
+  // Manejador para cerrar sesión con confirmación
+  const handleLogout = async () => {
+    setShowLogoutModal(true);
+  };
+
+  const confirmLogout = async () => {
+    await logout();
+    navigate("/login");
+  };
+
+  const cancelLogout = () => {
+    setShowLogoutModal(false);
+  };
+
   return (
     <div className="dashboard-container">
       <h5 className="dashboard-header">
@@ -158,10 +209,7 @@ const TherapistDashboard = () => {
 
       <button
         className="dashboard-button"
-        onClick={async () => {
-          await logout();
-          navigate("/login");
-        }}
+        onClick={handleLogout}
       >
         CERRAR SESIÓN
       </button>
@@ -192,7 +240,7 @@ const TherapistDashboard = () => {
                     className="play-button"
                     onClick={() => handleStartGame(patient)}
                   >
-                    Play
+                    Jugar
                   </button>
                 </td>
                 <td>
@@ -231,6 +279,7 @@ const TherapistDashboard = () => {
               onChange={handleChange}
               required
             />
+            {errors.cedulaP && <div className="error-message">{errors.cedulaP}</div>}
           </div>
           <div className="form-group">
             <label>Nombre:</label>
@@ -241,6 +290,7 @@ const TherapistDashboard = () => {
               onChange={handleChange}
               required
             />
+            {errors.name && <div className="error-message">{errors.name}</div>}
           </div>
           <div className="form-group">
             <label>Apellido:</label>
@@ -251,6 +301,7 @@ const TherapistDashboard = () => {
               onChange={handleChange}
               required
             />
+            {errors.lastname && <div className="error-message">{errors.lastname}</div>}
           </div>
           <div className="form-group">
             <label>Teléfono:</label>
@@ -261,6 +312,7 @@ const TherapistDashboard = () => {
               onChange={handleChange}
               required
             />
+            {errors.phone && <div className="error-message">{errors.phone}</div>}
           </div>
           <button type="submit" className="submit-button">
             Registrar Paciente
@@ -300,6 +352,23 @@ const TherapistDashboard = () => {
                 Aceptar
               </button>
               <button className="cancel-button" onClick={handleTransferCancel}>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+
+      {showLogoutModal && (
+        <>
+          <div className="overlay" onClick={cancelLogout}></div>
+          <div className="logout-modal">
+            <h3>¿Estás seguro de salir del juego?</h3>
+            <div className="logout-buttons">
+              <button className="accept-button" onClick={confirmLogout}>
+                Aceptar
+              </button>
+              <button className="cancel-button" onClick={cancelLogout}>
                 Cancelar
               </button>
             </div>

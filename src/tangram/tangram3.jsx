@@ -1,56 +1,18 @@
 import PropTypes from 'prop-types';
-import { useContext, useEffect, useState } from 'react';
-import GameRulesContext from '../context/GameRulesContext';
-import { getSuffleList } from '../utils/utils';
-import { LABELS } from '../utils/constantes';
+import useTangram from './useTangram';
 
-function Tangram3({ selectedColor, selectedLabel, onComplete, updateStats }) {
-  const [letters, setLetters] = useState([...LABELS]);
-  const { setIsWrongColor } = useContext(GameRulesContext);
-  const [paintedSections, setPaintedSections] = useState(new Set());
-  const [isTangramCompleted, setIsTangramCompleted] = useState(false);
-
-  const handleSectionClick = (event) => {
-    const label = event.target.getAttribute('data-label');
-
-    // Verifica si la sección ya ha sido pintada correctamente
-    if (paintedSections.has(label)) {
-        return; // Si la sección ya está pintada, no hacer nada
-    }
-
-    if (selectedColor === 'lightgray') {
-        setPaintedSections((prev) => {
-            const updated = new Set(prev);
-            updated.delete(label);
-            event.target.style.fill = 'lightgray';
-            return updated;
-        });
-    } else if (label === selectedLabel) {
-        setPaintedSections((prev) => {
-            const updated = new Set(prev);
-            updated.add(label); // Agrega la etiqueta a las pintadas
-            event.target.style.fill = selectedColor;
-            updateStats({ correct: true });
-            return updated;
-        });
-    } else {
-        setIsWrongColor(true);
-        updateStats({ correct: false });
-    }
-  };
-
-  useEffect(() => {
-    if (paintedSections.size === letters.length && !isTangramCompleted) {
-      setIsTangramCompleted(true);
-      if (onComplete) onComplete();
-    }
-  }, [paintedSections, letters.length, onComplete, isTangramCompleted]);
-
-  useEffect(() => {
-    const shuffledLetters = getSuffleList(letters);
-    setLetters(shuffledLetters);
-  }, []);
-
+function Tangram3({
+  selectedColor = "", // Valor por defecto aquí
+  selectedLabel = "", // Valor por defecto aquí
+  onComplete = () => {},
+  updateStats,
+}) {
+  const { letters, handleSectionClick } = useTangram({
+    selectedColor,
+    selectedLabel,
+    onComplete,
+    updateStats,
+  });
   return (
     <svg
       width="100%"
@@ -196,11 +158,12 @@ function Tangram3({ selectedColor, selectedLabel, onComplete, updateStats }) {
   );
 }
 
-export default Tangram3;
-
+// PropTypes (sin .isRequired para las props con valores por defecto)
 Tangram3.propTypes = {
-  selectedColor: PropTypes.string.isRequired,
-  selectedLabel: PropTypes.string.isRequired,
+  selectedColor: PropTypes.string,
+  selectedLabel: PropTypes.string,
   onComplete: PropTypes.func,
-  updateStats: PropTypes.func.isRequired, // Requerido para estadísticas
+  updateStats: PropTypes.func.isRequired,
 };
+
+export default Tangram3;
