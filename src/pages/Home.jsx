@@ -1,20 +1,20 @@
-import { useContext, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import AuthContext from '../context/AuthContext'
-import './Home.css'
+import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
+import './home.css';
 
 function Home() {
-	const navigate = useNavigate()
-	const { isAuthenticated } = useContext(AuthContext)
+	const navigate = useNavigate();
+	const { isAuthenticated } = useContext(AuthContext);
 
 	const handlePlayClick = () => {
-		navigate('/game')
-	}
+		navigate('/game');
+	};
 
 	useEffect(() => {
-		if (isAuthenticated) navigate('/dashboard')
+		if (isAuthenticated) navigate('/dashboard');
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isAuthenticated])
+	}, [isAuthenticated]);
 
 	return (
 		<div className='home-container'>
@@ -32,9 +32,8 @@ function Home() {
 				onClick={handlePlayClick}>
 				JUGAR
 			</button>
-			
 		</div>
-	)
+	);
 }
 
-export default Home
+export default Home;

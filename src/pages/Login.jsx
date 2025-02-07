@@ -1,45 +1,45 @@
-import { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import AuthContext from '../context/AuthContext'
-import './Login.css'
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
+import './login.css';
 
 const Login = () => {
-	const navigate = useNavigate()
-	const { login, isAuthenticated } = useContext(AuthContext)
+	const navigate = useNavigate();
+	const { login, isAuthenticated } = useContext(AuthContext);
 
-	const [cedula, setCedula] = useState('')
-	const [error, setError] = useState('')
+	const [cedula, setCedula] = useState('');
+	const [error, setError] = useState('');
 
 	const handleCedulaChange = (e) => {
-		const value = e.target.value
+		const value = e.target.value;
 
 		// Permitir solo números y máximo 10 caracteres
 		if (/^\d{0,10}$/.test(value)) {
-			setCedula(value)
-			setError('') // Limpiar el error si está correcto
+			setCedula(value);
+			setError(''); // Limpiar el error si está correcto
 		} else {
-			setError('La cédula debe contener solo números y un máximo de 10 dígitos.')
+			setError('La cédula debe contener solo números y un máximo de 10 dígitos.');
 		}
-	}
+	};
 
 	const handleSubmit = async (e) => {
-		e.preventDefault()
+		e.preventDefault();
 		if (cedula.length !== 10) {
-			setError('La cédula debe contener exactamente 10 dígitos.')
-			return
+			setError('La cédula debe contener exactamente 10 dígitos.');
+			return;
 		}
 		await login({
 			cedulaT: e.target.cedula.value,
 			password: e.target.password.value,
-		})
+		});
 
-		if (isAuthenticated) navigate('/dashboard')
-	}
+		if (isAuthenticated) navigate('/dashboard');
+	};
 
 	useEffect(() => {
-		if (isAuthenticated) navigate('/dashboard')
+		if (isAuthenticated) navigate('/dashboard');
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isAuthenticated])
+	}, [isAuthenticated]);
 
 	return (
 		<div className='login-container'>
@@ -91,7 +91,7 @@ const Login = () => {
 				</div>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
-export default Login
+export default Login;
