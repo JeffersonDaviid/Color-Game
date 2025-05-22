@@ -1,160 +1,162 @@
+# Color Game – Juego de Colorear Tangram para Personas con Alzheimer
 
-# **Memoria Artística**
+## Índice
 
-## **Descripción Técnica del Proyecto**
+- [Color Game – Juego de Colorear Tangram para Personas con Alzheimer](#color-game--juego-de-colorear-tangram-para-personas-con-alzheimer)
+  - [Índice](#índice)
+  - [Descripción](#descripción)
+  - [Características principales](#características-principales)
+  - [Tecnologías y herramientas](#tecnologías-y-herramientas)
+  - [Instalación y arranque](#instalación-y-arranque)
+  - [Uso de la aplicación](#uso-de-la-aplicación)
+    - [Perfiles de usuario](#perfiles-de-usuario)
+    - [Iniciar partida](#iniciar-partida)
+    - [Historial y métricas](#historial-y-métricas)
+  - [Calidad de Software](#calidad-de-software)
+    - [Estándares de commits](#estándares-de-commits)
+    - [Control de versiones y ramas](#control-de-versiones-y-ramas)
+    - [Usabilidad y accesibilidad](#usabilidad-y-accesibilidad)
+    - [Análisis estático con SonarQube](#análisis-estático-con-sonarqube)
+  - [Estructura del proyecto](#estructura-del-proyecto)
 
-**"Memoria Artística"** es una aplicación web interactiva diseñada para asistir a personas con Alzheimer a través de actividades visuales y cognitivas. El proyecto emplea tecnologías modernas para garantizar una experiencia fluida, funcional y escalable. Está dirigido a desarrolladores interesados en comprender y colaborar en la evolución del sistema desde una perspectiva técnica.
 
----
 
-## **Arquitectura del Proyecto**
+## Descripción
 
-El sistema se compone de los siguientes módulos principales:
+Color Game es una aplicación frontend (React + CSS puro) diseñada para ayudar a personas mayores con Alzheimer a ejercitar sus capacidades cognitivas a través de un juego de colorear tangram. El objetivo es hacer “match” entre piezas del tangram y su color o letra correspondiente, ralentizando el proceso mental y fomentando la estimulación cognitiva en entornos de cuidado.
 
-1. **Frontend:**
-   - Construido con **React** y optimizado mediante **Vite**.
-   - Diseñado con **CSS** para asegurar una interfaz responsiva y transiciones fluidas.
-   - Comunicación con el backend a través de **Axios** para consumir APIs REST.
+El proyecto incluye un sistema de perfiles de doctores y pacientes, permitiendo llevar un historial de partidas con estadísticas de aciertos, errores y tiempo de juego, visualizadas en gráficas de barras.
 
-2. **Backend:**
-   - Implementado como una API RESTful utilizando **FastAPI**.
-   - La base de datos está gestionada con **PostgreSQL**, lo que permite un manejo robusto de la información.
+> **Repositorio Frontend**: https://github.com/JeffersonDaviid/Color-Game  
+> **Repositorio Backend**: *(en otro repositorio)*
 
-3. **Docker:**
-   - Despliegue basado en contenedores configurados con **Docker Compose**.
-   - Separación clara de entornos de desarrollo y producción.
 
----
 
-## **Requerimientos Previos**
+## Características principales
 
-Para trabajar en este proyecto, es necesario contar con las siguientes herramientas instaladas:
+- **Gestión de perfiles**: Login de doctores y selección de pacientes.  
+- **Juego de tangram**: Matching de colores y letras en piezas.  
+- **Historial por paciente**: Registros de aciertos, errores y tiempo.  
+- **Visualización**: Gráficas de barras para comparar sesiones.  
+- **Calidad y usabilidad**: Principios de accesibilidad, interfaz limpia y componentes reutilizables.  
+- **Control de calidad**: Análisis estático con SonarQube, commits estandarizados, estrategia de branching GitFlow.
 
-- **Node.js** (versión 16 o superior)
-- **Docker** y **Docker Compose**
-- **NPM** (incluido con Node.js)
-- **Git** para clonar el repositorio.
 
----
 
-## **Cómo Configurar el Entorno**
+## Tecnologías y herramientas
 
-### **1. Configuración del Backend y la Base de Datos**
+- **Frontend**  
+  - React (hooks y componentes funcionales)  
+  - CSS puro (modular y basado en componentes)  
+- **Control de calidad**  
+  - SonarQube (análisis de código estático)  
+  - ESLint & Prettier (estilos y linting)  
+- **Control de versiones**  
+  - GitFlow: `main`, `develop`, `release/*`, `bugfix/*`  
+  - Commits con Convención [Conventional Commits](https://www.conventionalcommits.org/)  
 
-Dentro del repositorio `API-COLOR-GAME`:
 
-**Repositorio GitHub:** [https://github.com/JeffersonDaviid/api-color-game.git](https://github.com/JeffersonDaviid/api-color-game.git)
 
-1. Modifica el archivo `docker-compose.dev.yml`, descomentando las líneas correspondientes a la configuración de puertos para PostgreSQL:
+## Instalación y arranque
 
-   ```yaml
-   ports:
-     - "5433:5432"
+1. Clona este repositorio:
+   ```bash
+   git clone https://github.com/JeffersonDaviid/Color-Game.git
+   cd Color-Game
    ```
 
-2. Inicia únicamente el servicio de la base de datos con el siguiente comando:
+2. Instala dependencias:
 
    ```bash
-   docker-compose -f docker-compose.dev.yml up database-ma
+   npm install
    ```
 
-3. Para desplegar toda la API junto con sus servicios asociados, ejecuta:
+3. Arranca en modo desarrollo:
 
    ```bash
-   docker-compose -f docker-compose.dev.yml up
+   npm run dev
    ```
 
-   Esto iniciará tanto el backend como la base de datos, permitiendo realizar pruebas y establecer conexiones con el frontend.
-
-### **2. Configuración del Frontend**
-
-Clona el repositorio correspondiente al frontend del proyecto:
-
-```bash
-git clone https://github.com/tu-repositorio/memoria-artistica.git
-cd memoria-artistica
-```
-
-Instala las dependencias necesarias:
-
-```bash
-npm install
-npm install axios
-```
-
-Inicia el servidor de desarrollo:
-
-```bash
-npm run dev
-```
-
-Accede a la aplicación en [http://localhost:5173](http://localhost:5173) o el puerto asignado por Vite.
-
----
-
-## **Validación de la Base de Datos**
-
-Para comprobar la creación de usuarios, pacientes o cualquier otra entidad en la base de datos:
-
-1. Accede al contenedor de la base de datos con el siguiente comando:
+4. Para build de producción:
 
    ```bash
-   docker exec -it database-ma psql -U postgres -d memoria_artistica
+   npm run build
    ```
 
-2. Realiza consultas SQL para inspeccionar las tablas y su contenido. Por ejemplo:
 
-   ```sql
-   SELECT * FROM nombre_de_la_tabla;
-   ```
 
-   Sustituye `nombre_de_la_tabla` por la tabla que deseas consultar (ejemplo: `patient`, `therapist`, `session`, o `transfer`).
+## Uso de la aplicación
 
----
+### Perfiles de usuario
 
-## **Estructura del Proyecto**
+* **Doctor**: Inicia sesión con credenciales (email + contraseña).
+* **Paciente**: Seleccionado por el doctor antes de iniciar partida.
 
-### **Frontend**
+### Iniciar partida
 
-```bash
-/public
-├── assets          # Recursos como imágenes y fondos.
-│   ├── fondos      # Imágenes de fondo del juego.
-│   ├── personaje-hombre-descanso.png
-│   ├── personaje-mujer-comienzo.png
-│   ├── personaje-mujer-ok.png
-│   └── vite.svg
-/src
-├── components      # Componentes reutilizables como botones, formularios, etc.
-├── context         # Manejo de estados globales mediante React Context.
-├── hooks           # Hooks personalizados para lógica compartida.
-├── pages           # Páginas principales como el tablero de colores.
-├── services        # Lógica para la interacción con la API.
-└── App.jsx         # Punto de entrada del frontend.
+1. Selecciona paciente.
+2. Haz clic en “Iniciar partida”.
+3. El juego carga un tangram con piezas desordenadas.
+4. Pinta la pieza al hacer match entre color y letra.
+
+### Historial y métricas
+
+* Cada sesión guarda:
+
+  * Número de aciertos
+  * Número de errores
+  * Tiempo total de la partida
+* La sección “Historial” muestra gráficas de barras comparativas por fecha.
+
+
+
+## Calidad de Software
+
+### Estándares de commits
+
+Se emplea **Conventional Commits**:
+
+* `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`
+* Ejemplo: `feat(game): añadir validación de color en piezas`
+
+### Control de versiones y ramas
+
+Se sigue GitFlow:
+
+* `main`: versión estable en producción
+* `develop`: integración de funcionalidades
+* `feature/<descripcion>`: nuevas características
+* `release/<version>`: preparación de lanzamiento
+* `bugfix/<descripcion>`: corrección de errores en preproducción
+
+### Usabilidad y accesibilidad
+
+* Componentes con roles ARIA y etiquetas descriptivas (`alt`, `aria-label`).
+* Contraste de colores adaptado para baja visión.
+* Navegación con teclado (tabindex, focus-visible).
+
+### Análisis estático con SonarQube
+
+* Cubre métricas de cobertura, bugs potenciales y code smells.
+
+
+## Estructura del proyecto
+
+```
+Color-Game/
+├── public/                  # Archivos estáticos
+├── src/
+│   ├── components/          # Componentes reutilizables
+│   ├── pages/               # Vistas y rutas
+│   ├── services/            # Llamadas a API
+│   ├── hooks/               # Custom Hooks
+│   ├── styles/              # CSS modular
+│   └── utils/               # Funciones utilitarias
+├── .env.example             # Ejemplo de variables de entorno
+├── .eslintrc.js             # Configuración ESLint
+├── sonar-project.properties # Configuración SonarQube
+└── package.json
 ```
 
-### **Backend**
 
-```bash
-/src
-├── middlewares     # Middleware para gestionar solicitudes y respuestas.
-├── models          # Modelos de datos que interactúan con la base de datos.
-├── routes          # Rutas de la API.
-├── services        # Lógica de negocio y operaciones específicas.
-├── utils           # Funciones auxiliares y constantes.
-├── database.py     # Configuración de conexión a la base de datos.
-└── main.py         # Punto de entrada del servidor FastAPI.
-```
-
-### **Docker**
-
-```bash
-/docker-compose.dev.yml    # Configuración para el entorno de desarrollo.
-```
-
----
-
-## **Notas Adicionales**
-
-- Al realizar cambios en la configuración de Docker o en el código del backend, es recomendable eliminar los contenedores existentes y recrearlos para evitar conflictos.
-- Asegúrese de que los servicios del backend estén en ejecución; de lo contrario, el frontend mostrará mensajes de error indicando que no se pudo establecer conexión con el servidor.
+ 
