@@ -28,7 +28,7 @@ Color Game es una aplicación frontend (React + CSS puro) diseñada para ayudar 
 El proyecto incluye un sistema de perfiles de doctores y pacientes, permitiendo llevar un historial de partidas con estadísticas de aciertos, errores y tiempo de juego, visualizadas en gráficas de barras.
 
 > **Repositorio Frontend**: https://github.com/JeffersonDaviid/Color-Game  
-> **Repositorio Backend**: *(en otro repositorio)*
+> **Repositorio Backend**: https://github.com/JeffersonDaviid/api-color-game
 
 
 
